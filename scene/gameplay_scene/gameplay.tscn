@@ -1,23 +1,52 @@
-[gd_scene load_steps=2 format=3 uid="uid://chpp6u6l8c72o"]
+[gd_scene load_steps=3 format=3 uid="uid://chpp6u6l8c72o"]
 
 [ext_resource type="Script" uid="uid://cyyr26uacur4g" path="res://scene/gameplay_scene/gameplay.gd" id="1_tfltx"]
+[ext_resource type="PackedScene" uid="uid://djpfvvn6vm40b" path="res://instance/player_instance/mouse.tscn" id="2_agxrv"]
 
 [node name="gameplay" type="Node2D"]
 script = ExtResource("1_tfltx")
+playerscene = ExtResource("2_agxrv")
 
-[node name="Join" type="Button" parent="."]
-offset_left = 165.0
-offset_top = 149.0
-offset_right = 415.0
-offset_bottom = 265.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ui" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -76.0
+offset_right = 256.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Join" type="Button" parent="CanvasLayer/ui"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -58.0
+offset_right = 250.0
+offset_bottom = 58.0
+grow_vertical = 2
 text = "Join"
 
-[node name="Host" type="Button" parent="."]
-offset_left = 472.0
-offset_top = 150.0
-offset_right = 696.0
-offset_bottom = 275.0
+[node name="Host" type="Button" parent="CanvasLayer/ui"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -224.0
+offset_top = -62.5
+offset_bottom = 62.5
+grow_horizontal = 0
+grow_vertical = 2
 text = "Host"
 
-[connection signal="pressed" from="Join" to="." method="_join"]
-[connection signal="pressed" from="Host" to="." method="_host"]
+[connection signal="pressed" from="CanvasLayer/ui/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="CanvasLayer/ui/Host" to="." method="_on_host_pressed"]
