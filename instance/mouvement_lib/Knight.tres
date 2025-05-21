@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MouvementOption" load_steps=2 format=3 uid="uid://dqpewh7mb5uqy"]
+
+[ext_resource type="Script" uid="uid://b8t3sroj4iv3u" path="res://component/mouvement_component/MouvementOption.gd" id="1_dctna"]
+
+[resource]
+script = ExtResource("1_dctna")
+pos_array = Array[Vector2i]([Vector2i(1, 2), Vector2i(-1, 2), Vector2i(2, 1), Vector2i(2, -1), Vector2i(1, -2), Vector2i(-1, -2), Vector2i(-2, 1), Vector2i(-2, -1)])
+metadata/_custom_type_script = "uid://b8t3sroj4iv3u"

@@ -2,6 +2,7 @@ extends Node2D
 
 var peer = ENetMultiplayerPeer.new()
 @export var playerscene:PackedScene
+@export var internet_related:Control
 #@export var inputext:TextEdit
 const PORT:int = 135
 const MAX_PLAYER:int = 2
@@ -15,7 +16,7 @@ func _on_host_pressed()->void:
 	_hide_UI()
 	
 func _hide_UI()->void:
-	$CanvasLayer.hide()
+	internet_related.hide()
 
 func _on_join_pressed()->void:
 	peer.create_client(IP.get_local_addresses()[1],PORT)

@@ -1,9 +1,49 @@
-[gd_scene load_steps=3 format=3 uid="uid://djpfvvn6vm40b"]
+[gd_scene load_steps=8 format=3 uid="uid://djpfvvn6vm40b"]
 
 [ext_resource type="Script" uid="uid://b4u2c71tsilm7" path="res://instance/player_instance/mouse.gd" id="1_3m1e7"]
+[ext_resource type="Texture2D" uid="uid://cm8f52sggultk" path="res://asset/visual/pixel chess_v1.2/cursor.png" id="2_y8jxf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lpijr"]
 radius = 17.8885
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qnrr"]
+atlas = ExtResource("2_y8jxf")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ps5mi"]
+atlas = ExtResource("2_y8jxf")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmedw"]
+atlas = ExtResource("2_y8jxf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y4v5i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6qnrr")
+}],
+"loop": true,
+"name": &"can_click",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ps5mi")
+}],
+"loop": true,
+"name": &"click",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qmedw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="mouse" type="Area2D"]
 script = ExtResource("1_3m1e7")
@@ -11,6 +51,12 @@ script = ExtResource("1_3m1e7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lpijr")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-4.76837e-07, 4.76837e-07)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_y4v5i")
+animation = &"idle"
+autoplay = "idle"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

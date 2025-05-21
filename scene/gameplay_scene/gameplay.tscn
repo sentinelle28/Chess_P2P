@@ -1,15 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://chpp6u6l8c72o"]
+[gd_scene load_steps=6 format=4 uid="uid://chpp6u6l8c72o"]
 
 [ext_resource type="Script" uid="uid://cyyr26uacur4g" path="res://scene/gameplay_scene/gameplay.gd" id="1_tfltx"]
 [ext_resource type="PackedScene" uid="uid://djpfvvn6vm40b" path="res://instance/player_instance/mouse.tscn" id="2_agxrv"]
+[ext_resource type="Texture2D" uid="uid://gskdca2b7bu0" path="res://asset/visual/pixel chess_v1.2/boards/board_plain_05.png" id="3_7ggfb"]
 
-[node name="gameplay" type="Node2D"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h3lfs"]
+texture = ExtResource("3_7ggfb")
+margins = Vector2i(7, 7)
+0:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_jhoar"]
+sources/1 = SubResource("TileSetAtlasSource_h3lfs")
+
+[node name="gameplay" type="Node2D" node_paths=PackedStringArray("internet_related")]
 script = ExtResource("1_tfltx")
 playerscene = ExtResource("2_agxrv")
+internet_related = NodePath("UI_related/ui")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI_related" type="CanvasLayer" parent="."]
 
-[node name="ui" type="Control" parent="CanvasLayer"]
+[node name="ui" type="Control" parent="UI_related"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -23,7 +34,7 @@ offset_bottom = 76.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Join" type="Button" parent="CanvasLayer/ui"]
+[node name="Join" type="Button" parent="UI_related/ui"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -34,7 +45,7 @@ offset_bottom = 58.0
 grow_vertical = 2
 text = "Join"
 
-[node name="Host" type="Button" parent="CanvasLayer/ui"]
+[node name="Host" type="Button" parent="UI_related/ui"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -48,5 +59,11 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "Host"
 
-[connection signal="pressed" from="CanvasLayer/ui/Join" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="CanvasLayer/ui/Host" to="." method="_on_host_pressed"]
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(576, 320)
+scale = Vector2(2, 2)
+tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAAAAAEAAQAAAAAAAAAAAAIAAQABAAAAAAAAAAMAAQAAAAAAAAABAAAAAQAAAAAAAAABAAEAAQABAAAAAAABAAIAAQAAAAAAAAABAAMAAQABAAAAAAACAAAAAQABAAAAAAACAAEAAQAAAAAAAAACAAIAAQABAAAAAAACAAMAAQAAAAAAAAADAAAAAQAAAAAAAAADAAEAAQABAAAAAAADAAIAAQAAAAAAAAADAAMAAQABAAAAAAD8//z/AQABAAAAAAD8//3/AQAAAAAAAAD8//7/AQABAAAAAAD8////AQAAAAAAAAD8/wAAAQABAAAAAAD8/wEAAQAAAAAAAAD8/wIAAQABAAAAAAD8/wMAAQAAAAAAAAD9//z/AQAAAAAAAAD9//3/AQABAAAAAAD9//7/AQAAAAAAAAD9////AQABAAAAAAD9/wAAAQAAAAAAAAD9/wEAAQABAAAAAAD9/wIAAQAAAAAAAAD9/wMAAQABAAAAAAD+//z/AQABAAAAAAD+//3/AQAAAAAAAAD+//7/AQABAAAAAAD+////AQAAAAAAAAD+/wAAAQABAAAAAAD+/wEAAQAAAAAAAAD+/wIAAQABAAAAAAD+/wMAAQAAAAAAAAD///z/AQAAAAAAAAD///3/AQABAAAAAAD///7/AQAAAAAAAAD/////AQABAAAAAAD//wAAAQAAAAAAAAD//wEAAQABAAAAAAD//wIAAQAAAAAAAAD//wMAAQABAAAAAAAAAPz/AQABAAAAAAAAAP3/AQAAAAAAAAAAAP7/AQABAAAAAAAAAP//AQAAAAAAAAABAPz/AQAAAAAAAAABAP3/AQABAAAAAAABAP7/AQAAAAAAAAABAP//AQABAAAAAAACAPz/AQABAAAAAAACAP3/AQAAAAAAAAACAP7/AQABAAAAAAACAP//AQAAAAAAAAADAPz/AQAAAAAAAAADAP3/AQABAAAAAAADAP7/AQAAAAAAAAADAP//AQABAAAAAAA=")
+tile_set = SubResource("TileSet_jhoar")
+
+[connection signal="pressed" from="UI_related/ui/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="UI_related/ui/Host" to="." method="_on_host_pressed"]
