@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://chpp6u6l8c72o"]
+
+[ext_resource type="Script" uid="uid://cyyr26uacur4g" path="res://scene/gameplay_scene/gameplay.gd" id="1_tfltx"]
+
+[node name="gameplay" type="Node2D"]
+script = ExtResource("1_tfltx")
+
+[node name="Join" type="Button" parent="."]
+offset_left = 165.0
+offset_top = 149.0
+offset_right = 415.0
+offset_bottom = 265.0
+text = "Join"
+
+[node name="Host" type="Button" parent="."]
+offset_left = 472.0
+offset_top = 150.0
+offset_right = 696.0
+offset_bottom = 275.0
+text = "Host"
+
+[connection signal="pressed" from="Join" to="." method="_join"]
+[connection signal="pressed" from="Host" to="." method="_host"]
