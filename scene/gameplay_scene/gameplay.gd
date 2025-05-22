@@ -20,6 +20,7 @@ func _on_host_pressed()->void:
 	
 func _update_peer(_value:int)->void:
 	is_two = true
+	$UI_related/UI/HBoxContainer/Action/Start.show()
 	
 func _hide_UI()->void:
 	internet_related.hide()
@@ -31,7 +32,6 @@ func _on_join_pressed()->void:
 	multiplayer.multiplayer_peer = peer
 	_add_player(2)
 	_hide_UI()
-	$UI_related/UI/HBoxContainer/Action/Start.hide()
 	
 
 func _add_player(id:int)->void:

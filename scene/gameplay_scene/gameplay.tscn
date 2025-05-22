@@ -140,6 +140,7 @@ size_flags_vertical = 3
 text = "Validate turn"
 
 [node name="Start" type="Button" parent="UI_related/UI/HBoxContainer/Action"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
