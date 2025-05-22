@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfjmlv0qpd7l3"]
+
+[ext_resource type="PackedScene" uid="uid://2uij61rivcwg" path="res://instance/piece_instance/PieceInstance.tscn" id="1_d774e"]
+
+[node name="Pawn" instance=ExtResource("1_d774e")]
+mouvement_option = Array[int]([3])

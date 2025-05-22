@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cprhdkq3mjwqu"]
+
+[ext_resource type="PackedScene" uid="uid://2uij61rivcwg" path="res://instance/piece_instance/PieceInstance.tscn" id="1_x5e2l"]
+
+[node name="Beashop" instance=ExtResource("1_x5e2l")]
+mouvement_option = Array[int]([0])
+rank_of_the_piece = 3
+
+[node name="Sprite2D" parent="." index="1"]
+frame = 3
