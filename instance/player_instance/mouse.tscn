@@ -46,6 +46,9 @@ animations = [{
 }]
 
 [node name="mouse" type="Area2D"]
+top_level = true
+z_index = 100
+monitorable = false
 script = ExtResource("1_3m1e7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

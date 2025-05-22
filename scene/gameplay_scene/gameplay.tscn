@@ -1,8 +1,17 @@
-[gd_scene load_steps=6 format=4 uid="uid://chpp6u6l8c72o"]
+[gd_scene load_steps=15 format=4 uid="uid://chpp6u6l8c72o"]
 
 [ext_resource type="Script" uid="uid://cyyr26uacur4g" path="res://scene/gameplay_scene/gameplay.gd" id="1_tfltx"]
 [ext_resource type="PackedScene" uid="uid://djpfvvn6vm40b" path="res://instance/player_instance/mouse.tscn" id="2_agxrv"]
 [ext_resource type="Texture2D" uid="uid://gskdca2b7bu0" path="res://asset/visual/pixel chess_v1.2/boards/board_plain_05.png" id="3_7ggfb"]
+[ext_resource type="Script" uid="uid://eu4sjlhoqwpp" path="res://component/piece_manager/PieceManager.gd" id="4_h3lfs"]
+[ext_resource type="PackedScene" uid="uid://4m31j6a34hu4" path="res://instance/piece_instance/Piece_lib/king.tscn" id="5_2l5nx"]
+[ext_resource type="Texture2D" uid="uid://bscdnhk241vqs" path="res://asset/visual/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="6_bu0yp"]
+[ext_resource type="PackedScene" uid="uid://p0dm03gw6762" path="res://instance/piece_instance/Piece_lib/queen.tscn" id="7_2kjuw"]
+[ext_resource type="PackedScene" uid="uid://cprhdkq3mjwqu" path="res://instance/piece_instance/Piece_lib/beashop.tscn" id="8_dr73f"]
+[ext_resource type="PackedScene" uid="uid://dxgqf6ymiu05x" path="res://instance/piece_instance/Piece_lib/knight.tscn" id="9_slw4p"]
+[ext_resource type="PackedScene" uid="uid://yrvgyml4s8un" path="res://instance/piece_instance/Piece_lib/rook.tscn" id="10_jt474"]
+[ext_resource type="PackedScene" uid="uid://cfjmlv0qpd7l3" path="res://instance/piece_instance/Piece_lib/pawn.tscn" id="11_qx00v"]
+[ext_resource type="Texture2D" uid="uid://geqi0bsnmyo3" path="res://asset/visual/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="12_aje2a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h3lfs"]
 texture = ExtResource("3_7ggfb")
@@ -59,11 +68,257 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "Host"
 
+[node name="UI" type="Panel" parent="UI_related"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -136.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI_related/UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" type="Control" parent="UI_related/UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="UI_related/UI/HBoxContainer/Play"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card" type="VBoxContainer" parent="UI_related/UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="ProgressBar" type="ProgressBar" parent="UI_related/UI/HBoxContainer/Card"]
+layout_mode = 2
+rounded = true
+
+[node name="Control" type="Control" parent="UI_related/UI/HBoxContainer/Card"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Action" type="Control" parent="UI_related/UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InMatch" type="VBoxContainer" parent="UI_related/UI/HBoxContainer/Action"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Reset" type="Button" parent="UI_related/UI/HBoxContainer/Action/InMatch"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Reset"
+
+[node name="Validate" type="Button" parent="UI_related/UI/HBoxContainer/Action/InMatch"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Validate turn"
+
+[node name="Start" type="Button" parent="UI_related/UI/HBoxContainer/Action"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start"
+
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(576, 320)
 scale = Vector2(2, 2)
-tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAAAAAEAAQAAAAAAAAAAAAIAAQABAAAAAAAAAAMAAQAAAAAAAAABAAAAAQAAAAAAAAABAAEAAQABAAAAAAABAAIAAQAAAAAAAAABAAMAAQABAAAAAAACAAAAAQABAAAAAAACAAEAAQAAAAAAAAACAAIAAQABAAAAAAACAAMAAQAAAAAAAAADAAAAAQAAAAAAAAADAAEAAQABAAAAAAADAAIAAQAAAAAAAAADAAMAAQABAAAAAAD8//z/AQABAAAAAAD8//3/AQAAAAAAAAD8//7/AQABAAAAAAD8////AQAAAAAAAAD8/wAAAQABAAAAAAD8/wEAAQAAAAAAAAD8/wIAAQABAAAAAAD8/wMAAQAAAAAAAAD9//z/AQAAAAAAAAD9//3/AQABAAAAAAD9//7/AQAAAAAAAAD9////AQABAAAAAAD9/wAAAQAAAAAAAAD9/wEAAQABAAAAAAD9/wIAAQAAAAAAAAD9/wMAAQABAAAAAAD+//z/AQABAAAAAAD+//3/AQAAAAAAAAD+//7/AQABAAAAAAD+////AQAAAAAAAAD+/wAAAQABAAAAAAD+/wEAAQAAAAAAAAD+/wIAAQABAAAAAAD+/wMAAQAAAAAAAAD///z/AQAAAAAAAAD///3/AQABAAAAAAD///7/AQAAAAAAAAD/////AQABAAAAAAD//wAAAQAAAAAAAAD//wEAAQABAAAAAAD//wIAAQAAAAAAAAD//wMAAQABAAAAAAAAAPz/AQABAAAAAAAAAP3/AQAAAAAAAAAAAP7/AQABAAAAAAAAAP//AQAAAAAAAAABAPz/AQAAAAAAAAABAP3/AQABAAAAAAABAP7/AQAAAAAAAAABAP//AQABAAAAAAACAPz/AQABAAAAAAACAP3/AQAAAAAAAAACAP7/AQABAAAAAAACAP//AQAAAAAAAAADAPz/AQAAAAAAAAADAP3/AQABAAAAAAADAP7/AQAAAAAAAAADAP//AQABAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAAAAAEAAQAAAAAAAAAAAAIAAQABAAAAAAAAAAMAAQAAAAAAAAABAAAAAQAAAAAAAAABAAEAAQABAAAAAAABAAIAAQAAAAAAAAABAAMAAQABAAAAAAACAAAAAQABAAAAAAACAAEAAQAAAAAAAAACAAIAAQABAAAAAAACAAMAAQAAAAAAAAADAAAAAQAAAAAAAAADAAEAAQABAAAAAAADAAIAAQAAAAAAAAADAAMAAQABAAAAAAD8//z/AQABAAAAAAD8//3/AQAAAAAAAAD8//7/AQABAAAAAAD8////AQAAAAAAAAD8/wAAAQABAAAAAAD8/wEAAQAAAAAAAAD8/wIAAQABAAAAAAD8/wMAAQAAAAAAAAD9//z/AQAAAAAAAAD9//3/AQABAAAAAAD9//7/AQAAAAAAAAD9////AQABAAAAAAD9/wAAAQAAAAAAAAD9/wEAAQABAAAAAAD9/wIAAQAAAAAAAAD9/wMAAQABAAAAAAD+//z/AQABAAAAAAD+//3/AQAAAAAAAAD+//7/AQABAAAAAAD+////AQAAAAAAAAD+/wAAAQABAAAAAAD+/wEAAQAAAAAAAAD+/wIAAQABAAAAAAD+/wMAAQAAAAAAAAD///z/AQAAAAAAAAD///3/AQABAAAAAAD///7/AQAAAAAAAAD/////AQABAAAAAAD//wAAAQAAAAAAAAD//wEAAQABAAAAAAD//wIAAQAAAAAAAAD//wMAAQABAAAAAAAAAPz/AQABAAAAAAAAAP3/AQAAAAAAAAAAAP7/AQABAAAAAAAAAP//AQAAAAAAAAABAPz/AQAAAAAAAAABAP3/AQABAAAAAAABAP7/AQAAAAAAAAABAP//AQABAAAAAAACAPz/AQABAAAAAAACAP3/AQAAAAAAAAACAP7/AQABAAAAAAACAP//AQAAAAAAAAADAPz/AQAAAAAAAAADAP3/AQABAAAAAAADAP7/AQAAAAAAAAADAP//AQABAAAAAAAEAPz/AQABAAAAAAAEAP3/AQAAAAAAAAAEAP7/AQABAAAAAAAEAP//AQAAAAAAAAAEAAAAAQABAAAAAAAEAAEAAQAAAAAAAAAEAAIAAQABAAAAAAAEAAMAAQAAAAAAAAAFAPz/AQAAAAAAAAAFAP3/AQABAAAAAAAFAP7/AQAAAAAAAAAFAP//AQABAAAAAAAFAAAAAQAAAAAAAAAFAAEAAQABAAAAAAAFAAIAAQAAAAAAAAAFAAMAAQABAAAAAAAGAPz/AQABAAAAAAAGAP3/AQAAAAAAAAAGAP7/AQABAAAAAAAGAP//AQAAAAAAAAAGAAAAAQABAAAAAAAGAAEAAQAAAAAAAAAGAAIAAQABAAAAAAAGAAMAAQAAAAAAAAAHAPz/AQAAAAAAAAAHAP3/AQABAAAAAAAHAP7/AQAAAAAAAAAHAP//AQABAAAAAAAHAAAAAQAAAAAAAAAHAAEAAQABAAAAAAAHAAIAAQAAAAAAAAAHAAMAAQABAAAAAAAIAPz/AQABAAAAAAAIAP3/AQAAAAAAAAAIAP7/AQABAAAAAAAIAP//AQAAAAAAAAAIAAAAAQABAAAAAAAIAAEAAQAAAAAAAAAIAAIAAQABAAAAAAAIAAMAAQAAAAAAAAAJAPz/AQAAAAAAAAAJAP3/AQABAAAAAAAJAP7/AQAAAAAAAAAJAP//AQABAAAAAAAJAAAAAQAAAAAAAAAJAAEAAQABAAAAAAAJAAIAAQAAAAAAAAAJAAMAAQABAAAAAAAKAPz/AQABAAAAAAAKAP3/AQAAAAAAAAAKAP7/AQABAAAAAAAKAP//AQAAAAAAAAAKAAAAAQABAAAAAAAKAAEAAQAAAAAAAAAKAAIAAQABAAAAAAAKAAMAAQAAAAAAAAALAPz/AQAAAAAAAAALAP3/AQABAAAAAAALAP7/AQAAAAAAAAALAP//AQABAAAAAAALAAAAAQAAAAAAAAALAAEAAQABAAAAAAALAAIAAQAAAAAAAAALAAMAAQABAAAAAAD0//z/AQABAAAAAAD0//3/AQAAAAAAAAD0//7/AQABAAAAAAD0////AQAAAAAAAAD0/wAAAQABAAAAAAD0/wEAAQAAAAAAAAD0/wIAAQABAAAAAAD0/wMAAQAAAAAAAAD1//z/AQAAAAAAAAD1//3/AQABAAAAAAD1//7/AQAAAAAAAAD1////AQABAAAAAAD1/wAAAQAAAAAAAAD1/wEAAQABAAAAAAD1/wIAAQAAAAAAAAD1/wMAAQABAAAAAAD2//z/AQABAAAAAAD2//3/AQAAAAAAAAD2//7/AQABAAAAAAD2////AQAAAAAAAAD2/wAAAQABAAAAAAD2/wEAAQAAAAAAAAD2/wIAAQABAAAAAAD2/wMAAQAAAAAAAAD3//z/AQAAAAAAAAD3//3/AQABAAAAAAD3//7/AQAAAAAAAAD3////AQABAAAAAAD3/wAAAQAAAAAAAAD3/wEAAQABAAAAAAD3/wIAAQAAAAAAAAD3/wMAAQABAAAAAAD4//z/AQABAAAAAAD4//3/AQAAAAAAAAD4//7/AQABAAAAAAD4////AQAAAAAAAAD4/wAAAQABAAAAAAD4/wEAAQAAAAAAAAD4/wIAAQABAAAAAAD4/wMAAQAAAAAAAAD5//z/AQAAAAAAAAD5//3/AQABAAAAAAD5//7/AQAAAAAAAAD5////AQABAAAAAAD5/wAAAQAAAAAAAAD5/wEAAQABAAAAAAD5/wIAAQAAAAAAAAD5/wMAAQABAAAAAAD6//z/AQABAAAAAAD6//3/AQAAAAAAAAD6//7/AQABAAAAAAD6////AQAAAAAAAAD6/wAAAQABAAAAAAD6/wEAAQAAAAAAAAD6/wIAAQABAAAAAAD6/wMAAQAAAAAAAAD7//z/AQAAAAAAAAD7//3/AQABAAAAAAD7//7/AQAAAAAAAAD7////AQABAAAAAAD7/wAAAQAAAAAAAAD7/wEAAQABAAAAAAD7/wIAAQAAAAAAAAD7/wMAAQABAAAAAAD0/wQAAQABAAAAAAD0/wUAAQAAAAAAAAD1/wQAAQAAAAAAAAD1/wUAAQABAAAAAAD2/wQAAQABAAAAAAD2/wUAAQAAAAAAAAD3/wQAAQAAAAAAAAD3/wUAAQABAAAAAAD4/wQAAQABAAAAAAD4/wUAAQAAAAAAAAD5/wQAAQAAAAAAAAD5/wUAAQABAAAAAAD6/wQAAQABAAAAAAD6/wUAAQAAAAAAAAD7/wQAAQAAAAAAAAD7/wUAAQABAAAAAAD8/wQAAQABAAAAAAD8/wUAAQAAAAAAAAD9/wQAAQAAAAAAAAD9/wUAAQABAAAAAAD+/wQAAQABAAAAAAD+/wUAAQAAAAAAAAD//wQAAQAAAAAAAAD//wUAAQABAAAAAAAAAAQAAQABAAAAAAAAAAUAAQAAAAAAAAABAAQAAQAAAAAAAAABAAUAAQABAAAAAAACAAQAAQABAAAAAAACAAUAAQAAAAAAAAADAAQAAQAAAAAAAAADAAUAAQABAAAAAAAEAAQAAQABAAAAAAAEAAUAAQAAAAAAAAAFAAQAAQAAAAAAAAAFAAUAAQABAAAAAAAGAAQAAQABAAAAAAAGAAUAAQAAAAAAAAAHAAQAAQAAAAAAAAAHAAUAAQABAAAAAAAIAAQAAQABAAAAAAAIAAUAAQAAAAAAAAAJAAQAAQAAAAAAAAAJAAUAAQABAAAAAAAKAAQAAQABAAAAAAAKAAUAAQAAAAAAAAALAAQAAQAAAAAAAAALAAUAAQABAAAAAAAMAAQAAQABAAAAAAAMAAUAAQAAAAAAAAANAAQAAQAAAAAAAAANAAUAAQABAAAAAAAOAAQAAQABAAAAAAAOAAUAAQAAAAAAAAAPAAQAAQAAAAAAAAAPAAUAAQABAAAAAAAQAAQAAQABAAAAAAAQAAUAAQAAAAAAAAARAAQAAQAAAAAAAAARAAUAAQABAAAAAAAMAAIAAQABAAAAAAAMAAMAAQAAAAAAAAANAAIAAQAAAAAAAAANAAMAAQABAAAAAAAOAAIAAQABAAAAAAAOAAMAAQAAAAAAAAAPAAIAAQAAAAAAAAAPAAMAAQABAAAAAAAQAAIAAQABAAAAAAAQAAMAAQAAAAAAAAARAAIAAQAAAAAAAAARAAMAAQABAAAAAAAMAP7/AQABAAAAAAAMAP//AQAAAAAAAAAMAAAAAQABAAAAAAAMAAEAAQAAAAAAAAANAP7/AQAAAAAAAAANAP//AQABAAAAAAANAAAAAQAAAAAAAAANAAEAAQABAAAAAAAOAP7/AQABAAAAAAAOAP//AQAAAAAAAAAOAAAAAQABAAAAAAAOAAEAAQAAAAAAAAAPAP7/AQAAAAAAAAAPAP//AQABAAAAAAAPAAAAAQAAAAAAAAAPAAEAAQABAAAAAAAQAP7/AQABAAAAAAAQAP//AQAAAAAAAAAQAAAAAQABAAAAAAAQAAEAAQAAAAAAAAARAP7/AQAAAAAAAAARAP//AQABAAAAAAARAAAAAQAAAAAAAAARAAEAAQABAAAAAAAMAPr/AQABAAAAAAAMAPv/AQAAAAAAAAAMAPz/AQABAAAAAAAMAP3/AQAAAAAAAAANAPr/AQAAAAAAAAANAPv/AQABAAAAAAANAPz/AQAAAAAAAAANAP3/AQABAAAAAAAOAPr/AQABAAAAAAAOAPv/AQAAAAAAAAAOAPz/AQABAAAAAAAOAP3/AQAAAAAAAAAPAPr/AQAAAAAAAAAPAPv/AQABAAAAAAAPAPz/AQAAAAAAAAAPAP3/AQABAAAAAAAQAPr/AQABAAAAAAAQAPv/AQAAAAAAAAAQAPz/AQABAAAAAAAQAP3/AQAAAAAAAAARAPr/AQAAAAAAAAARAPv/AQABAAAAAAARAPz/AQAAAAAAAAARAP3/AQABAAAAAAAMAPb/AQABAAAAAAAMAPf/AQAAAAAAAAAMAPj/AQABAAAAAAAMAPn/AQAAAAAAAAANAPb/AQAAAAAAAAANAPf/AQABAAAAAAANAPj/AQAAAAAAAAANAPn/AQABAAAAAAAOAPb/AQABAAAAAAAOAPf/AQAAAAAAAAAOAPj/AQABAAAAAAAOAPn/AQAAAAAAAAAPAPb/AQAAAAAAAAAPAPf/AQABAAAAAAAPAPj/AQAAAAAAAAAPAPn/AQABAAAAAAAQAPb/AQABAAAAAAAQAPf/AQAAAAAAAAAQAPj/AQABAAAAAAAQAPn/AQAAAAAAAAARAPb/AQAAAAAAAAARAPf/AQABAAAAAAARAPj/AQAAAAAAAAARAPn/AQABAAAAAADu/wIAAQABAAAAAADu/wMAAQAAAAAAAADu/wQAAQABAAAAAADu/wUAAQAAAAAAAADv/wIAAQAAAAAAAADv/wMAAQABAAAAAADv/wQAAQAAAAAAAADv/wUAAQABAAAAAADw/wIAAQABAAAAAADw/wMAAQAAAAAAAADw/wQAAQABAAAAAADw/wUAAQAAAAAAAADx/wIAAQAAAAAAAADx/wMAAQABAAAAAADx/wQAAQAAAAAAAADx/wUAAQABAAAAAADy/wIAAQABAAAAAADy/wMAAQAAAAAAAADy/wQAAQABAAAAAADy/wUAAQAAAAAAAADz/wIAAQAAAAAAAADz/wMAAQABAAAAAADz/wQAAQAAAAAAAADz/wUAAQABAAAAAADu//7/AQABAAAAAADu////AQAAAAAAAADu/wAAAQABAAAAAADu/wEAAQAAAAAAAADv//7/AQAAAAAAAADv////AQABAAAAAADv/wAAAQAAAAAAAADv/wEAAQABAAAAAADw//7/AQABAAAAAADw////AQAAAAAAAADw/wAAAQABAAAAAADw/wEAAQAAAAAAAADx//7/AQAAAAAAAADx////AQABAAAAAADx/wAAAQAAAAAAAADx/wEAAQABAAAAAADy//7/AQABAAAAAADy////AQAAAAAAAADy/wAAAQABAAAAAADy/wEAAQAAAAAAAADz//7/AQAAAAAAAADz////AQABAAAAAADz/wAAAQAAAAAAAADz/wEAAQABAAAAAADu//r/AQABAAAAAADu//v/AQAAAAAAAADu//z/AQABAAAAAADu//3/AQAAAAAAAADv//r/AQAAAAAAAADv//v/AQABAAAAAADv//z/AQAAAAAAAADv//3/AQABAAAAAADw//r/AQABAAAAAADw//v/AQAAAAAAAADw//z/AQABAAAAAADw//3/AQAAAAAAAADx//r/AQAAAAAAAADx//v/AQABAAAAAADx//z/AQAAAAAAAADx//3/AQABAAAAAADy//r/AQABAAAAAADy//v/AQAAAAAAAADy//z/AQABAAAAAADy//3/AQAAAAAAAADz//r/AQAAAAAAAADz//v/AQABAAAAAADz//z/AQAAAAAAAADz//3/AQABAAAAAADu//b/AQABAAAAAADu//f/AQAAAAAAAADu//j/AQABAAAAAADu//n/AQAAAAAAAADv//b/AQAAAAAAAADv//f/AQABAAAAAADv//j/AQAAAAAAAADv//n/AQABAAAAAADw//b/AQABAAAAAADw//f/AQAAAAAAAADw//j/AQABAAAAAADw//n/AQAAAAAAAADx//b/AQAAAAAAAADx//f/AQABAAAAAADx//j/AQAAAAAAAADx//n/AQABAAAAAADy//b/AQABAAAAAADy//f/AQAAAAAAAADy//j/AQABAAAAAADy//n/AQAAAAAAAADz//b/AQAAAAAAAADz//f/AQABAAAAAADz//j/AQAAAAAAAADz//n/AQABAAAAAAD0//j/AQABAAAAAAD0//n/AQAAAAAAAAD0//r/AQABAAAAAAD0//v/AQAAAAAAAAD1//j/AQAAAAAAAAD1//n/AQABAAAAAAD1//r/AQAAAAAAAAD1//v/AQABAAAAAAD2//j/AQABAAAAAAD2//n/AQAAAAAAAAD2//r/AQABAAAAAAD2//v/AQAAAAAAAAD3//j/AQAAAAAAAAD3//n/AQABAAAAAAD3//r/AQAAAAAAAAD3//v/AQABAAAAAAD4//j/AQABAAAAAAD4//n/AQAAAAAAAAD4//r/AQABAAAAAAD4//v/AQAAAAAAAAD5//j/AQAAAAAAAAD5//n/AQABAAAAAAD5//r/AQAAAAAAAAD5//v/AQABAAAAAAD6//j/AQABAAAAAAD6//n/AQAAAAAAAAD6//r/AQABAAAAAAD6//v/AQAAAAAAAAD7//j/AQAAAAAAAAD7//n/AQABAAAAAAD7//r/AQAAAAAAAAD7//v/AQABAAAAAAD8//j/AQABAAAAAAD8//n/AQAAAAAAAAD8//r/AQABAAAAAAD8//v/AQAAAAAAAAD9//j/AQAAAAAAAAD9//n/AQABAAAAAAD9//r/AQAAAAAAAAD9//v/AQABAAAAAAD+//j/AQABAAAAAAD+//n/AQAAAAAAAAD+//r/AQABAAAAAAD+//v/AQAAAAAAAAD///j/AQAAAAAAAAD///n/AQABAAAAAAD///r/AQAAAAAAAAD///v/AQABAAAAAAAAAPj/AQABAAAAAAAAAPn/AQAAAAAAAAAAAPr/AQABAAAAAAAAAPv/AQAAAAAAAAABAPj/AQAAAAAAAAABAPn/AQABAAAAAAABAPr/AQAAAAAAAAABAPv/AQABAAAAAAACAPj/AQABAAAAAAACAPn/AQAAAAAAAAACAPr/AQABAAAAAAACAPv/AQAAAAAAAAADAPj/AQAAAAAAAAADAPn/AQABAAAAAAADAPr/AQAAAAAAAAADAPv/AQABAAAAAAAEAPj/AQABAAAAAAAEAPn/AQAAAAAAAAAEAPr/AQABAAAAAAAEAPv/AQAAAAAAAAAFAPj/AQAAAAAAAAAFAPn/AQABAAAAAAAFAPr/AQAAAAAAAAAFAPv/AQABAAAAAAAGAPj/AQABAAAAAAAGAPn/AQAAAAAAAAAGAPr/AQABAAAAAAAGAPv/AQAAAAAAAAAHAPj/AQAAAAAAAAAHAPn/AQABAAAAAAAHAPr/AQAAAAAAAAAHAPv/AQABAAAAAAAIAPj/AQABAAAAAAAIAPn/AQAAAAAAAAAIAPr/AQABAAAAAAAIAPv/AQAAAAAAAAAJAPj/AQAAAAAAAAAJAPn/AQABAAAAAAAJAPr/AQAAAAAAAAAJAPv/AQABAAAAAAAKAPj/AQABAAAAAAAKAPn/AQAAAAAAAAAKAPr/AQABAAAAAAAKAPv/AQAAAAAAAAALAPj/AQAAAAAAAAALAPn/AQABAAAAAAALAPr/AQAAAAAAAAALAPv/AQABAAAAAAD0//b/AQABAAAAAAD0//f/AQAAAAAAAAD1//b/AQAAAAAAAAD1//f/AQABAAAAAAD2//b/AQABAAAAAAD2//f/AQAAAAAAAAD3//b/AQAAAAAAAAD3//f/AQABAAAAAAD4//b/AQABAAAAAAD4//f/AQAAAAAAAAD5//b/AQAAAAAAAAD5//f/AQABAAAAAAD6//b/AQABAAAAAAD6//f/AQAAAAAAAAD7//b/AQAAAAAAAAD7//f/AQABAAAAAAD8//b/AQABAAAAAAD8//f/AQAAAAAAAAD9//b/AQAAAAAAAAD9//f/AQABAAAAAAD+//b/AQABAAAAAAD+//f/AQAAAAAAAAD///b/AQAAAAAAAAD///f/AQABAAAAAAAAAPb/AQABAAAAAAAAAPf/AQAAAAAAAAABAPb/AQAAAAAAAAABAPf/AQABAAAAAAACAPb/AQABAAAAAAACAPf/AQAAAAAAAAADAPb/AQAAAAAAAAADAPf/AQABAAAAAAAEAPb/AQABAAAAAAAEAPf/AQAAAAAAAAAFAPb/AQAAAAAAAAAFAPf/AQABAAAAAAAGAPb/AQABAAAAAAAGAPf/AQAAAAAAAAAHAPb/AQAAAAAAAAAHAPf/AQABAAAAAAAIAPb/AQABAAAAAAAIAPf/AQAAAAAAAAAJAPb/AQAAAAAAAAAJAPf/AQABAAAAAAAKAPb/AQABAAAAAAAKAPf/AQAAAAAAAAALAPb/AQAAAAAAAAALAPf/AQABAAAAAAA=")
 tile_set = SubResource("TileSet_jhoar")
+
+[node name="PieceManager" type="Node" parent="."]
+script = ExtResource("4_h3lfs")
+metadata/_custom_type_script = "uid://eu4sjlhoqwpp"
+
+[node name="BlackKing" parent="PieceManager" instance=ExtResource("5_2l5nx")]
+physics_interpolation_mode = 2
+position = Vector2(560, 432)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("6_bu0yp")
+
+[node name="BlackQueen" parent="PieceManager" instance=ExtResource("7_2kjuw")]
+position = Vector2(592, 432)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("6_bu0yp")
+
+[node name="BlackBeashop" parent="PieceManager" instance=ExtResource("8_dr73f")]
+position = Vector2(528, 432)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("6_bu0yp")
+
+[node name="BlackBeashop2" parent="PieceManager" instance=ExtResource("8_dr73f")]
+position = Vector2(624, 432)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("6_bu0yp")
+
+[node name="BlackKnight" parent="PieceManager" instance=ExtResource("9_slw4p")]
+position = Vector2(496, 432)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("6_bu0yp")
+
+[node name="BlackKnight2" parent="PieceManager" instance=ExtResource("9_slw4p")]
+position = Vector2(656, 432)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("6_bu0yp")
+
+[node name="BlackRook" parent="PieceManager" instance=ExtResource("10_jt474")]
+position = Vector2(464, 432)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("6_bu0yp")
+
+[node name="BlackRook2" parent="PieceManager" instance=ExtResource("10_jt474")]
+position = Vector2(688, 432)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("6_bu0yp")
+
+[node name="BlackPawn" parent="PieceManager" instance=ExtResource("11_qx00v")]
+position = Vector2(464, 400)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("6_bu0yp")
+
+[node name="BlackPawn2" parent="PieceManager" instance=ExtResource("11_qx00v")]
+position = Vector2(496, 400)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("6_bu0yp")
+
+[node name="BlackPawn3" parent="PieceManager" instance=ExtResource("11_qx00v")]
+position = Vector2(528, 400)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("6_bu0yp")
+
+[node name="BlackPawn4" parent="PieceManager" instance=ExtResource("11_qx00v")]
+position = Vector2(560, 400)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("6_bu0yp")
+
+[node name="BlackPawn5" parent="PieceManager" instance=ExtResource("11_qx00v")]
+position = Vector2(592, 400)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("6_bu0yp")
+
+[node name="BlackPawn6" parent="PieceManager" instance=ExtResource("11_qx00v")]
+position = Vector2(624, 400)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("6_bu0yp")
+
+[node name="BlackPawn7" parent="PieceManager" instance=ExtResource("11_qx00v")]
+position = Vector2(656, 400)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("6_bu0yp")
+
+[node name="BlackPawn8" parent="PieceManager" instance=ExtResource("11_qx00v")]
+position = Vector2(688, 400)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("6_bu0yp")
+
+[node name="WhiteKing" parent="PieceManager" instance=ExtResource("5_2l5nx")]
+position = Vector2(592, 208)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("12_aje2a")
+
+[node name="WhiteQueen" parent="PieceManager" instance=ExtResource("7_2kjuw")]
+position = Vector2(560, 208)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("12_aje2a")
+
+[node name="WhiteBeashop" parent="PieceManager" instance=ExtResource("8_dr73f")]
+position = Vector2(528, 208)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("12_aje2a")
+
+[node name="WhiteBeashop2" parent="PieceManager" instance=ExtResource("8_dr73f")]
+position = Vector2(624, 208)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("12_aje2a")
+
+[node name="WhiteKnight" parent="PieceManager" instance=ExtResource("9_slw4p")]
+position = Vector2(496, 208)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("12_aje2a")
+
+[node name="WhiteKnight2" parent="PieceManager" instance=ExtResource("9_slw4p")]
+position = Vector2(656, 208)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("12_aje2a")
+
+[node name="WhiteRook" parent="PieceManager" instance=ExtResource("10_jt474")]
+position = Vector2(464, 208)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("12_aje2a")
+
+[node name="WhiteRook2" parent="PieceManager" instance=ExtResource("10_jt474")]
+position = Vector2(688, 208)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("12_aje2a")
+
+[node name="WhitePawn" parent="PieceManager" instance=ExtResource("11_qx00v")]
+position = Vector2(464, 240)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("12_aje2a")
+
+[node name="WhitePawn2" parent="PieceManager" instance=ExtResource("11_qx00v")]
+position = Vector2(496, 240)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("12_aje2a")
+
+[node name="WhitePawn3" parent="PieceManager" instance=ExtResource("11_qx00v")]
+position = Vector2(528, 240)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("12_aje2a")
+
+[node name="WhitePawn4" parent="PieceManager" instance=ExtResource("11_qx00v")]
+position = Vector2(560, 240)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("12_aje2a")
+
+[node name="WhitePawn5" parent="PieceManager" instance=ExtResource("11_qx00v")]
+position = Vector2(592, 240)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("12_aje2a")
+
+[node name="WhitePawn6" parent="PieceManager" instance=ExtResource("11_qx00v")]
+position = Vector2(624, 240)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("12_aje2a")
+
+[node name="WhitePawn7" parent="PieceManager" instance=ExtResource("11_qx00v")]
+position = Vector2(656, 240)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("12_aje2a")
+
+[node name="WhitePawn8" parent="PieceManager" instance=ExtResource("11_qx00v")]
+position = Vector2(688, 240)
+scale = Vector2(1.6, 1.6)
+image_to_load = ExtResource("12_aje2a")
 
 [connection signal="pressed" from="UI_related/ui/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="UI_related/ui/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="UI_related/UI/HBoxContainer/Action/Start" to="." method="_on_start_pressed"]
