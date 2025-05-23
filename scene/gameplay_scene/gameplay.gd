@@ -59,7 +59,13 @@ func is_peer_connected()->bool:
 
 func _change_color(is_black:bool)->void:
 	if is_black:
+		$UI_related/UI/HBoxContainer/Play/ColorRect.color = Color.WHITE
+		$UI_related/UI/HBoxContainer/Play/BlackKing.show()
+		$UI_related/UI/HBoxContainer/Play/WhiteKing.hide()
+	else:
 		$UI_related/UI/HBoxContainer/Play/ColorRect.color = Color.BLACK
+		$UI_related/UI/HBoxContainer/Play/BlackKing.hide()
+		$UI_related/UI/HBoxContainer/Play/WhiteKing.show()
 
 @rpc("call_remote","authority")
 func _start_game(is_starting:bool,is_black:bool)->void:
