@@ -3,7 +3,6 @@ class_name Piece
 @export var mouvement_option:Array[int]
 @export var rank_of_the_piece:int = 0
 @export var is_black:bool = true
-@export var pos:Vector2i
 @export var image_to_load:Texture2D
 var is_selected:bool = false
 
@@ -15,10 +14,12 @@ func _ready() -> void:
 
 func get_possible_mouvement()->Array[Vector2i]:
 	var array:Array[Vector2i] = []
+	var index:int = get_index()
+	var parent:PieceManager = get_parent()
 	for option:int in mouvement_option:
-		array.append_array(
-			MouvRef.get_mouv(option).get_possible_mouv()
-			)
+		for possible_mouv:Vector2i in MouvRef.get_mouv(option).get_possible_mouv():
+			if parent.is_in_map(possible_mouv,index):
+				array.append(possible_mouv)
 	return array
 
 func _draw() -> void:
