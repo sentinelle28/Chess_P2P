@@ -72,3 +72,33 @@ func _start_game(is_starting:bool,is_black:bool)->void:
 	action_bar.visible = is_starting
 	m_player.is_black = is_black
 	_change_color(is_black)
+
+
+@rpc("authority","call_remote")
+func _do_action_client(action:Action)->void:
+	_do_action(action)
+	
+@rpc("any_peer","call_local")
+func _do_action_host(action:Action)->void:
+	_do_action(action)
+		
+func _do_action(action:Action)->void:
+	if action is MouvAction:
+		action._do_action($PieceManager)
+
+func _do_consequence()->void:
+	if EventListenner.did_action():
+		EventListenner._reset_action()
+		for consequence:Consequence in EventListenner:
+			if consequence is MouvConsequence:
+				consequence._reverse($PieceManager)
+	
+func _send_action()->void:
+	if EventListenner.did_action():
+		EventListenner._reset_consequence()
+		if is_multiplayer_authority():
+			rpc("_do_action_client",EventListenner.get_action())
+			EventListenner.action = null
+		else:
+			rpc("_do_action_host",EventListenner.get_action())
+			EventListenner.action = null

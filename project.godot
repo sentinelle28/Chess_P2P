@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 MouvRef="*res://autoload/ref/flywheight_mouv/MouvRef.gd"
 PosReset="*res://autoload/ref/reset_related/PosReset.gd"
+EventListenner="*res://autoload/stocker/EventListenner.gd"
 
 [rendering]
 
