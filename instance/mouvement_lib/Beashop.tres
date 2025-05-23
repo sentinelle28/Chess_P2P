@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="MouvementOption" load_steps=2 format=3 uid="uid://dyyh66hfai0c8"]
+[gd_resource type="Resource" script_class="ComputeMouvOption" load_steps=2 format=3 uid="uid://7xgfmx3tsp1m"]
 
-[ext_resource type="Script" uid="uid://b8t3sroj4iv3u" path="res://component/piece_related/mouvement_component/MouvementOption.gd" id="1_1dof8"]
+[ext_resource type="Script" uid="uid://khk2br3shwca" path="res://component/piece_related/mouvement_component/ComputeMouvOption.gd" id="1_1dof8"]
 
 [resource]
 script = ExtResource("1_1dof8")
-pos_array = Array[Vector2i]([Vector2i(1, 1), Vector2i(2, 2), Vector2i(3, 3), Vector2i(4, 4), Vector2i(5, 5), Vector2i(6, 6), Vector2i(7, 7), Vector2i(8, 8), Vector2i(-1, -1), Vector2i(-2, -2), Vector2i(-3, -3), Vector2i(-4, -4), Vector2i(-5, -5), Vector2i(-6, -6), Vector2i(-7, -7), Vector2i(-8, -8), Vector2i(1, -1), Vector2i(2, -2), Vector2i(3, -3), Vector2i(4, -4), Vector2i(5, -5), Vector2i(6, -6), Vector2i(7, -7), Vector2i(8, -8), Vector2i(-1, 1), Vector2i(-2, 2), Vector2i(-3, 3), Vector2i(-4, 4), Vector2i(-5, 5), Vector2i(-6, 6), Vector2i(-7, 7), Vector2i(-8, 8)])
-metadata/_custom_type_script = "uid://b8t3sroj4iv3u"
+pos_array = Array[Vector2i]([Vector2i(1, 1), Vector2i(-1, 1), Vector2i(1, -1), Vector2i(-1, -1)])
+metadata/_custom_type_script = "uid://khk2br3shwca"

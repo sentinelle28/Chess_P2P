@@ -85,6 +85,7 @@ func _do_action_host(action:Action)->void:
 func _do_action(action:Action)->void:
 	if action is MouvAction:
 		action._do_action($PieceManager)
+	EventListenner.consequences.clear()
 
 func _do_consequence()->void:
 	if EventListenner.did_action():

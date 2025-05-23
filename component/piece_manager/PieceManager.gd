@@ -10,7 +10,7 @@ func _ready() -> void:
 		
 func _reset()->void:
 	array_pos.clear()
-	for i:int in range(get_child_count()):
+	for i:int in range(32):
 		var child:Piece = get_child(i)
 		array_pos.append(PosReset.beginning_pos[i])
 		child.global_position = get_map_pos(PosReset.beginning_pos[i])

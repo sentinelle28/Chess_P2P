@@ -17,9 +17,17 @@ func get_possible_mouvement()->Array[Vector2i]:
 	var index:int = get_index()
 	var parent:PieceManager = get_parent()
 	for option:int in mouvement_option:
-		for possible_mouv:Vector2i in MouvRef.get_mouv(option).get_possible_mouv():
-			if parent.is_in_map(possible_mouv,index):
-				array.append(possible_mouv)
+		if MouvRef.get_mouv(option) is ComputeMouvOption:
+			var computemouv:ComputeMouvOption = MouvRef.get_mouv(option)
+			var temp_array:Array[Vector2i] = computemouv.get_compute_possible_mouv(
+				parent.tilemap,
+				parent.array_pos[get_index()],
+				parent.array_pos)
+			array.append_array(temp_array)
+		else:
+			for possible_mouv:Vector2i in MouvRef.get_mouv(option).get_possible_mouv():
+				if parent.is_in_map(possible_mouv,index):
+					array.append(possible_mouv)
 	return array
 
 func _draw() -> void:
