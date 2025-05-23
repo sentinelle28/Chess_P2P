@@ -9,7 +9,7 @@ const MAX_PLAYER:int = 2
 var m_player:Player
 var is_two:bool = false
 
-@onready var action:VBoxContainer = $UI_related/UI/HBoxContainer/Action/InMatch
+@onready var action_bar:VBoxContainer = $UI_related/UI/bottom_box/action/InMatch
 
 func _on_host_pressed()->void:
 	peer.create_server(PORT,MAX_PLAYER)
@@ -20,7 +20,7 @@ func _on_host_pressed()->void:
 	
 func _update_peer(_value:int)->void:
 	is_two = true
-	$UI_related/UI/HBoxContainer/Action/Start.show()
+	$UI_related/UI/bottom_box/action/Start.show()
 	
 func _hide_UI()->void:
 	internet_related.hide()
@@ -45,10 +45,10 @@ func _add_player(id:int)->void:
 
 func _on_start_pressed() -> void:
 	if is_two:
-		$UI_related/UI/HBoxContainer/Action/Start.hide()
+		$UI_related/UI/bottom_box/action/Start.hide()
 		var is_black:bool = randi_range(0,1) == 1
 		var is_starting:bool = randi_range(0,1) == 1
-		action.visible = is_starting
+		action_bar.visible = is_starting
 		m_player.is_black = is_black
 		
 		_change_color(is_black)
@@ -59,17 +59,16 @@ func is_peer_connected()->bool:
 
 func _change_color(is_black:bool)->void:
 	if is_black:
-		$UI_related/UI/HBoxContainer/Play/ColorRect.color = Color.WHITE
-		$UI_related/UI/HBoxContainer/Play/BlackKing.show()
-		$UI_related/UI/HBoxContainer/Play/WhiteKing.hide()
+		$UI_related/UI/bottom_box/Play/ColorRect.color = Color.WHITE
+		$UI_related/UI/bottom_box/Play/BlackKing.show()
+		$UI_related/UI/bottom_box/Play/WhiteKing.hide()
 	else:
-		$UI_related/UI/HBoxContainer/Play/ColorRect.color = Color.BLACK
-		$UI_related/UI/HBoxContainer/Play/BlackKing.hide()
-		$UI_related/UI/HBoxContainer/Play/WhiteKing.show()
+		$UI_related/UI/bottom_box/Play/ColorRect.color = Color.BLACK
+		$UI_related/UI/bottom_box/Play/BlackKing.hide()
+		$UI_related/UI/bottom_box/Play/WhiteKing.show()
 
 @rpc("call_remote","authority")
 func _start_game(is_starting:bool,is_black:bool)->void:
-	
-	action.visible = is_starting
+	action_bar.visible = is_starting
 	m_player.is_black = is_black
 	_change_color(is_black)

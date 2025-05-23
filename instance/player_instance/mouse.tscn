@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cm8f52sggultk" path="res://asset/visual/pixel chess_v1.2/cursor.png" id="2_y8jxf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lpijr"]
-radius = 17.8885
+radius = 8.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6qnrr"]
 atlas = ExtResource("2_y8jxf")
