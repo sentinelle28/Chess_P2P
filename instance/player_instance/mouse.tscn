@@ -58,7 +58,7 @@ shape = SubResource("CircleShape2D_lpijr")
 position = Vector2(-4.76837e-07, 4.76837e-07)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_y4v5i")
-animation = &"idle"
+animation = &"click"
 autoplay = "idle"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

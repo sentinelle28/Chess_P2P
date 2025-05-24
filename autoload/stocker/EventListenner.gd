@@ -1,6 +1,7 @@
 extends Node
-signal PieceTaken(index_of_the_victime:int,index_of_the_attacker:int)
+signal PieceTaken(index_of_the_victime:int)
 signal PieceMov(from:Vector2i,to:Vector2i,who:int)
+signal DidAction
 
 var action:Action
 var consequences:Array[Consequence] = []
@@ -21,16 +22,19 @@ func _reset_consequence()->void:
 func _add_consequence(consequence:Consequence)->void:
 	consequences.append(consequence)
 	
-func _add_piece_taken_consequence(index_of_the_victime:int,
-index_of_the_attacker:int)->void:
-	pass
+func _add_piece_taken_consequence(index_of_the_victime:int)->void:
+	var new_consequence:PieceTakenConsequence = PieceTakenConsequence.new()
+	new_consequence.index_of_the_victim = index_of_the_victime
 	
 func _add_movement_consequence(from:Vector2i,to:Vector2i,who:int)->void:
+	#describe action
 	var new_action:MouvAction = MouvAction.new()
 	new_action.new_pos = to
 	new_action.index = who
-	action = new_action
-	var new_consequence:Consequence = MouvConsequence.new()
+	_add_action(new_action)
+	
+	#mouv consequences
+	var new_consequence:MouvConsequence = MouvConsequence.new()
 	new_consequence.index = who
 	new_consequence.previous_pos = from
 	_add_consequence(new_consequence)
@@ -38,3 +42,7 @@ func _add_movement_consequence(from:Vector2i,to:Vector2i,who:int)->void:
 func _reset_action()->void:
 	action = null
 	#consequence thingy
+
+func _add_action(n_action:Action)->void:
+	action = n_action
+	emit_signal("DidAction")
