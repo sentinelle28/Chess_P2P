@@ -1,6 +1,7 @@
 extends Node
 class_name PieceManager
 
+signal Victory(is_black:bool)
 
 @export var tilemap:TileMapLayer
 var array_pos:Array[Vector2i] = []
@@ -8,7 +9,7 @@ var possible_pos:Array[Vector2i] = []
 
 
 func _ready() -> void:
-	_reset()
+	connect("Victory",get_parent()._do_victory)
 		
 func _reset()->void:
 	array_pos.clear()
@@ -25,6 +26,9 @@ func _update_pos(index:int,value:Vector2i)->void:
 		var index_of_the_victim:int = array_pos.find(value)
 		EventListenner.emit_signal("PieceTaken",index_of_the_victim)
 		_make_dead(index_of_the_victim)
+		var piece:Piece = get_child(index_of_the_victim)
+		if "King" in piece.name:
+			emit_signal("Victory",not piece.is_black)
 	
 	
 	array_pos[index] = value

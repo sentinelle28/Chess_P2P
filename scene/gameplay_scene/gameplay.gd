@@ -8,8 +8,11 @@ const PORT:int = 135
 const MAX_PLAYER:int = 2
 var m_player:Player
 var is_two:bool = false
+var is_replaying:bool = false
 
 @onready var action_bar:VBoxContainer = $UI_related/UI/bottom_box/action/InMatch
+
+
 
 func _on_host_pressed()->void:
 	peer.create_server(PORT,MAX_PLAYER)
@@ -43,10 +46,26 @@ func _add_player(id:int)->void:
 	#check if mouse clicked somewhere good
 	m_player.connect("mouv_input",$PieceManager._check_mouse_pos)
 
+func _reset_global()->void:
+	$UI_related/UI/bottom_box/action/Start.hide()
+	$UI_related/Defeat.hide()
+	$UI_related/Victory.hide()
+	#reset
+	m_player._reset()
+	EventListenner._reset_action()
+	EventListenner._reset_consequence()
+	$PieceManager._reset()
+@rpc("authority","call_remote")
+func _reset_client()->void:
+	_reset_global()
+
 
 func _on_start_pressed() -> void:
 	if is_two:
-		$UI_related/UI/bottom_box/action/Start.hide()
+		#hide unuseful
+		_reset_global()
+		rpc("_reset_client")
+		#who is gonna start
 		var is_black:bool = randi_range(0,1) == 1
 		var is_starting:bool = randi_range(0,1) == 1
 		action_bar.visible = is_starting
@@ -92,7 +111,7 @@ func _do_mouv_action_host(who:int,to_x:int,to_y:int)->void:
 		
 		
 func _do_action(action:Action)->void:
-	
+	is_replaying = true
 	if action is MouvAction:
 		action._do_action($PieceManager)
 	#prevent weird reset that doesn't make sens
@@ -100,6 +119,7 @@ func _do_action(action:Action)->void:
 	#allow player to do action
 	action_bar.show()
 	m_player.can_play = true
+	is_replaying = false
 
 
 func _do_consequence()->void:
@@ -134,3 +154,30 @@ func _send_action()->void:
 		#prevent playing twice
 		m_player.can_play = false
 		action_bar.hide()
+
+func _do_victory(is_black:bool)->void:
+	if is_multiplayer_authority():
+		$UI_related/UI/bottom_box/action/Start.show()
+	
+	if not is_replaying:
+		_send_action()
+		var to_add:String = "_host"
+		#make sure we ask to update the right pc
+		if is_multiplayer_authority():
+			to_add = "_client"
+		rpc("_stop_action"+to_add)
+		
+	var result:bool = is_black == m_player.is_black
+	$UI_related/Defeat.visible = not result
+	$UI_related/Victory.visible = result
+
+
+@rpc("any_peer","call_local")
+func _stop_action_host()->void:
+	action_bar.hide()
+	m_player.can_play = false
+
+@rpc("authority","call_remote")
+func _stop_action_client()->void:
+	action_bar.hide()
+	m_player.can_play = false

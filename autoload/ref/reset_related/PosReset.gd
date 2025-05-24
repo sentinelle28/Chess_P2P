@@ -19,8 +19,8 @@ const beginning_pos:Array[Vector2i] = [
 	Vector2i(3,2), #heigth black pawn
 	
 	
-	Vector2i(-1,-4),#white king
-	Vector2i(0,-4),#white queen
+	Vector2i(0,-4),#white king
+	Vector2i(-1,-4),#white queen
 	Vector2i(-2,-4),#white beashop left
 	Vector2i(1,-4),#white beashop right
 	Vector2i(-3,-4), #white knight left

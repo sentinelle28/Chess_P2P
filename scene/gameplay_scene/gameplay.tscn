@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://chpp6u6l8c72o"]
+[gd_scene load_steps=16 format=4 uid="uid://chpp6u6l8c72o"]
 
 [ext_resource type="Script" uid="uid://cyyr26uacur4g" path="res://scene/gameplay_scene/gameplay.gd" id="1_tfltx"]
 [ext_resource type="PackedScene" uid="uid://djpfvvn6vm40b" path="res://instance/player_instance/mouse.tscn" id="2_agxrv"]
@@ -12,6 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://yrvgyml4s8un" path="res://instance/piece_instance/Piece_lib/rook.tscn" id="10_jt474"]
 [ext_resource type="PackedScene" uid="uid://cfjmlv0qpd7l3" path="res://instance/piece_instance/Piece_lib/pawn.tscn" id="11_qx00v"]
 [ext_resource type="Texture2D" uid="uid://geqi0bsnmyo3" path="res://asset/visual/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="12_aje2a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2kjuw"]
+font_size = 46
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h3lfs"]
 texture = ExtResource("3_7ggfb")
@@ -163,6 +166,38 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Start"
+
+[node name="Defeat" type="Label" parent="UI_related"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Defeat"
+label_settings = SubResource("LabelSettings_2kjuw")
+
+[node name="Victory" type="Label" parent="UI_related"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Victory"
+label_settings = SubResource("LabelSettings_2kjuw")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(576, 320)
