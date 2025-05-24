@@ -33,7 +33,8 @@ func _update_pos(index:int,value:Vector2i)->void:
 	
 	array_pos[index] = value
 	var child:Piece = get_child(index)
-	child.global_position = get_map_pos(value)
+	var temp:Tween = get_tree().create_tween()
+	temp.tween_property(child,"global_position",get_map_pos(value),0.5)
 
 func get_map_pos(pos:Vector2i)->Vector2:
 	var pos_local:Vector2 = tilemap.map_to_local(pos)

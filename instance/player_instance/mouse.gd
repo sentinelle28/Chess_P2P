@@ -40,14 +40,27 @@ func can_click()->bool:
 func _on_area_entered(area: Area2D) -> void:
 	if area is Piece:
 		if can_play and area.is_black == is_black and not is_lock_on_piece:
+			#prevent bug
+			if is_instance_valid(last_selected_piece):
+				last_selected_piece.z_index = 1
+				last_selected_piece.is_selected = false
+				last_selected_piece.queue_redraw()
+				
 			last_selected_piece = area
+			#anim
 			anim.play("can_click")
-			area.is_selected = true
+			
+			#draw anim
+			last_selected_piece.is_selected = true
+			last_selected_piece.z_index = 2
 			area.queue_redraw()
+			
 
 
 func _on_area_exited(area: Area2D) -> void:
 	if area is Piece and not is_lock_on_piece:
+		area.z_index = 1
+		
 		last_selected_piece = null
 		_exit_piece(area)
 
