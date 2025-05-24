@@ -37,10 +37,11 @@ func _on_join_pressed()->void:
 func _add_player(id:int)->void:
 	var player = playerscene.instantiate()
 	player.name = str(id)
-	print("created player with id:", id)
 	player.set_multiplayer_authority(id)
 	call_deferred("add_child",player)
 	m_player = player
+	#check if mouse clicked somewhere good
+	m_player.connect("mouv_input",$PieceManager._check_mouse_pos)
 
 
 func _on_start_pressed() -> void:
@@ -50,7 +51,7 @@ func _on_start_pressed() -> void:
 		var is_starting:bool = randi_range(0,1) == 1
 		action_bar.visible = is_starting
 		m_player.is_black = is_black
-		
+		m_player.can_play = is_starting
 		_change_color(is_black)
 		rpc("_start_game", not is_starting, not is_black)
 
@@ -70,6 +71,7 @@ func _change_color(is_black:bool)->void:
 @rpc("call_remote","authority")
 func _start_game(is_starting:bool,is_black:bool)->void:
 	action_bar.visible = is_starting
+	m_player.can_play = is_starting
 	m_player.is_black = is_black
 	_change_color(is_black)
 
@@ -81,17 +83,24 @@ func _do_action_client(action:Action)->void:
 @rpc("any_peer","call_local")
 func _do_action_host(action:Action)->void:
 	_do_action(action)
+	#need to rework how to send custom object over internet
+		
+		
 		
 func _do_action(action:Action)->void:
 	if action is MouvAction:
 		action._do_action($PieceManager)
 	EventListenner.consequences.clear()
+	action_bar.show()
 
 func _do_consequence()->void:
 	if EventListenner.did_action():
+		m_player.can_play = true
 		EventListenner._reset_action()
-		for consequence:Consequence in EventListenner:
+		for consequence:Consequence in EventListenner.consequences:
 			if consequence is MouvConsequence:
+				consequence._reverse($PieceManager)
+			if consequence is PieceTakenConsequence:
 				consequence._reverse($PieceManager)
 	
 func _send_action()->void:
@@ -103,3 +112,7 @@ func _send_action()->void:
 		else:
 			rpc("_do_action_host",EventListenner.get_action())
 			EventListenner.action = null
+			
+		#prevent playing twice
+		m_player.can_play = false
+		action_bar.hide()

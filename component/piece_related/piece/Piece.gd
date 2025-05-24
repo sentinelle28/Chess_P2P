@@ -33,5 +33,13 @@ func get_possible_mouvement()->Array[Vector2i]:
 func _draw() -> void:
 	if is_selected:
 		var array:Array[Vector2i] = get_possible_mouvement()
+		var parent:PieceManager = get_parent()
+		parent.possible_pos.clear()
+		
+		#add for easier selection
+		for pos:Vector2i in array:
+			parent.possible_pos.append(pos + parent.array_pos[get_index()])
+		
+		#draw screen
 		for possible_pos:Vector2i in array:
 			draw_circle(possible_pos*20,5,Color.GRAY,true)
