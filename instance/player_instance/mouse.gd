@@ -60,8 +60,8 @@ func _on_area_entered(area: Area2D) -> void:
 func _on_area_exited(area: Area2D) -> void:
 	if area is Piece and not is_lock_on_piece:
 		area.z_index = 1
-		
-		last_selected_piece = null
+		if last_selected_piece == area:
+			last_selected_piece = null
 		_exit_piece(area)
 
 func _reset()->void:
@@ -69,7 +69,8 @@ func _reset()->void:
 	last_selected_piece = null
 
 func _exit_piece(piece:Piece)->void:
-	anim.play("idle")
+	if not is_instance_valid(last_selected_piece):
+		anim.play("idle")
 	piece.is_selected = false
 	piece.queue_redraw()
 
