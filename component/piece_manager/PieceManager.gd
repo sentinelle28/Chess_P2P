@@ -24,7 +24,7 @@ func _update_pos(index:int,value:Vector2i)->void:
 	#check if there has been a kill
 	if value in array_pos and value != array_pos[index]:
 		var index_of_the_victim:int = array_pos.find(value)
-		EventListenner.emit_signal("PieceTaken",index_of_the_victim)
+		EventListenner.emit_signal("PieceTaken",index_of_the_victim,array_pos[index_of_the_victim])
 		_make_dead(index_of_the_victim)
 		var piece:Piece = get_child(index_of_the_victim)
 		if "King" in piece.name:
@@ -43,11 +43,13 @@ func get_map_pos(pos:Vector2i)->Vector2:
 	
 func _make_dead(index:int)->void:
 	var child:Piece = get_child(index)
+	child.global_position = get_map_pos(Vector2i(-19,-11))
 	child.hide()
 	child.monitorable = false
 	
-func _make_alive(index:int)->void:
+func _make_alive(index:int,pos:Vector2i)->void:
 	var child:Piece = get_child(index)
+	child.global_position = get_map_pos(pos)
 	child.show()
 	child.monitorable = true
 

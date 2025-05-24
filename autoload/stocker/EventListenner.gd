@@ -1,5 +1,5 @@
 extends Node
-signal PieceTaken(index_of_the_victime:int)
+signal PieceTaken(index_of_the_victime:int,pos_of_the_victime:Vector2i)
 signal PieceMov(from:Vector2i,to:Vector2i,who:int)
 signal DidAction
 
@@ -22,9 +22,10 @@ func _reset_consequence()->void:
 func _add_consequence(consequence:Consequence)->void:
 	consequences.append(consequence)
 	
-func _add_piece_taken_consequence(index_of_the_victime:int)->void:
+func _add_piece_taken_consequence(index_of_the_victime:int,pos_of_the_victime:Vector2i)->void:
 	var new_consequence:PieceTakenConsequence = PieceTakenConsequence.new()
 	new_consequence.index_of_the_victim = index_of_the_victime
+	new_consequence.pos_of_the_victim = pos_of_the_victime
 	_add_consequence(new_consequence)
 	
 func _add_movement_consequence(from:Vector2i,to:Vector2i,who:int)->void:
