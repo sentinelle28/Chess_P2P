@@ -76,22 +76,31 @@ func _start_game(is_starting:bool,is_black:bool)->void:
 	_change_color(is_black)
 
 
+func _construct_mouv_action(who:int,to_x:int,to_y:int)->void:
+	var new_action:MouvAction = MouvAction.new()
+	new_action.index = who
+	new_action.new_pos = Vector2i(to_x,to_y)
+	_do_action(new_action)
+
 @rpc("authority","call_remote")
-func _do_action_client(action:Action)->void:
-	_do_action(action)
+func _do_mouv_action_client(who:int,to_x:int,to_y:int)->void:
+	_construct_mouv_action(who,to_x,to_y)
 	
 @rpc("any_peer","call_local")
-func _do_action_host(action:Action)->void:
-	_do_action(action)
-	#need to rework how to send custom object over internet
-		
+func _do_mouv_action_host(who:int,to_x:int,to_y:int)->void:
+	_construct_mouv_action(who,to_x,to_y)
 		
 		
 func _do_action(action:Action)->void:
+	
 	if action is MouvAction:
 		action._do_action($PieceManager)
+	#prevent weird reset that doesn't make sens
 	EventListenner.consequences.clear()
+	#allow player to do action
 	action_bar.show()
+	m_player.can_play = true
+
 
 func _do_consequence()->void:
 	if EventListenner.did_action():
@@ -106,12 +115,21 @@ func _do_consequence()->void:
 func _send_action()->void:
 	if EventListenner.did_action():
 		EventListenner._reset_consequence()
+		var action_to_send:Action = EventListenner.get_action()
+		var to_add:String = "_host"
+		#make sure we ask to update the right pc
 		if is_multiplayer_authority():
-			rpc("_do_action_client",EventListenner.get_action())
-			EventListenner.action = null
-		else:
-			rpc("_do_action_host",EventListenner.get_action())
-			EventListenner.action = null
+			to_add = "_client"
+		
+		#send info as requiered
+		if action_to_send is MouvAction:
+			var to_call:String = "_do_mouv_action"+to_add
+			rpc(
+				to_call, #mouv function
+				action_to_send.index, #who to move
+				action_to_send.new_pos.x, #where on x
+				action_to_send.new_pos.y) #where on y
+		EventListenner.action = null
 			
 		#prevent playing twice
 		m_player.can_play = false

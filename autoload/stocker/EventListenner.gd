@@ -25,6 +25,7 @@ func _add_consequence(consequence:Consequence)->void:
 func _add_piece_taken_consequence(index_of_the_victime:int)->void:
 	var new_consequence:PieceTakenConsequence = PieceTakenConsequence.new()
 	new_consequence.index_of_the_victim = index_of_the_victime
+	_add_consequence(new_consequence)
 	
 func _add_movement_consequence(from:Vector2i,to:Vector2i,who:int)->void:
 	#describe action
