@@ -76,3 +76,4 @@ func _exit_piece(piece:Piece)->void:
 
 func _prevent_futher_action()->void:
 	can_play = false
+	is_lock_on_piece = false

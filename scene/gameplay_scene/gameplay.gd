@@ -28,7 +28,6 @@ func _update_peer(_value:int)->void:
 func _hide_UI()->void:
 	internet_related.hide()
 	
-
 func _on_join_pressed()->void:
 	peer.create_client(IP.get_local_addresses()[1],PORT)
 	print("connected to: ", IP.get_local_addresses()[1])
@@ -36,7 +35,6 @@ func _on_join_pressed()->void:
 	_add_player(2)
 	_hide_UI()
 	
-
 func _add_player(id:int)->void:
 	var player = playerscene.instantiate()
 	player.name = str(id)
@@ -55,10 +53,10 @@ func _reset_global()->void:
 	EventListenner._reset_action()
 	EventListenner._reset_consequence()
 	$PieceManager._reset()
+	
 @rpc("authority","call_remote")
 func _reset_client()->void:
 	_reset_global()
-
 
 func _on_start_pressed() -> void:
 	if is_two:
@@ -94,7 +92,6 @@ func _start_game(is_starting:bool,is_black:bool)->void:
 	m_player.is_black = is_black
 	_change_color(is_black)
 
-
 func _construct_mouv_action(who:int,to_x:int,to_y:int)->void:
 	var new_action:MouvAction = MouvAction.new()
 	new_action.index = who
@@ -107,7 +104,8 @@ func _do_mouv_action_client(who:int,to_x:int,to_y:int)->void:
 	
 @rpc("any_peer","call_local")
 func _do_mouv_action_host(who:int,to_x:int,to_y:int)->void:
-	_construct_mouv_action(who,to_x,to_y)
+	if is_multiplayer_authority():
+		_construct_mouv_action(who,to_x,to_y)
 		
 		
 func _do_action(action:Action)->void:
@@ -119,7 +117,10 @@ func _do_action(action:Action)->void:
 	#allow player to do action
 	action_bar.show()
 	m_player.can_play = true
+	m_player.is_lock_on_piece = false
 	is_replaying = false
+	EventListenner.action = null
+	print(is_multiplayer_authority()," can play")
 
 
 func _do_consequence()->void:
@@ -131,10 +132,10 @@ func _do_consequence()->void:
 				consequence._reverse($PieceManager)
 			if consequence is PieceTakenConsequence:
 				consequence._reverse($PieceManager)
+		EventListenner._reset_consequence()
 	
 func _send_action()->void:
 	if EventListenner.did_action():
-		EventListenner._reset_consequence()
 		var action_to_send:Action = EventListenner.get_action()
 		var to_add:String = "_host"
 		#make sure we ask to update the right pc
@@ -144,15 +145,18 @@ func _send_action()->void:
 		#send info as requiered
 		if action_to_send is MouvAction:
 			var to_call:String = "_do_mouv_action"+to_add
+			print("action was sent from :",is_multiplayer_authority()," to: ",not is_multiplayer_authority())
 			rpc(
 				to_call, #mouv function
 				action_to_send.index, #who to move
 				action_to_send.new_pos.x, #where on x
 				action_to_send.new_pos.y) #where on y
+			
 		EventListenner.action = null
 			
 		#prevent playing twice
 		m_player.can_play = false
+		m_player.is_lock_on_piece = false
 		action_bar.hide()
 
 func _do_victory(is_black:bool)->void:
@@ -174,8 +178,9 @@ func _do_victory(is_black:bool)->void:
 
 @rpc("any_peer","call_local")
 func _stop_action_host()->void:
-	action_bar.hide()
-	m_player.can_play = false
+	if is_multiplayer_authority():
+		action_bar.hide()
+		m_player.can_play = false
 
 @rpc("authority","call_remote")
 func _stop_action_client()->void:

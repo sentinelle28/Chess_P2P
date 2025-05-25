@@ -20,7 +20,9 @@ func _reset()->void:
 		child.show()
 		child.monitorable = true
 	
-func _update_pos(index:int,value:Vector2i)->void:
+func _update_pos(index:int,value:Vector2i,do_emit_signal:bool)->void:
+	if do_emit_signal:
+		EventListenner.emit_signal("PieceMov",array_pos[index],value,index)
 	#check if there has been a kill
 	if value in array_pos and value != array_pos[index]:
 		var index_of_the_victim:int = array_pos.find(value)
@@ -63,11 +65,8 @@ func _check_mouse_pos(who:int)->void:
 	var mouse_pos:Vector2 = tilemap.get_local_mouse_position()
 	var tile_pos:Vector2i = tilemap.local_to_map(mouse_pos)
 	if tile_pos in possible_pos:
-		#created the sucequent action
-		EventListenner.emit_signal("PieceMov",array_pos[who],tile_pos,who)
-		
 		#update pos and check if there has been a piece takenb
-		_update_pos(who,tile_pos)
+		_update_pos(who,tile_pos,true)
 		#clear possible pos since it is not usefull
 		possible_pos.clear()
 	
