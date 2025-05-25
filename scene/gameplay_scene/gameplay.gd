@@ -21,6 +21,7 @@ func _on_host_pressed()->void:
 	_add_player(1)
 	_hide_UI()
 	
+	
 func _update_peer(_value:int)->void:
 	is_two = true
 	$UI_related/UI/bottom_box/action/Start.show()
@@ -29,11 +30,19 @@ func _hide_UI()->void:
 	internet_related.hide()
 	
 func _on_join_pressed()->void:
-	peer.create_client(IP.get_local_addresses()[1],PORT)
-	print("connected to: ", IP.get_local_addresses()[1])
-	multiplayer.multiplayer_peer = peer
-	_add_player(2)
-	_hide_UI()
+	var to_connect:String = $UI_related/ui/VBoxContainer/TextEdit.text
+	if is_valid_ip(to_connect):
+		#IP.get_local_addresses()[1]
+		print("connected to: ", to_connect)
+		multiplayer.multiplayer_peer = peer
+		_add_player(2)
+		_hide_UI()
+	
+func is_valid_ip(ip:String)->bool:
+	var result:Error = peer.create_client(ip,PORT)
+	if result != OK:
+		return false 
+	return true
 	
 func _add_player(id:int)->void:
 	var player = playerscene.instantiate()
