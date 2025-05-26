@@ -1,7 +1,10 @@
 extends Node
 
 var array_of_card:Array[CardStrategyPattern] = [
-	AddKnightMovement.new()
+	AddKnightMovement.new(),
+	AddRookCard.new(),
+	AddBeashopCard.new(),
+	AddKingCard.new()
 ]
 
 func _ready() -> void:
