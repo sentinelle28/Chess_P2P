@@ -1,6 +1,7 @@
 extends Node
 signal PieceTaken(index_of_the_victime:int,pos_of_the_victime:Vector2i)
 signal PieceMov(from:Vector2i,to:Vector2i,who:int)
+signal UseCard(CardIndex:int,pos:Vector2i,is_black:bool)
 signal DidAction
 
 var action:Action
@@ -15,9 +16,25 @@ func get_action()->Action:
 func _ready() -> void:
 	connect("PieceTaken",_add_piece_taken_consequence)
 	connect("PieceMov",_add_movement_consequence)
+	connect("UseCard",_add_card_consequence)
 	
 func _reset_consequence()->void:
 	consequences.clear()
+	
+func _add_card_consequence(CardIndex:int,pos:Vector2i,is_black:bool)->void:
+	#_add_action
+	var action:CardAction = CardAction.new()
+	action.card_index = CardIndex
+	action.pos = pos
+	action.is_black = is_black
+	_add_action(action)
+	
+	var consequence:CardConsequence = CardConsequence.new()
+	consequence.card_index = CardIndex
+	consequence.pos = pos
+	consequence.is_black = is_black
+	_add_consequence(consequence)
+	
 	
 func _add_consequence(consequence:Consequence)->void:
 	consequences.append(consequence)

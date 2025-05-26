@@ -20,9 +20,9 @@ func _discard()->void:
 func _use()->void:
 	emit_signal("use",self_index)
 	
-func _change_card(value:CardStrategyPattern)->void:
-	_change_descrition(value.description)
-	_change_name(value.name)
+func _change_card(card:CardStrategyPattern)->void:
+	_change_descrition(card.get_description())
+	_change_name(card.get_card_name())
 
 func _change_descrition(new_desc:String)->void:
 	description_label.text = new_desc

@@ -23,17 +23,27 @@ func _update_display(index:int)->void:
 	
 	
 func _discard_card(index:int)->void:
-	pass
+	current_card.remove_at(index)
+	current_energy += 1
+	
 	
 func _use_card(index:int)->void:
 	pass
 
 
 func can_use(card:CardStrategyPattern)->bool:
-	if current_energy >= card.cost:
-		_spend_energy(card.cost)
+	var cost:int = card.get_cost()
+	if current_energy >= cost:
+		_spend_energy(cost)
 		return true
 	return false 
 
 func _spend_energy(energy_to_spend:int)->void:
 	current_energy -= energy_to_spend
+
+
+func _reset()->void:
+	current_card.clear()
+	current_energy = 0
+	for i:int in range(3):
+		get_child(i).hide()

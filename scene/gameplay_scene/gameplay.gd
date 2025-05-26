@@ -158,13 +158,10 @@ func _send_action()->void:
 		
 		#send info as requiered
 		if action_to_send is MouvAction:
-			var to_call:String = "_do_mouv_action"+to_add
-			print("action was sent from :",is_multiplayer_authority()," to: ",not is_multiplayer_authority())
-			rpc(
-				to_call, #mouv function
-				action_to_send.index, #who to move
-				action_to_send.new_pos.x, #where on x
-				action_to_send.new_pos.y) #where on y
+			_send_movement_action(to_add,action_to_send)
+			
+		if action_to_send is CardAction:
+			_send_card_action(to_add,action_to_send)
 			
 		EventListenner.action = null
 			
@@ -172,6 +169,23 @@ func _send_action()->void:
 		m_player.can_play = false
 		m_player.is_lock_on_piece = false
 		action_bar.hide()
+		
+func _send_movement_action(to_add:String,action_to_send:MouvAction)->void:
+	var to_call:String = "_do_mouv_action"+to_add
+	print("action was sent from :",is_multiplayer_authority()," to: ",not is_multiplayer_authority())
+	rpc(
+		to_call, #mouv function
+		action_to_send.index, #who to move
+		action_to_send.new_pos.x, #where on x
+		action_to_send.new_pos.y) #where on y
+
+func _send_card_action(to_add:String,action_to_send:CardAction)->void:
+	var to_call:String = "_do_card_action"+to_add
+	rpc(to_call,action_to_send.card_index,
+	action_to_send.pos.x,
+	action_to_send.pos.y,
+	action_to_send.is_black)
+	
 
 func _do_victory(is_black:bool)->void:
 	if is_multiplayer_authority():
@@ -200,3 +214,17 @@ func _stop_action_host()->void:
 func _stop_action_client()->void:
 	action_bar.hide()
 	m_player.can_play = false
+
+@rpc("authority","call_remote")
+func _do_card_action_client(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:
+	_execute_card(index_of_the_card,pos_x,pos_y,is_black)
+	
+	
+@rpc("any_peer","call_local")
+func _do_card_action_host(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:
+	if is_multiplayer_authority():
+		_execute_card(index_of_the_card,pos_x,pos_y,is_black)
+
+func _execute_card(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:
+	var card_to_use:CardStrategyPattern = CardLib.array_of_card[index_of_the_card]
+	card_to_use._apply(pos_x,pos_y,is_black)
