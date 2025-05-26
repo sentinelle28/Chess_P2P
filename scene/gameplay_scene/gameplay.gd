@@ -63,6 +63,8 @@ func _reset_global()->void:
 	EventListenner._reset_consequence()
 	$PieceManager._reset()
 	
+	$UI_related/UI/bottom_box/Card.show()
+	
 @rpc("authority","call_remote")
 func _reset_client()->void:
 	_reset_global()
