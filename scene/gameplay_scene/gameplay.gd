@@ -1,7 +1,9 @@
 extends Node2D
 
 var peer = ENetMultiplayerPeer.new()
+@export_subgroup("To instantiate")
 @export var playerscene:PackedScene
+@export_subgroup("Usefull tool")
 @export var internet_related:Control
 #@export var inputext:TextEdit
 const PORT:int = 135
@@ -11,7 +13,8 @@ var is_two:bool = false
 var is_replaying:bool = false
 
 @onready var action_bar:VBoxContainer = $UI_related/UI/bottom_box/action/InMatch
-
+@export var card_manager:CardManager
+@export var piece_manager:PieceManager
 
 
 func _on_host_pressed()->void:
@@ -51,7 +54,7 @@ func _add_player(id:int)->void:
 	call_deferred("add_child",player)
 	m_player = player
 	#check if mouse clicked somewhere good
-	m_player.connect("mouv_input",$PieceManager._check_mouse_pos)
+	m_player.connect("mouv_input",piece_manager._check_mouse_pos)
 
 func _reset_global()->void:
 	$UI_related/UI/bottom_box/action/Start.hide()
@@ -61,7 +64,7 @@ func _reset_global()->void:
 	m_player._reset()
 	EventListenner._reset_action()
 	EventListenner._reset_consequence()
-	$PieceManager._reset()
+	piece_manager._reset()
 	
 	$UI_related/UI/bottom_box/Card.show()
 	
@@ -122,7 +125,7 @@ func _do_mouv_action_host(who:int,to_x:int,to_y:int)->void:
 func _do_action(action:Action)->void:
 	is_replaying = true
 	if action is MouvAction:
-		action._do_action($PieceManager)
+		action._do_action(piece_manager)
 	#prevent weird reset that doesn't make sens
 	EventListenner.consequences.clear()
 	#allow player to do action
@@ -140,9 +143,9 @@ func _do_consequence()->void:
 		EventListenner._reset_action()
 		for consequence:Consequence in EventListenner.consequences:
 			if consequence is MouvConsequence:
-				consequence._reverse($PieceManager)
+				consequence._reverse(piece_manager)
 			if consequence is PieceTakenConsequence:
-				consequence._reverse($PieceManager)
+				consequence._reverse(piece_manager)
 		EventListenner._reset_consequence()
 	
 func _send_action()->void:
