@@ -1,8 +1,12 @@
 extends HBoxContainer
 class_name CardManager
 
+signal CardQeued
+
 @export var current_card:Array[CardStrategyPattern] = []
 @export var current_energy:int = 0
+
+var current_queued_card:int = 4
 
 func _ready() -> void:
 	for card:CardHolder in get_children():
@@ -28,8 +32,13 @@ func _discard_card(index:int)->void:
 	
 	
 func _use_card(index:int)->void:
-	pass
+	current_queued_card = index
+	emit_signal("CardQeued")
+	
 
+func _send_card(pos:Vector2i,is_black:bool)->void:
+	var current_card_object:CardStrategyPattern = current_card[current_queued_card]
+	EventListenner.emit_signal("UseCard",current_card_object.index,pos,is_black)
 
 func can_use(card:CardStrategyPattern)->bool:
 	var cost:int = card.get_cost()
@@ -47,3 +56,7 @@ func _reset()->void:
 	current_energy = 0
 	for i:int in range(3):
 		get_child(i).hide()
+		
+func _update_energy()->void:
+	show()
+	current_energy += 1

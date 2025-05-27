@@ -16,6 +16,12 @@ var is_replaying:bool = false
 @export var card_manager:CardManager
 @export var piece_manager:PieceManager
 
+signal NewTurn
+signal EndTurn
+
+func _ready() -> void:
+	connect("NewTurn",card_manager._update_energy)
+	connect("EndTurn",card_manager.hide)
 
 func _on_host_pressed()->void:
 	peer.create_server(PORT,MAX_PLAYER)
@@ -62,8 +68,20 @@ func _add_player(id:int)->void:
 	player.set_multiplayer_authority(id)
 	call_deferred("add_child",player)
 	m_player = player
+	
 	#check if mouse clicked somewhere good
 	m_player.connect("mouv_input",piece_manager._check_mouse_pos)
+	
+	
+	#switch mouse to card mode
+	card_manager.connect("CardQeued",m_player._switch_to_card_mode)
+	m_player.connect("GetPos",piece_manager._verify_card_pos)
+	piece_manager.connect("PosVerified",card_manager._send_card)
+	#failure
+	piece_manager.connect("StopQueuing",m_player._reset_card_mode)
+	
+	
+	
 
 func _reset_global()->void:
 	$UI_related/UI/bottom_box/action/Start.hide()
@@ -74,8 +92,6 @@ func _reset_global()->void:
 	EventListenner._reset_action()
 	EventListenner._reset_consequence()
 	piece_manager._reset()
-	
-	$UI_related/UI/bottom_box/Card.show()
 	
 @rpc("authority","call_remote")
 func _reset_client()->void:
@@ -144,6 +160,7 @@ func _do_action(action:Action)->void:
 	is_replaying = false
 	EventListenner.action = null
 	print(is_multiplayer_authority()," can play")
+	emit_signal("NewTurn")
 
 
 func _do_consequence()->void:
@@ -178,6 +195,7 @@ func _send_action()->void:
 		m_player.can_play = false
 		m_player.is_lock_on_piece = false
 		action_bar.hide()
+		emit_signal("EndTurn")
 		
 func _send_movement_action(to_add:String,action_to_send:MouvAction)->void:
 	var to_call:String = "_do_mouv_action"+to_add
@@ -229,6 +247,7 @@ func _do_card_action_client(index_of_the_card:int,pos_x:int,pos_y:int,is_black:b
 	_execute_card(index_of_the_card,pos_x,pos_y,is_black)
 	
 	
+	
 @rpc("any_peer","call_local")
 func _do_card_action_host(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:
 	if is_multiplayer_authority():
@@ -237,3 +256,4 @@ func _do_card_action_host(index_of_the_card:int,pos_x:int,pos_y:int,is_black:boo
 func _execute_card(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:
 	var card_to_use:CardStrategyPattern = CardLib.array_of_card[index_of_the_card]
 	card_to_use._apply(pos_x,pos_y,is_black,piece_manager)
+	emit_signal("NewTurn")

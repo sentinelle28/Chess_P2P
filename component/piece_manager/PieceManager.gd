@@ -2,6 +2,8 @@ extends Node
 class_name PieceManager
 
 signal Victory(is_black:bool)
+signal PosVerified(pos:Vector2i,is_black:bool)
+signal StopQueuing
 
 @export var tilemap:TileMapLayer
 var array_pos:Array[Vector2i] = []
@@ -62,11 +64,21 @@ func is_in_map(pos:Vector2i,index:int)->bool:
 	
 
 func _check_mouse_pos(who:int)->void:
-	var mouse_pos:Vector2 = tilemap.get_local_mouse_position()
-	var tile_pos:Vector2i = tilemap.local_to_map(mouse_pos)
+	var tile_pos:Vector2i = get_mouse_pos()
 	if tile_pos in possible_pos:
 		#update pos and check if there has been a piece takenb
 		_update_pos(who,tile_pos,true)
 		#clear possible pos since it is not usefull
 		possible_pos.clear()
+
+func get_mouse_pos()->Vector2i:
+	var mouse_pos:Vector2 = tilemap.get_local_mouse_position()
+	var tile_pos:Vector2i = tilemap.local_to_map(mouse_pos)
+	return tile_pos
 	
+func _verify_card_pos(is_black:bool)->void:
+	var pos:Vector2i = get_mouse_pos()
+	if tilemap.get_cell_atlas_coords(pos) != Vector2i(-1,-1):
+		emit_signal("PosVerified",pos,is_black)
+	#mouse doesn't need after that to wait for input
+	emit_signal("StopQueuing")

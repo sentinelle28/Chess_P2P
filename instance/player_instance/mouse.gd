@@ -4,8 +4,13 @@ var last_selected_piece:Piece
 var is_black:bool = false
 var can_play:bool = false
 var is_lock_on_piece:bool = false
+
+var is_queued_for_card:bool = false
+
 @onready var anim:AnimatedSprite2D = $AnimatedSprite2D
+
 signal mouv_input(who:int)
+signal GetPos(is_black:bool)
 
 func _ready() -> void:
 	EventListenner.connect("DidAction",_prevent_futher_action)
@@ -28,9 +33,12 @@ func _select_input()->void:
 		
 func _mouv_input()->void:
 	if Input.is_action_just_pressed("select"):
-		emit_signal("mouv_input",last_selected_piece.get_index())
-		_exit_piece(last_selected_piece)
-		_reset()
+		if is_queued_for_card:
+			emit_signal("GetPos",is_black)
+		else:
+			emit_signal("mouv_input",last_selected_piece.get_index())
+			_exit_piece(last_selected_piece)
+			_reset()
 	
 func can_click()->bool:
 	return is_instance_valid(last_selected_piece)
@@ -56,7 +64,6 @@ func _on_area_entered(area: Area2D) -> void:
 			area.queue_redraw()
 			
 
-
 func _on_area_exited(area: Area2D) -> void:
 	if area is Piece and not is_lock_on_piece:
 		area.z_index = 1
@@ -77,3 +84,10 @@ func _exit_piece(piece:Piece)->void:
 func _prevent_futher_action()->void:
 	can_play = false
 	is_lock_on_piece = false
+
+func _switch_to_card_mode()->void:
+	is_queued_for_card = true
+
+func _reset_card_mode()->void:
+	is_queued_for_card = false
+	
