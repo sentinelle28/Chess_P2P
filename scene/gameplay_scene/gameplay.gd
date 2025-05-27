@@ -227,4 +227,4 @@ func _do_card_action_host(index_of_the_card:int,pos_x:int,pos_y:int,is_black:boo
 
 func _execute_card(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:
 	var card_to_use:CardStrategyPattern = CardLib.array_of_card[index_of_the_card]
-	card_to_use._apply(pos_x,pos_y,is_black)
+	card_to_use._apply(pos_x,pos_y,is_black,piece_manager)
