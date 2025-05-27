@@ -37,7 +37,7 @@ sources/1 = SubResource("TileSetAtlasSource_h3lfs")
 script = ExtResource("1_tfltx")
 playerscene = ExtResource("2_agxrv")
 internet_related = NodePath("UI_related/ui")
-card_manager = NodePath("UI_related/UI/bottom_box/Card/CardManager")
+card_manager = NodePath("UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager")
 piece_manager = NodePath("PieceManager")
 
 [node name="UI_related" type="CanvasLayer" parent="."]
@@ -134,7 +134,6 @@ hframes = 6
 frame = 5
 
 [node name="Card" type="VBoxContainer" parent="UI_related/UI/bottom_box"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.5
@@ -144,6 +143,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/background = SubResource("StyleBoxFlat_slw4p")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jt474")
+max_value = 10.0
 rounded = true
 show_percentage = false
 
@@ -162,20 +162,32 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Energy"
 
-[node name="CardManager" type="HBoxContainer" parent="UI_related/UI/bottom_box/Card"]
+[node name="PreventBarProblem" type="Control" parent="UI_related/UI/bottom_box/Card"]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="CardManager" type="HBoxContainer" parent="UI_related/UI/bottom_box/Card/PreventBarProblem" node_paths=PackedStringArray("progress_bar")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
 script = ExtResource("5_slw4p")
+progress_bar = NodePath("../../ProgressBar")
 metadata/_custom_type_script = "uid://df1g4lj0cq1bv"
 
-[node name="Card" type="Panel" parent="UI_related/UI/bottom_box/Card/CardManager"]
+[node name="Card" type="Panel" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("5_dr73f")
 metadata/_custom_type_script = "uid://2ar7rvy5cxeg"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI_related/UI/bottom_box/Card/CardManager/Card"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -183,11 +195,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="UI_related/UI/bottom_box/Card/CardManager/Card/VBoxContainer"]
+[node name="Control" type="Control" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Name_of_the_card" type="Label" parent="UI_related/UI/bottom_box/Card/CardManager/Card/VBoxContainer/Control"]
+[node name="Name_of_the_card" type="Label" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card/VBoxContainer/Control"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -198,34 +210,36 @@ offset_bottom = 23.0
 grow_horizontal = 2
 text = "Name"
 
-[node name="Control2" type="Label" parent="UI_related/UI/bottom_box/Card/CardManager/Card/VBoxContainer"]
+[node name="Control2" type="Label" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 text = "Description"
 horizontal_alignment = 1
 
-[node name="Action_Bar" type="HBoxContainer" parent="UI_related/UI/bottom_box/Card/CardManager/Card/VBoxContainer"]
+[node name="Action_Bar" type="HBoxContainer" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Discard" type="Button" parent="UI_related/UI/bottom_box/Card/CardManager/Card/VBoxContainer/Action_Bar"]
+[node name="Discard" type="Button" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card/VBoxContainer/Action_Bar"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Discard"
 
-[node name="Use" type="Button" parent="UI_related/UI/bottom_box/Card/CardManager/Card/VBoxContainer/Action_Bar"]
+[node name="Use" type="Button" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card/VBoxContainer/Action_Bar"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Use"
 
-[node name="Card2" type="Panel" parent="UI_related/UI/bottom_box/Card/CardManager"]
+[node name="Card2" type="Panel" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("5_dr73f")
 metadata/_custom_type_script = "uid://2ar7rvy5cxeg"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI_related/UI/bottom_box/Card/CardManager/Card2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -233,11 +247,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="UI_related/UI/bottom_box/Card/CardManager/Card2/VBoxContainer"]
+[node name="Control" type="Control" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Name_of_the_card" type="Label" parent="UI_related/UI/bottom_box/Card/CardManager/Card2/VBoxContainer/Control"]
+[node name="Name_of_the_card" type="Label" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card2/VBoxContainer/Control"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -248,34 +262,36 @@ offset_bottom = 23.0
 grow_horizontal = 2
 text = "Name"
 
-[node name="Control2" type="Label" parent="UI_related/UI/bottom_box/Card/CardManager/Card2/VBoxContainer"]
+[node name="Control2" type="Label" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 text = "Description"
 horizontal_alignment = 1
 
-[node name="Action_Bar" type="HBoxContainer" parent="UI_related/UI/bottom_box/Card/CardManager/Card2/VBoxContainer"]
+[node name="Action_Bar" type="HBoxContainer" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Discard" type="Button" parent="UI_related/UI/bottom_box/Card/CardManager/Card2/VBoxContainer/Action_Bar"]
+[node name="Discard" type="Button" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card2/VBoxContainer/Action_Bar"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Discard"
 
-[node name="Use" type="Button" parent="UI_related/UI/bottom_box/Card/CardManager/Card2/VBoxContainer/Action_Bar"]
+[node name="Use" type="Button" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card2/VBoxContainer/Action_Bar"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Use"
 
-[node name="Card3" type="Panel" parent="UI_related/UI/bottom_box/Card/CardManager"]
+[node name="Card3" type="Panel" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("5_dr73f")
 metadata/_custom_type_script = "uid://2ar7rvy5cxeg"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI_related/UI/bottom_box/Card/CardManager/Card3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card3"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -283,11 +299,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="UI_related/UI/bottom_box/Card/CardManager/Card3/VBoxContainer"]
+[node name="Control" type="Control" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card3/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Name_of_the_card" type="Label" parent="UI_related/UI/bottom_box/Card/CardManager/Card3/VBoxContainer/Control"]
+[node name="Name_of_the_card" type="Label" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card3/VBoxContainer/Control"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -298,23 +314,24 @@ offset_bottom = 23.0
 grow_horizontal = 2
 text = "Name"
 
-[node name="Control2" type="Label" parent="UI_related/UI/bottom_box/Card/CardManager/Card3/VBoxContainer"]
+[node name="Control2" type="Label" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card3/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 text = "Description"
 horizontal_alignment = 1
 
-[node name="Action_Bar" type="HBoxContainer" parent="UI_related/UI/bottom_box/Card/CardManager/Card3/VBoxContainer"]
+[node name="Action_Bar" type="HBoxContainer" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card3/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Discard" type="Button" parent="UI_related/UI/bottom_box/Card/CardManager/Card3/VBoxContainer/Action_Bar"]
+[node name="Discard" type="Button" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card3/VBoxContainer/Action_Bar"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Discard"
 
-[node name="Use" type="Button" parent="UI_related/UI/bottom_box/Card/CardManager/Card3/VBoxContainer/Action_Bar"]
+[node name="Use" type="Button" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card3/VBoxContainer/Action_Bar"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Use"

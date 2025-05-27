@@ -22,12 +22,13 @@ func _reset_consequence()->void:
 	consequences.clear()
 	
 func _add_card_consequence(CardIndex:int,pos:Vector2i,is_black:bool)->void:
+	print("use ",CardLib.array_of_card[CardIndex].get_card_name()," on tile ",pos)
 	#_add_action
-	var action:CardAction = CardAction.new()
-	action.card_index = CardIndex
-	action.pos = pos
-	action.is_black = is_black
-	_add_action(action)
+	var c_action:CardAction = CardAction.new()
+	c_action.card_index = CardIndex
+	c_action.pos = pos
+	c_action.is_black = is_black
+	_add_action(c_action)
 	
 	var consequence:CardConsequence = CardConsequence.new()
 	consequence.card_index = CardIndex

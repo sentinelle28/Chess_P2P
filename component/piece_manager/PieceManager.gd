@@ -78,7 +78,10 @@ func get_mouse_pos()->Vector2i:
 	
 func _verify_card_pos(is_black:bool)->void:
 	var pos:Vector2i = get_mouse_pos()
+	print("Card Pos received")
 	if tilemap.get_cell_atlas_coords(pos) != Vector2i(-1,-1):
+		print("correct one")
 		emit_signal("PosVerified",pos,is_black)
 	#mouse doesn't need after that to wait for input
 	emit_signal("StopQueuing")
+	

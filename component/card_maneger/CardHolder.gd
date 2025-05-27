@@ -16,9 +16,11 @@ func _ready() -> void:
 	
 func _discard()->void:
 	emit_signal("discard",self_index)
+	$VBoxContainer/Action_Bar/Use.hide()
 	
 func _use()->void:
 	emit_signal("use",self_index)
+	$VBoxContainer/Action_Bar/Use.hide()
 	
 func _change_card(card:CardStrategyPattern)->void:
 	_change_descrition(card.get_description())

@@ -80,6 +80,8 @@ func _add_player(id:int)->void:
 	#failure
 	piece_manager.connect("StopQueuing",m_player._reset_card_mode)
 	
+	#show card ui
+	$UI_related/UI/bottom_box.show()
 	
 	
 
@@ -167,6 +169,7 @@ func _do_consequence()->void:
 	if EventListenner.did_action():
 		m_player.can_play = true
 		EventListenner._reset_action()
+		card_manager._update_card()
 		for consequence:Consequence in EventListenner.consequences:
 			if consequence is MouvConsequence:
 				consequence._reverse(piece_manager)

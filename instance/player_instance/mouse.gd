@@ -25,6 +25,9 @@ func _process(_delta: float) -> void:
 			_select_input()
 		else:
 			_mouv_input()
+			
+	if is_queued_for_card and Input.is_action_just_pressed("select"):
+		emit_signal("GetPos",is_black)
 	
 func _select_input()->void:
 	if Input.is_action_just_pressed("select"):
@@ -33,12 +36,10 @@ func _select_input()->void:
 		
 func _mouv_input()->void:
 	if Input.is_action_just_pressed("select"):
-		if is_queued_for_card:
-			emit_signal("GetPos",is_black)
-		else:
-			emit_signal("mouv_input",last_selected_piece.get_index())
-			_exit_piece(last_selected_piece)
-			_reset()
+		
+		emit_signal("mouv_input",last_selected_piece.get_index())
+		_exit_piece(last_selected_piece)
+		_reset()
 	
 func can_click()->bool:
 	return is_instance_valid(last_selected_piece)
@@ -46,7 +47,7 @@ func can_click()->bool:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	if area is Piece:
+	if area is Piece and not is_queued_for_card:
 		if can_play and area.is_black == is_black and not is_lock_on_piece:
 			#prevent bug
 			if is_instance_valid(last_selected_piece):
@@ -62,10 +63,9 @@ func _on_area_entered(area: Area2D) -> void:
 			last_selected_piece.is_selected = true
 			last_selected_piece.z_index = 2
 			area.queue_redraw()
-			
 
 func _on_area_exited(area: Area2D) -> void:
-	if area is Piece and not is_lock_on_piece:
+	if area is Piece and not is_lock_on_piece and not is_queued_for_card:
 		area.z_index = 1
 		if last_selected_piece == area:
 			last_selected_piece = null
@@ -87,7 +87,11 @@ func _prevent_futher_action()->void:
 
 func _switch_to_card_mode()->void:
 	is_queued_for_card = true
+	last_selected_piece = null
+	is_lock_on_piece = false
+	print("switch to card mode")
+	
 
 func _reset_card_mode()->void:
 	is_queued_for_card = false
-	
+	print("reset card mode")
