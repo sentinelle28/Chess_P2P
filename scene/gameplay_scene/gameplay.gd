@@ -33,18 +33,27 @@ func _hide_UI()->void:
 	internet_related.hide()
 	
 func _on_join_pressed()->void:
-	var to_connect:String = $UI_related/ui/VBoxContainer/TextEdit.text
+	var to_connect:String = get_ip()
 	if is_valid_ip(to_connect):
-		#IP.get_local_addresses()[1]
-		print("connected to: ", to_connect)
-		multiplayer.multiplayer_peer = peer
-		_add_player(2)
-		_hide_UI()
+		_connect_procedure()
+		
+		
+func _connect_procedure()->void:
+	multiplayer.multiplayer_peer = peer
+	_add_player(2)
+	_hide_UI()
+	
+func get_ip()->String:
+	if GameSettings.is_lan_mode:
+		return IP.get_local_addresses()[1]
+	
+	return $UI_related/ui/VBoxContainer/TextEdit.text
 	
 func is_valid_ip(ip:String)->bool:
 	var result:Error = peer.create_client(ip,PORT)
 	if result != OK:
 		return false 
+	print("connected to: ", ip)
 	return true
 	
 func _add_player(id:int)->void:
