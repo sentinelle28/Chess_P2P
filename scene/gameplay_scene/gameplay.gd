@@ -30,10 +30,12 @@ func _on_host_pressed()->void:
 	multiplayer.connect("peer_connected",_update_peer)
 	_add_player(1)
 	_hide_UI()
+	$UI_related/UI/WaitingPlayer.show()
 	
 func _update_peer(_value:int)->void:
 	is_two = true
 	$UI_related/UI/bottom_box/action/Start.show()
+	$UI_related/UI/WaitingPlayer.hide()
 	
 func _hide_UI()->void:
 	internet_related.hide()
@@ -86,6 +88,7 @@ func _add_player(id:int)->void:
 	
 	
 func _reset_global()->void:
+	$UI_related/UI/WaitingPlayer.hide()
 	$UI_related/UI/bottom_box/action/Start.hide()
 	$UI_related/Defeat.hide()
 	$UI_related/Victory.hide()

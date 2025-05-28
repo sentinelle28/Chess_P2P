@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://chpp6u6l8c72o"]
+[gd_scene load_steps=21 format=4 uid="uid://chpp6u6l8c72o"]
 
 [ext_resource type="Script" uid="uid://cyyr26uacur4g" path="res://scene/gameplay_scene/gameplay.gd" id="1_tfltx"]
 [ext_resource type="PackedScene" uid="uid://djpfvvn6vm40b" path="res://instance/player_instance/mouse.tscn" id="2_agxrv"]
@@ -20,6 +20,9 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jt474"]
 bg_color = Color(0, 0.625531, 0.996107, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_slw4p"]
+font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_2kjuw"]
 font_size = 46
@@ -368,6 +371,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Start"
+
+[node name="WaitingPlayer" type="Label" parent="UI_related/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Waiting for player 2 to connect"
+label_settings = SubResource("LabelSettings_slw4p")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Defeat" type="Label" parent="UI_related"]
 visible = false
