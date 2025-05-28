@@ -8,9 +8,7 @@ func get_card_name()->String:
 func get_description()->String:
 	return "Add knight movement to a piece"
 	
-func get_rarity()->int:
-	return 5
-	
+
 func get_cost()->int:
 	return 1
 

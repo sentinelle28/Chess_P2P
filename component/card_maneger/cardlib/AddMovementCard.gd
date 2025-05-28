@@ -7,9 +7,6 @@ func get_card_name()->String:
 func get_description()->String:
 	return "None"
 	
-func get_rarity()->int:
-	return 0
-	
 func get_cost()->int:
 	return 0
 
