@@ -154,15 +154,24 @@ func _do_action(action:Action)->void:
 	if action is MouvAction:
 		action._do_action(piece_manager)
 	#prevent weird reset that doesn't make sens
+	_start_turn()
+
+func _start_turn()->void:
 	EventListenner.consequences.clear()
 	#allow player to do action
 	action_bar.show()
+	#can play
 	m_player.can_play = true
 	m_player.is_lock_on_piece = false
+	#prevent action problem
 	is_replaying = false
+	#prevent precent turn to affect it
+	m_player.is_queued_for_card = false
+	#remove possible action
 	EventListenner.action = null
 	print(is_multiplayer_authority()," can play")
 	emit_signal("NewTurn")
+
 
 
 func _do_consequence()->void:
@@ -257,6 +266,7 @@ func _do_card_action_host(index_of_the_card:int,pos_x:int,pos_y:int,is_black:boo
 		_execute_card(index_of_the_card,pos_x,pos_y,is_black)
 
 func _execute_card(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:
+	is_replaying = true
 	var card_to_use:CardStrategyPattern = CardLib.array_of_card[index_of_the_card]
 	card_to_use._apply(pos_x,pos_y,is_black,piece_manager)
-	emit_signal("NewTurn")
+	_start_turn()

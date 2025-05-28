@@ -51,6 +51,7 @@ func _send_card(pos:Vector2i,is_black:bool)->void:
 	EventListenner.emit_signal("UseCard",current_queued_card.index,pos,is_black)
 	current_card.erase(current_queued_card)
 	current_queued_card = null
+	_update_card()
 
 
 func _spend_energy(energy_to_spend:int)->void:
