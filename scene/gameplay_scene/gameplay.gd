@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name GameplayScene
 var peer = ENetMultiplayerPeer.new()
 @export_subgroup("To instantiate")
 @export var playerscene:PackedScene
@@ -181,9 +181,15 @@ func _do_consequence()->void:
 		card_manager._update_card()
 		for consequence:Consequence in EventListenner.consequences:
 			if consequence is MouvConsequence:
+				print("trying to reverse mouvement consequence")
 				consequence._reverse(piece_manager)
 			if consequence is PieceTakenConsequence:
+				print("trying to reverse piece taken")
 				consequence._reverse(piece_manager)
+			if consequence is CardConsequence:
+				print("trying to reverse card consequence")
+				consequence._reverse(self)
+				
 		EventListenner._reset_consequence()
 	
 func _send_action()->void:
@@ -268,5 +274,5 @@ func _do_card_action_host(index_of_the_card:int,pos_x:int,pos_y:int,is_black:boo
 func _execute_card(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:
 	is_replaying = true
 	var card_to_use:CardStrategyPattern = CardLib.array_of_card[index_of_the_card]
-	card_to_use._apply(pos_x,pos_y,is_black,piece_manager)
+	card_to_use._apply(pos_x,pos_y,is_black,self)
 	_start_turn()

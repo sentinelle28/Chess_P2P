@@ -29,6 +29,8 @@ func _add_card_consequence(CardIndex:int,pos:Vector2i,is_black:bool)->void:
 	c_action.pos = pos
 	c_action.is_black = is_black
 	_add_action(c_action)
+	#execute action
+	action._do_action(get_tree().current_scene)
 	
 	var consequence:CardConsequence = CardConsequence.new()
 	consequence.card_index = CardIndex

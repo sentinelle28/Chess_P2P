@@ -5,5 +5,5 @@ var pos:Vector2i
 var is_black:bool
 
 func _reverse(node:Node)->void:
-	if node is PieceManager:
+	if node is GameplayScene:
 		CardLib.array_of_card[card_index]._reverse(pos.x,pos.y,is_black,node)
