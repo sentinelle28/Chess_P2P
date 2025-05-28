@@ -88,8 +88,15 @@ func _add_player(id:int)->void:
 	
 	
 func _reset_global()->void:
+	# hide player color
+	$UI_related/UI/bottom_box/Play/ColorRect.hide()
+	$UI_related/UI/bottom_box/Play/BlackKing.hide()
+	$UI_related/UI/bottom_box/Play/WhiteKing.hide()
+	#hide waiting player
 	$UI_related/UI/WaitingPlayer.hide()
+	#hide turn option
 	$UI_related/UI/bottom_box/action/Start.hide()
+	#hide defeat or victory
 	$UI_related/Defeat.hide()
 	$UI_related/Victory.hide()
 	#reset
@@ -129,6 +136,7 @@ func _change_color(is_black:bool)->void:
 		$UI_related/UI/bottom_box/Play/ColorRect.color = Color.BLACK
 		$UI_related/UI/bottom_box/Play/BlackKing.hide()
 		$UI_related/UI/bottom_box/Play/WhiteKing.show()
+	$UI_related/UI/bottom_box/Play/ColorRect.show()
 
 @rpc("call_remote","authority")
 func _start_game(is_starting:bool,is_black:bool)->void:
