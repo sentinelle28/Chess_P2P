@@ -13,6 +13,12 @@ func _ready() -> void:
 	for card:CardHolder in get_children():
 		card.connect("discard",_discard_card)
 		card.connect("use",_use_card)
+		
+	EventListenner.connect("DidAction",_prevent_card)
+	
+func _prevent_card()->void:
+	for i:int in range(3):
+		get_child(i).hide()
 
 func _update_card()->void:
 	for i:int in range(3):
@@ -39,6 +45,7 @@ func _update_display(index:int)->void:
 func _discard_card(index:int)->void:
 	current_card.remove_at(index)
 	current_energy += 1
+	_update_card()
 	
 	
 func _use_card(index:int)->void:
