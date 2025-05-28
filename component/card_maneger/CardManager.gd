@@ -79,5 +79,5 @@ func _update_energy()->void:
 	
 func _add_card_to_hand()->void:
 	if len(current_card) < 3:
-		current_card.append(CardLib.array_of_card[0])
+		current_card.append(CardLib.get_random_card())
 		
