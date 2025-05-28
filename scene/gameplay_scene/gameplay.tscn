@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://chpp6u6l8c72o"]
+[gd_scene load_steps=28 format=4 uid="uid://chpp6u6l8c72o"]
 
 [ext_resource type="Script" uid="uid://cyyr26uacur4g" path="res://scene/gameplay_scene/gameplay.gd" id="1_tfltx"]
 [ext_resource type="PackedScene" uid="uid://djpfvvn6vm40b" path="res://instance/player_instance/mouse.tscn" id="2_agxrv"]
@@ -10,7 +10,9 @@
 [ext_resource type="Script" uid="uid://df1g4lj0cq1bv" path="res://component/card_maneger/CardManager.gd" id="5_slw4p"]
 [ext_resource type="Texture2D" uid="uid://bscdnhk241vqs" path="res://asset/visual/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="6_bu0yp"]
 [ext_resource type="PackedScene" uid="uid://p0dm03gw6762" path="res://instance/piece_instance/Piece_lib/queen.tscn" id="7_2kjuw"]
+[ext_resource type="Theme" uid="uid://bwa84tjmfm4v8" path="res://asset/theme/ResetButtonTheme.tres" id="8_aje2a"]
 [ext_resource type="PackedScene" uid="uid://cprhdkq3mjwqu" path="res://instance/piece_instance/Piece_lib/beashop.tscn" id="8_dr73f"]
+[ext_resource type="Theme" uid="uid://4sllni2xg00e" path="res://scene/gameplay_scene/ValidateButtonTheme.tres" id="9_225mg"]
 [ext_resource type="PackedScene" uid="uid://dxgqf6ymiu05x" path="res://instance/piece_instance/Piece_lib/knight.tscn" id="9_slw4p"]
 [ext_resource type="PackedScene" uid="uid://yrvgyml4s8un" path="res://instance/piece_instance/Piece_lib/rook.tscn" id="10_jt474"]
 [ext_resource type="PackedScene" uid="uid://cfjmlv0qpd7l3" path="res://instance/piece_instance/Piece_lib/pawn.tscn" id="11_qx00v"]
@@ -68,96 +70,6 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jt474"]
 bg_color = Color(0, 0.625531, 0.996107, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_225mg"]
-bg_color = Color(0.75339, 2.38247e-06, 5.77569e-07, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7gry"]
-bg_color = Color(0.667286, 0.580463, 0.532924, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="Theme" id="Theme_0yuk4"]
-default_font_size = 32
-Button/colors/font_color = Color(1, 1, 1, 1)
-Button/colors/font_disabled_color = Color(0, 0, 0, 1)
-Button/colors/font_focus_color = Color(0, 0, 0, 1)
-Button/colors/font_hover_color = Color(0, 0, 0, 1)
-Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-Button/colors/font_outline_color = Color(0, 0, 0, 1)
-Button/colors/font_pressed_color = Color(0, 0, 0, 1)
-Button/colors/icon_disabled_color = Color(0, 0, 0, 1)
-Button/colors/icon_focus_color = Color(0, 0, 0, 1)
-Button/colors/icon_hover_color = Color(0, 0, 0, 1)
-Button/colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
-Button/colors/icon_normal_color = Color(0, 0, 0, 1)
-Button/colors/icon_pressed_color = Color(0, 0, 0, 1)
-Button/constants/align_to_largest_stylebox = 0
-Button/constants/h_separation = 0
-Button/constants/icon_max_width = 0
-Button/constants/outline_size = 0
-Button/font_sizes/font_size = 32
-Button/fonts/font = null
-Button/styles/disabled = null
-Button/styles/focus = null
-Button/styles/hover = SubResource("StyleBoxFlat_225mg")
-Button/styles/normal = SubResource("StyleBoxFlat_r7gry")
-Button/styles/pressed = null
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lcphj"]
-bg_color = Color(0.581994, 0.616934, 0.521245, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="Theme" id="Theme_wjuuw"]
-default_font_size = 32
-Button/colors/font_color = Color(1, 1, 1, 1)
-Button/colors/font_disabled_color = Color(0, 0, 0, 1)
-Button/colors/font_focus_color = Color(0, 0, 0, 1)
-Button/colors/font_hover_color = Color(0, 0, 0, 1)
-Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-Button/colors/font_outline_color = Color(0, 0, 0, 1)
-Button/colors/font_pressed_color = Color(0, 0, 0, 1)
-Button/colors/icon_disabled_color = Color(0, 0, 0, 1)
-Button/colors/icon_focus_color = Color(0, 0, 0, 1)
-Button/colors/icon_hover_color = Color(0, 0, 0, 1)
-Button/colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
-Button/colors/icon_normal_color = Color(0, 0, 0, 1)
-Button/colors/icon_pressed_color = Color(0, 0, 0, 1)
-Button/constants/align_to_largest_stylebox = 0
-Button/constants/h_separation = 0
-Button/constants/icon_max_width = 0
-Button/constants/outline_size = 0
-Button/font_sizes/font_size = 32
-Button/fonts/font = null
-Button/styles/disabled = null
-Button/styles/focus = null
-Button/styles/hover = null
-Button/styles/normal = SubResource("StyleBoxFlat_lcphj")
-Button/styles/pressed = null
 
 [sub_resource type="LabelSettings" id="LabelSettings_slw4p"]
 font_size = 40
@@ -370,12 +282,14 @@ size_flags_vertical = 3
 [node name="Discard" type="Button" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card/VBoxContainer/Action_Bar"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("8_aje2a")
 text = "Discard"
 
 [node name="Use" type="Button" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card/VBoxContainer/Action_Bar"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("9_225mg")
 text = "Use"
 
 [node name="Card2" type="Panel" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager"]
@@ -422,12 +336,14 @@ size_flags_vertical = 3
 [node name="Discard" type="Button" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card2/VBoxContainer/Action_Bar"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("8_aje2a")
 text = "Discard"
 
 [node name="Use" type="Button" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card2/VBoxContainer/Action_Bar"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("9_225mg")
 text = "Use"
 
 [node name="Card3" type="Panel" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager"]
@@ -474,12 +390,14 @@ size_flags_vertical = 3
 [node name="Discard" type="Button" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card3/VBoxContainer/Action_Bar"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("8_aje2a")
 text = "Discard"
 
 [node name="Use" type="Button" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager/Card3/VBoxContainer/Action_Bar"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("9_225mg")
 text = "Use"
 
 [node name="action" type="Control" parent="UI_related/UI/bottom_box"]
@@ -498,13 +416,13 @@ grow_vertical = 2
 [node name="Reset" type="Button" parent="UI_related/UI/bottom_box/action/InMatch"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = SubResource("Theme_0yuk4")
+theme = ExtResource("8_aje2a")
 text = "Reset"
 
 [node name="Validate" type="Button" parent="UI_related/UI/bottom_box/action/InMatch"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = SubResource("Theme_wjuuw")
+theme = ExtResource("9_225mg")
 text = "Validate turn"
 
 [node name="Start" type="Button" parent="UI_related/UI/bottom_box/action"]
