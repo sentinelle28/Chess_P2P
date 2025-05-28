@@ -26,10 +26,10 @@ func _ready() -> void:
 func _on_host_pressed()->void:
 	peer.create_server(PORT,MAX_PLAYER)
 	multiplayer.multiplayer_peer = peer
+	multiplayer.connect("peer_disconnected",_disconnect)
 	multiplayer.connect("peer_connected",_update_peer)
 	_add_player(1)
 	_hide_UI()
-	
 	
 func _update_peer(_value:int)->void:
 	is_two = true
@@ -46,6 +46,7 @@ func _on_join_pressed()->void:
 		
 func _connect_procedure()->void:
 	multiplayer.multiplayer_peer = peer
+	multiplayer.connect("peer_disconnected",_disconnect)
 	_add_player(2)
 	_hide_UI()
 	
@@ -84,7 +85,6 @@ func _add_player(id:int)->void:
 	$UI_related/UI/bottom_box.show()
 	
 	
-
 func _reset_global()->void:
 	$UI_related/UI/bottom_box/action/Start.hide()
 	$UI_related/Defeat.hide()
@@ -94,6 +94,7 @@ func _reset_global()->void:
 	EventListenner._reset_action()
 	EventListenner._reset_consequence()
 	piece_manager._reset()
+	card_manager._reset()
 	
 @rpc("authority","call_remote")
 func _reset_client()->void:
@@ -148,7 +149,6 @@ func _do_mouv_action_host(who:int,to_x:int,to_y:int)->void:
 	if is_multiplayer_authority():
 		_construct_mouv_action(who,to_x,to_y)
 		
-		
 func _do_action(action:Action)->void:
 	is_replaying = true
 	if action is MouvAction:
@@ -171,8 +171,6 @@ func _start_turn()->void:
 	EventListenner.action = null
 	print(is_multiplayer_authority()," can play")
 	emit_signal("NewTurn")
-
-
 
 func _do_consequence()->void:
 	if EventListenner.did_action():
@@ -231,7 +229,6 @@ func _send_card_action(to_add:String,action_to_send:CardAction)->void:
 	action_to_send.pos.y,
 	action_to_send.is_black)
 	
-
 func _do_victory(is_black:bool)->void:
 	if is_multiplayer_authority():
 		$UI_related/UI/bottom_box/action/Start.show()
@@ -248,7 +245,6 @@ func _do_victory(is_black:bool)->void:
 	$UI_related/Defeat.visible = not result
 	$UI_related/Victory.visible = result
 
-
 @rpc("any_peer","call_local")
 func _stop_action_host()->void:
 	if is_multiplayer_authority():
@@ -264,8 +260,6 @@ func _stop_action_client()->void:
 func _do_card_action_client(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:
 	_execute_card(index_of_the_card,pos_x,pos_y,is_black)
 	
-	
-	
 @rpc("any_peer","call_local")
 func _do_card_action_host(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:
 	if is_multiplayer_authority():
@@ -276,3 +270,15 @@ func _execute_card(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->voi
 	var card_to_use:CardStrategyPattern = CardLib.array_of_card[index_of_the_card]
 	card_to_use._apply(pos_x,pos_y,is_black,self)
 	_start_turn()
+
+
+func _disconnect()->void:
+	_reset_global()
+	multiplayer.peer = null
+	remove_child(m_player)
+	action_bar.hide()
+	internet_related.show()
+	$UI_related/UI/bottom_box/Play/ColorRect.hide()
+	$UI_related/UI/bottom_box/Play/BlackKing.hide()
+	$UI_related/UI/bottom_box/Play/WhiteKing.hide()
+	
