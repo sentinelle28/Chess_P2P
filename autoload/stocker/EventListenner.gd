@@ -1,8 +1,8 @@
 extends Node
-signal PieceTaken(index_of_the_victime:int,pos_of_the_victime:Vector2i)
-signal PieceMov(from:Vector2i,to:Vector2i,who:int)
-signal UseCard(CardIndex:int,pos:Vector2i,is_black:bool)
-signal DidAction
+signal PieceTaken(index_of_the_victime:int,pos_of_the_victime:Vector2i) #emited from piece manager to self
+signal PieceMov(from:Vector2i,to:Vector2i,who:int) #emited from piece manager to self
+signal UseCard(CardIndex:int,pos:Vector2i,is_black:bool) # emited from card manager to self
+signal DidAction # prevent mouse from doing two action
 
 var action:Action
 var consequences:Array[Consequence] = []

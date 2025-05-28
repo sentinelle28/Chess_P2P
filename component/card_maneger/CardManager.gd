@@ -1,7 +1,7 @@
 extends HBoxContainer
 class_name CardManager
 
-signal CardQeued
+signal CardQeued #notify mouse that it needs to check pos
 
 @export var current_card:Array[CardStrategyPattern] = []
 @export var current_energy:int = 0

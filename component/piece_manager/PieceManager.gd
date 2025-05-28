@@ -1,9 +1,9 @@
 extends Node
 class_name PieceManager
 
-signal Victory(is_black:bool)
-signal PosVerified(pos:Vector2i,is_black:bool)
-signal StopQueuing
+signal Victory(is_black:bool) #send when one king is captured
+signal PosVerified(pos:Vector2i,is_black:bool) # emited to card manager
+signal StopQueuing # emited to prevent mouse seeking the same thing over and over again
 
 @export var tilemap:TileMapLayer
 var array_pos:Array[Vector2i] = []
@@ -15,12 +15,16 @@ func _ready() -> void:
 		
 func _reset()->void:
 	array_pos.clear()
-	for i:int in range(32):
-		var child:Piece = get_child(i)
-		array_pos.append(PosReset.beginning_pos[i])
-		child.global_position = get_map_pos(PosReset.beginning_pos[i])
-		child.show()
-		child.monitorable = true
+	for i:int in range(get_child_count()):
+		if i <= 31: #0 à 32
+			var child:Piece = get_child(i)
+			array_pos.append(PosReset.beginning_pos[i])
+			child.global_position = get_map_pos(PosReset.beginning_pos[i])
+			child.show()
+			child.monitorable = true
+		else:
+			# there is too many children
+			remove_child(get_child(i))
 	
 func _update_pos(index:int,value:Vector2i,do_emit_signal:bool)->void:
 	if do_emit_signal:

@@ -9,8 +9,8 @@ var is_queued_for_card:bool = false
 
 @onready var anim:AnimatedSprite2D = $AnimatedSprite2D
 
-signal mouv_input(who:int)
-signal GetPos(is_black:bool)
+signal mouv_input(who:int) # notify piece manager that mouse wants to move a piece
+signal GetPos(is_black:bool) # notify piece manager that mouse wants to use a card on a pos
 
 func _ready() -> void:
 	EventListenner.connect("DidAction",_prevent_futher_action)
