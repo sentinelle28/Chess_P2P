@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dsvihcfx686cj" path="res://scene/main/main_menu.gd" id="1_lgni4"]
 [ext_resource type="Texture2D" uid="uid://gskdca2b7bu0" path="res://asset/visual/pixel chess_v1.2/boards/board_plain_05.png" id="2_rxfpd"]
-[ext_resource type="Theme" uid="uid://c1nw8lnmxxeh4" path="res://asset/theme/ButtonTheme.tres" id="3_j5kbh"]
+[ext_resource type="Theme" uid="uid://c1nw8lnmxxeh4" path="res://asset/godot_assset/theme/ButtonTheme.tres" id="3_j5kbh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j5kbh"]
 texture = ExtResource("2_rxfpd")
