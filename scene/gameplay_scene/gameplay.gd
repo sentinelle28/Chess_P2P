@@ -283,9 +283,9 @@ func _execute_card(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->voi
 	_start_turn()
 
 
-func _disconnect()->void:
+func _disconnect(id:int)->void:
+	print(id," is disconnected")
 	_reset_global()
-	multiplayer.peer = null
 	remove_child(m_player)
 	action_bar.hide()
 	internet_related.show()
