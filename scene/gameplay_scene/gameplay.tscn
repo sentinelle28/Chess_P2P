@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://chpp6u6l8c72o"]
+[gd_scene load_steps=27 format=4 uid="uid://chpp6u6l8c72o"]
 
 [ext_resource type="Script" uid="uid://cyyr26uacur4g" path="res://scene/gameplay_scene/gameplay.gd" id="1_tfltx"]
 [ext_resource type="PackedScene" uid="uid://djpfvvn6vm40b" path="res://instance/player_instance/mouse.tscn" id="2_agxrv"]
@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://p0dm03gw6762" path="res://instance/piece_instance/Piece_lib/queen.tscn" id="7_2kjuw"]
 [ext_resource type="Theme" uid="uid://bwa84tjmfm4v8" path="res://asset/theme/ResetButtonTheme.tres" id="8_aje2a"]
 [ext_resource type="PackedScene" uid="uid://cprhdkq3mjwqu" path="res://instance/piece_instance/Piece_lib/beashop.tscn" id="8_dr73f"]
-[ext_resource type="Theme" uid="uid://4sllni2xg00e" path="res://scene/gameplay_scene/ValidateButtonTheme.tres" id="9_225mg"]
+[ext_resource type="Theme" uid="uid://4sllni2xg00e" path="res://asset/theme/ValidateButtonTheme.tres" id="9_225mg"]
 [ext_resource type="PackedScene" uid="uid://dxgqf6ymiu05x" path="res://instance/piece_instance/Piece_lib/knight.tscn" id="9_slw4p"]
 [ext_resource type="PackedScene" uid="uid://yrvgyml4s8un" path="res://instance/piece_instance/Piece_lib/rook.tscn" id="10_jt474"]
 [ext_resource type="PackedScene" uid="uid://cfjmlv0qpd7l3" path="res://instance/piece_instance/Piece_lib/pawn.tscn" id="11_qx00v"]
@@ -53,8 +53,6 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="Theme" id="Theme_aje2a"]
 Panel/styles/panel = SubResource("StyleBoxFlat_qx00v")
-
-[sub_resource type="Theme" id="Theme_225mg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slw4p"]
 bg_color = Color(0, 0, 0, 1)
@@ -167,13 +165,12 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 128.0
-offset_top = 40.0
-offset_right = -150.0
-offset_bottom = -32.0
+offset_left = 120.0
+offset_top = 29.0
+offset_right = -142.0
+offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_225mg")
 
 [node name="BlackKing" type="Sprite2D" parent="UI_related/UI/bottom_box/Play"]
 visible = false
