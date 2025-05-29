@@ -31,7 +31,7 @@ func _update_card()->void:
 	progress_bar.value = current_energy
 	
 func _show_use_button(index:int)->void:
-	if current_card[index].get_cost() >= current_energy:
+	if current_card[index].get_cost() <= current_energy:
 		var child:CardHolder = get_child(index)
 		var button:Button = child.get_node("VBoxContainer/Action_Bar/Use")
 		button.show()
