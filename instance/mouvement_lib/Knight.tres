@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="MouvementOption" load_steps=2 format=3 uid="uid://dqpewh7mb5uqy"]
 
-[ext_resource type="Script" uid="uid://b8t3sroj4iv3u" path="res://component/piece_related/mouvement_component/MouvementOption.gd" id="1_dctna"]
+[ext_resource type="Script" uid="uid://b8t3sroj4iv3u" path="res://component/related_to_piece/piece_related/mouvement_component/MouvementOption.gd" id="1_dctna"]
+
 
 [resource]
 script = ExtResource("1_dctna")

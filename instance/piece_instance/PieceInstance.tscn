@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://2uij61rivcwg"]
 
-[ext_resource type="Script" uid="uid://d4neyykiw252t" path="res://component/piece_related/piece/Piece.gd" id="1_7v5tm"]
+[ext_resource type="Script" uid="uid://d4neyykiw252t" path="res://component/related_to_piece/piece_related/piece/Piece.gd" id="1_7v5tm"]
 [ext_resource type="Texture2D" uid="uid://bscdnhk241vqs" path="res://asset/visual/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_6svx6"]
+
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6svx6"]
 radius = 8.0

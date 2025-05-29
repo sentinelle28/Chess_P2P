@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="MouvementOption" load_steps=2 format=3 uid="uid://bvvgomnu16ulv"]
 
-[ext_resource type="Script" uid="uid://b8t3sroj4iv3u" path="res://component/piece_related/mouvement_component/MouvementOption.gd" id="1_mcxu7"]
+[ext_resource type="Script" uid="uid://b8t3sroj4iv3u" path="res://component/related_to_piece/piece_related/mouvement_component/MouvementOption.gd" id="1_mcxu7"]
+
 
 [resource]
 script = ExtResource("1_mcxu7")
