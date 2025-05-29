@@ -8,19 +8,21 @@ signal use(index:int)
 
 @onready var name_label:Label = $VBoxContainer/Control/Name_of_the_card
 @onready var description_label:Label = $VBoxContainer/Control2
+@onready var discard_button:Button = $VBoxContainer/Action_Bar/Discard
+@onready var use_button:Button = $VBoxContainer/Action_Bar/Use
 
 func _ready() -> void:
-	$VBoxContainer/Action_Bar/Discard.connect("pressed",_discard)
-	$VBoxContainer/Action_Bar/Use.connect("pressed",_use)
+	discard_button.connect("pressed",_discard)
+	use_button.connect("pressed",_use)
 	
 	
 func _discard()->void:
 	emit_signal("discard",self_index)
-	$VBoxContainer/Action_Bar/Use.hide()
+	use_button.hide()
 	
 func _use()->void:
 	emit_signal("use",self_index)
-	$VBoxContainer/Action_Bar/Use.hide()
+	use_button.hide()
 	
 func _change_card(card:CardStrategyPattern)->void:
 	_change_descrition(card.get_description())

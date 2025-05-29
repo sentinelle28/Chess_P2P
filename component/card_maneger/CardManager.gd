@@ -7,6 +7,7 @@ signal CardQeued #notify mouse that it needs to check pos
 @export var current_energy:int = 0
 @export var progress_bar:ProgressBar
 
+var has_resized:bool = false
 var current_queued_card:CardStrategyPattern
 
 func _ready() -> void:
@@ -29,6 +30,18 @@ func _update_card()->void:
 		else:
 			get_child(i).hide()
 	progress_bar.value = current_energy
+	if len(current_card) == 3 and not has_resized:
+		has_resized = true
+		for i:int in range(3):
+			var card:CardHolder = get_child(i)
+			card.use_button.add_theme_font_size_override("resized",16)
+			card.discard_button.add_theme_font_size_override("resized",16)
+	elif len(current_card) != 3 and has_resized:
+		has_resized = false
+		for i:int in range(3):
+			var card:CardHolder = get_child(i)
+			card.use_button.remove_theme_font_size_override("resized")
+			card.discard_button.remove_theme_font_size_override("resized")
 	
 func _show_use_button(index:int)->void:
 	if current_card[index].get_cost() <= current_energy:
@@ -65,6 +78,7 @@ func _spend_energy(energy_to_spend:int)->void:
 	current_energy -= energy_to_spend
 
 func _reset()->void:
+	has_resized = false
 	current_card.clear()
 	current_energy = 0
 	for i:int in range(3):

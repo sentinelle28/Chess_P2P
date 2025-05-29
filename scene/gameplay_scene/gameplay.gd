@@ -89,7 +89,6 @@ func _add_player(id:int)->void:
 	
 func _reset_global()->void:
 	# hide player color
-	$UI_related/UI/bottom_box/Play/ColorRect.hide()
 	$UI_related/UI/bottom_box/Play/BlackKing.hide()
 	$UI_related/UI/bottom_box/Play/WhiteKing.hide()
 	#hide waiting player
@@ -129,14 +128,11 @@ func is_peer_connected()->bool:
 
 func _change_color(is_black:bool)->void:
 	if is_black:
-		$UI_related/UI/bottom_box/Play/ColorRect.color = Color.WHITE
 		$UI_related/UI/bottom_box/Play/BlackKing.show()
 		$UI_related/UI/bottom_box/Play/WhiteKing.hide()
 	else:
-		$UI_related/UI/bottom_box/Play/ColorRect.color = Color.BLACK
 		$UI_related/UI/bottom_box/Play/BlackKing.hide()
 		$UI_related/UI/bottom_box/Play/WhiteKing.show()
-	$UI_related/UI/bottom_box/Play/ColorRect.show()
 
 @rpc("call_remote","authority")
 func _start_game(is_starting:bool,is_black:bool)->void:
@@ -289,7 +285,6 @@ func _disconnect(id:int)->void:
 	remove_child(m_player)
 	action_bar.hide()
 	internet_related.show()
-	$UI_related/UI/bottom_box/Play/ColorRect.hide()
 	$UI_related/UI/bottom_box/Play/BlackKing.hide()
 	$UI_related/UI/bottom_box/Play/WhiteKing.hide()
 	
