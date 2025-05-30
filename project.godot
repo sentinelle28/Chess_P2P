@@ -22,6 +22,7 @@ PosReset="*res://autoload/ref/reset_related/PosReset.gd"
 EventListenner="*res://autoload/stocker/EventListenner.gd"
 CardLib="*res://autoload/ref/Card_lib/CardLib.gd"
 GameSettings="*res://autoload/Setting/Settings.gd"
+SummonCardLib="*res://autoload/ref/Card_lib/SummonCardLib.gd"
 
 [display]
 

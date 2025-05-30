@@ -89,3 +89,8 @@ func _verify_card_pos(is_black:bool)->void:
 	#mouse doesn't need after that to wait for input
 	emit_signal("StopQueuing")
 	
+
+func _add_piece(piece:Piece,pos:Vector2i)->void:
+	add_child(piece)
+	piece.global_position = get_map_pos(pos)
+	array_pos.append(pos)
