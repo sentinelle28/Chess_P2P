@@ -1,11 +1,11 @@
 extends Node
 var array_of_piece:Array[PackedScene] = [
-	preload("res://instance/piece_instance/Piece_lib/beashop.tscn"),
-	preload("res://instance/piece_instance/Piece_lib/king.tscn"),
-	preload("res://instance/piece_instance/Piece_lib/knight.tscn"),
-	preload("res://instance/piece_instance/Piece_lib/pawn.tscn"),
-	preload("res://instance/piece_instance/Piece_lib/queen.tscn"),
-	preload("res://instance/piece_instance/Piece_lib/rook.tscn"),
+	preload("res://instance/piece_instance/Piece_lib/beashop.tscn"), #0
+	preload("res://instance/piece_instance/Piece_lib/king.tscn"), #1
+	preload("res://instance/piece_instance/Piece_lib/knight.tscn"), #2
+	preload("res://instance/piece_instance/Piece_lib/pawn.tscn"), #3
+	preload("res://instance/piece_instance/Piece_lib/queen.tscn"), #4
+	preload("res://instance/piece_instance/Piece_lib/rook.tscn"), #5
 	
 ]
 

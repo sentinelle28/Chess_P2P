@@ -4,14 +4,24 @@ var array_of_card:Array[CardStrategyPattern] = [
 	AddKnightMovement.new(),
 	AddRookCard.new(),
 	AddBeashopCard.new(),
-	AddKingCard.new()
+	AddKingCard.new(),
+	SummonPawn.new(),
+	SummonKnight.new(),
+	SummonBeashop.new(),
+	SummonRook.new(),
+	SummonQueen.new()
 ]
 
 var array_of_rarity:Array[int] = [
 	6,
 	5,
 	5,
-	6
+	6,
+	5,
+	4,
+	3,
+	3,
+	2
 ]
 
 var total:int = 0
