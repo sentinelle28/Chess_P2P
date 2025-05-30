@@ -15,6 +15,7 @@ func _ready() -> void:
 		
 func _reset()->void:
 	array_pos.clear()
+	var to_delete:Array[Piece] = []
 	for i:int in range(get_child_count()):
 		if i <= 31: #0 à 32
 			var child:Piece = get_child(i)
@@ -24,7 +25,10 @@ func _reset()->void:
 			child.monitorable = true
 		else:
 			# there is too many children
-			remove_child(get_child(i))
+			to_delete.append(get_child(i))
+	for piece:Piece in to_delete:
+		remove_child(piece)
+	to_delete.clear()
 	
 func _update_pos(index:int,value:Vector2i,do_emit_signal:bool)->void:
 	if do_emit_signal:
