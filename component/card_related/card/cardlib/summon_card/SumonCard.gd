@@ -15,18 +15,24 @@ func _summon_range(pos:Vector2i,gameplay_scene:GameplayScene,is_black:bool)->voi
 	var left_to_summon:int = get_num_to_summon()
 	var tilemap:TileMapLayer = gameplay_scene.piece_manager.tilemap
 	var array_of_piece:Array[Vector2i] = gameplay_scene.piece_manager.array_pos
-	for y:int in range(-1,2):
-		for x:int in range(-1,2):
-			var new_pos:Vector2i = pos+Vector2i(x,y)
-			if can_summon(new_pos,tilemap,array_of_piece):
-				var index:int = (x + 1) + (y + 1) * 3 # find index base on pos
-				SummonCardLib.last_summon_array[index] = true
-				left_to_summon -= 1
-				_summon(new_pos,is_black,gameplay_scene)
-				if left_to_summon <= 0:
-					break
-		if left_to_summon <= 0:
-			break
+	if can_summon(pos,tilemap,array_of_piece):
+		SummonCardLib.last_summon_array[4] = true
+		left_to_summon -= 1
+		_summon(pos,is_black,gameplay_scene)
+	
+	if left_to_summon > 0:
+		for y:int in range(-1,2):
+			for x:int in range(-1,2):
+				var new_pos:Vector2i = pos+Vector2i(x,y)
+				if can_summon(new_pos,tilemap,array_of_piece):
+					var index:int = (x + 1) + (y + 1) * 3 # find index base on pos
+					SummonCardLib.last_summon_array[index] = true
+					left_to_summon -= 1
+					_summon(new_pos,is_black,gameplay_scene)
+					if left_to_summon <= 0:
+						break
+			if left_to_summon <= 0:
+				break
 					
 func _summon(pos:Vector2i,is_black:bool,gameplay:GameplayScene)->void:
 	var piece:Piece = SummonCardLib.get_piece(get_piece_to_summon(),is_black)
@@ -45,11 +51,8 @@ func _custom_reverse(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScen
 			var x:int = i%4 - 1 #0 to 2 and then centered by -1 
 			var y:int = i/3 - 1 #same
 			var to_del:Vector2i = Vector2i(x,y) + pos
-			var index:int = piece_mana.array_pos.find(to_del)
-			print(to_del)
-			print(index)
-			piece_mana.array_pos.remove_at(index)
-			piece_mana.remove_child(piece_mana.get_child(index))
-			
+			var c_index:int = piece_mana.array_pos.find(to_del)
+			piece_mana.array_pos.remove_at(c_index)
+			piece_mana.remove_child(piece_mana.get_child(c_index))
 	SummonCardLib._reset_last_summon_array()
 	
