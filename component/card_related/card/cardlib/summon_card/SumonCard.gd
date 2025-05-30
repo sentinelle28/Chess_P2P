@@ -25,6 +25,8 @@ func _summon_range(pos:Vector2i,gameplay_scene:GameplayScene,is_black:bool)->voi
 				_summon(new_pos,is_black,gameplay_scene)
 				if left_to_summon <= 0:
 					break
+		if left_to_summon <= 0:
+			break
 					
 func _summon(pos:Vector2i,is_black:bool,gameplay:GameplayScene)->void:
 	var piece:Piece = SummonCardLib.get_piece(get_piece_to_summon(),is_black)
@@ -44,6 +46,8 @@ func _custom_reverse(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScen
 			var y:int = i/3 - 1 #same
 			var to_del:Vector2i = Vector2i(x,y) + pos
 			var index:int = piece_mana.array_pos.find(to_del)
+			print(to_del)
+			print(index)
 			piece_mana.array_pos.remove_at(index)
 			piece_mana.remove_child(piece_mana.get_child(index))
 			
