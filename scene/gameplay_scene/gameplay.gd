@@ -218,6 +218,7 @@ func _send_action()->void:
 		m_player.can_play = false
 		m_player.is_lock_on_piece = false
 		action_bar.hide()
+		card_manager.progress_bar.hide()
 		emit_signal("EndTurn")
 		
 func _send_movement_action(to_add:String,action_to_send:MouvAction)->void:

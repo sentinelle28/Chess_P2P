@@ -6,8 +6,8 @@
 [ext_resource type="Theme" uid="uid://c1nw8lnmxxeh4" path="res://asset/godot_assset/theme/ButtonTheme.tres" id="3_jt474"]
 [ext_resource type="Script" uid="uid://eu4sjlhoqwpp" path="res://component/related_to_piece/piece_manager/PieceManager.gd" id="4_h3lfs"]
 [ext_resource type="PackedScene" uid="uid://4m31j6a34hu4" path="res://instance/piece_instance/Piece_lib/king.tscn" id="5_2l5nx"]
-[ext_resource type="Script" uid="uid://2ar7rvy5cxeg" path="res://component/card_maneger/CardHolder.gd" id="5_dr73f"]
-[ext_resource type="Script" uid="uid://df1g4lj0cq1bv" path="res://component/card_maneger/CardManager.gd" id="5_slw4p"]
+[ext_resource type="Script" uid="uid://2ar7rvy5cxeg" path="res://component/card_related/card_manager/CardHolder.gd" id="5_dr73f"]
+[ext_resource type="Script" uid="uid://df1g4lj0cq1bv" path="res://component/card_related/card_manager/CardManager.gd" id="5_slw4p"]
 [ext_resource type="Texture2D" uid="uid://bscdnhk241vqs" path="res://asset/visual/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="6_bu0yp"]
 [ext_resource type="PackedScene" uid="uid://p0dm03gw6762" path="res://instance/piece_instance/Piece_lib/queen.tscn" id="7_2kjuw"]
 [ext_resource type="LabelSettings" uid="uid://c2r1t5dko1l2p" path="res://asset/godot_assset/font/DescriptionFont.tres" id="8_225mg"]
@@ -376,6 +376,7 @@ theme = ExtResource("9_225mg")
 text = "Use"
 
 [node name="ProgressBar" type="ProgressBar" parent="UI_related/UI/bottom_box/Card"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
