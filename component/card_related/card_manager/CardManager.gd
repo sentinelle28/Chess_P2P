@@ -22,6 +22,7 @@ func _prevent_card()->void:
 		get_child(i).hide()
 
 func _update_card()->void:
+	progress_bar.show()
 	for i:int in range(3):
 		if len(current_card) >= i+1:
 			get_child(i).show()
