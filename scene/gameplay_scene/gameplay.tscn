@@ -163,7 +163,7 @@ size_flags_stretch_ratio = 0.5
 
 [node name="BlackKing" type="Sprite2D" parent="UI_related/UI/bottom_box/Play"]
 visible = false
-position = Vector2(152, 72)
+position = Vector2(68, 76)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("6_bu0yp")
 hframes = 6
@@ -171,7 +171,7 @@ frame = 5
 
 [node name="WhiteKing" type="Sprite2D" parent="UI_related/UI/bottom_box/Play"]
 visible = false
-position = Vector2(152, 72)
+position = Vector2(68, 76)
 scale = Vector2(3.25, 3.25)
 texture = ExtResource("12_aje2a")
 hframes = 6
