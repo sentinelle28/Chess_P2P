@@ -7,9 +7,7 @@ func get_description()->String:
 	return "Add king movement to a piece"
 	
 
-	
-func get_cost()->int:
-	return 1
+
 
 func get_mouv_to_add()->int:
 	return 1

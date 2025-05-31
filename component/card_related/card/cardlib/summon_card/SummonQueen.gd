@@ -6,9 +6,7 @@ func get_card_name()->String:
 	
 func get_description()->String:
 	return "Summon 1 queen"
-	
-func get_cost()->int:
-	return 5
+
 	
 func get_piece_to_summon()->int:
 	return 4

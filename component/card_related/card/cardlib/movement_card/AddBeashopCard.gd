@@ -7,10 +7,5 @@ func get_card_name()->String:
 func get_description()->String:
 	return "Add beashop movement to a piece"
 	
-
-	
-func get_cost()->int:
-	return 1
-
 func get_mouv_to_add()->int:
 	return 0

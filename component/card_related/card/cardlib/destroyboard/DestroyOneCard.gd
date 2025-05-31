@@ -9,6 +9,3 @@ func get_card_name()->String:
 	
 func get_description()->String:
 	return "Destroy a board tile"
-	
-func get_cost()->int:
-	return 2
