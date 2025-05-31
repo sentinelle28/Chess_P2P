@@ -43,3 +43,12 @@ func _draw() -> void:
 		#draw screen
 		for possible_pos:Vector2i in array:
 			draw_circle(possible_pos*20,5,Color.GRAY,true)
+
+func _add_shader()->void:
+	var sprite:Sprite2D = get_node("Sprite2D")
+	sprite.material = ShaderMaterial.new()
+	sprite.material.shader = MouvRef.pre_shader
+	
+func _remove_shader()->void:
+	var sprite:Sprite2D = get_node("Sprite2D")
+	sprite.material = null

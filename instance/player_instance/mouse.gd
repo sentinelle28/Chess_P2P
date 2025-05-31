@@ -53,6 +53,7 @@ func _on_area_entered(area: Area2D) -> void:
 			if is_instance_valid(last_selected_piece):
 				last_selected_piece.z_index = 1
 				last_selected_piece.is_selected = false
+				last_selected_piece._remove_shader()
 				last_selected_piece.queue_redraw()
 				
 			last_selected_piece = area
@@ -62,11 +63,13 @@ func _on_area_entered(area: Area2D) -> void:
 			#draw anim
 			last_selected_piece.is_selected = true
 			last_selected_piece.z_index = 2
-			area.queue_redraw()
+			last_selected_piece.queue_redraw()
+			last_selected_piece._add_shader()
 
 func _on_area_exited(area: Area2D) -> void:
-	if area is Piece and not is_lock_on_piece and not is_queued_for_card:
+	if area is Piece and (not is_lock_on_piece) and (not is_queued_for_card):
 		area.z_index = 1
+		area._remove_shader()
 		if last_selected_piece == area:
 			last_selected_piece = null
 		_exit_piece(area)

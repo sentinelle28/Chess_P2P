@@ -52,6 +52,7 @@ monitorable = false
 script = ExtResource("1_3m1e7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, -8)
 shape = SubResource("CircleShape2D_lpijr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
