@@ -9,7 +9,10 @@ var array_of_card:Array[CardStrategyPattern] = [
 	SummonKnight.new(),
 	SummonBeashop.new(),
 	SummonRook.new(),
-	SummonQueen.new()
+	SummonQueen.new(),
+	DestroyOneCard.new(),
+	DestroyThreeCard.new(),
+	DestroynineCard.new()
 ]
 
 var array_of_rarity:Array[int] = [
@@ -21,7 +24,10 @@ var array_of_rarity:Array[int] = [
 	4, #SummonKnight
 	3, #SummonBeashop
 	3, #SummonRook
-	2 #SummonQueen
+	2, #SummonQueen
+	4, #destroy 1 tile
+	3, #destroy 3 tile
+	1 #destroy 9 tile
 ]
 
 var total:int = 0

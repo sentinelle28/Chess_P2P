@@ -104,6 +104,7 @@ func _reset_global()->void:
 	EventListenner._reset_consequence()
 	piece_manager._reset()
 	card_manager._reset()
+	_reset_board()
 	
 @rpc("authority","call_remote")
 func _reset_client()->void:
@@ -289,3 +290,23 @@ func _disconnect(id:int)->void:
 	$UI_related/UI/bottom_box/Play/BlackKing.hide()
 	$UI_related/UI/bottom_box/Play/WhiteKing.hide()
 	
+
+func _reset_board()->void:
+	var tilemap:TileMapLayer = piece_manager.tilemap
+	for y:int in range(-10,6):
+		for x:int in range(-18,18):
+			if tilemap.get_cell_atlas_coords(Vector2i(x,y)) == Vector2i(-1,-1):
+				var new_pos:Vector2i = Vector2i(x,y)
+				var posi:Vector2i
+				if new_pos.y%2 == 0:
+					if new_pos.x%2 == 0:
+						posi = Vector2i(1,0)
+					else:
+						posi = Vector2i(0,0)
+				else:
+					if new_pos.x%2 == 0:
+						posi = Vector2i(0,0)
+					else:
+						posi = Vector2i(1,0)
+			
+				tilemap.set_cell(new_pos,0,posi)
