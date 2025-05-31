@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ghna3yk7xeel"]
+
+[ext_resource type="AudioStream" uid="uid://dx05vkf8lpg0p" path="res://asset/audio/music/loopmusic.ogg" id="1_jsm5y"]
+[ext_resource type="Script" uid="uid://cnnhkc4p2wfsg" path="res://autoload/stocker/sound_manager.gd" id="2_65cx2"]
+
+[node name="SoundManager" type="AudioStreamPlayer"]
+stream = ExtResource("1_jsm5y")
+autoplay = true
+script = ExtResource("2_65cx2")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
