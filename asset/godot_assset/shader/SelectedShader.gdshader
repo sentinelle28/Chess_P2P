@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
 void vertex() {
-	VERTEX.y = VERTEX.y + sin(TIME*1.5)*2.;
+	VERTEX.y += sin(TIME*2.)*2. - 2.5;
 }
 
