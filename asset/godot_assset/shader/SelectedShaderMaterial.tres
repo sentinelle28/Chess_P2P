@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://gq3jxp4bjdg6"]
+
+[ext_resource type="Shader" uid="uid://chfrm45sfltnv" path="res://asset/godot_assset/shader/SelectedShader.gdshader" id="1_kvu85"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_kvu85")
