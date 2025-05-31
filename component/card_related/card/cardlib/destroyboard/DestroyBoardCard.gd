@@ -66,5 +66,4 @@ func _custom_reverse(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScen
 					posi = Vector2i(0,0)
 				else:
 					posi = Vector2i(1,0)
-			
 			tilemap.set_cell(new_pos,0,posi)
