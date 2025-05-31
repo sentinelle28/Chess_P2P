@@ -15,6 +15,8 @@ array_of_piece:Array[Vector2i])->Array[Vector2i]:
 			elif not is_empity(current_pos,array_of_piece):
 				array.append(direction*i)
 				break
+		else:
+			break
 	return array
 	
 func is_in_board(pos:Vector2i,tilemap:TileMapLayer)->bool:
