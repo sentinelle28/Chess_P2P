@@ -36,7 +36,6 @@ func _select_input()->void:
 		
 func _mouv_input()->void:
 	if Input.is_action_just_pressed("select"):
-		
 		emit_signal("mouv_input",last_selected_piece.get_index())
 		_exit_piece(last_selected_piece)
 		_reset()
@@ -69,7 +68,6 @@ func _on_area_entered(area: Area2D) -> void:
 func _on_area_exited(area: Area2D) -> void:
 	if area is Piece and (not is_lock_on_piece) and (not is_queued_for_card):
 		area.z_index = 1
-		area._remove_shader()
 		if last_selected_piece == area:
 			last_selected_piece = null
 		_exit_piece(area)
@@ -84,6 +82,7 @@ func _exit_piece(piece:Piece)->void:
 		anim.play("idle")
 	piece.is_selected = false
 	piece.queue_redraw()
+	piece._remove_shader()
 
 func _prevent_futher_action()->void:
 	can_play = false
