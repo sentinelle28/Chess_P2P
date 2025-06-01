@@ -32,7 +32,7 @@ func _on_main_music_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:
 		var new_value:float = main_music_bar.value
 		var rap:float = new_value/100.0
-		GameSettings.volume = (-80) * int(1.-rap)
+		GameSettings.volume = (GameSettings.MIN_DB) * (1.-rap)
 		SoundManager._set_main_sound_level()
 
 

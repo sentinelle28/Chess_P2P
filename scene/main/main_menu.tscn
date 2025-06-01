@@ -35,8 +35,10 @@ Panel/styles/panel = SubResource("StyleBoxFlat_j5kbh")
 [sub_resource type="LabelSettings" id="LabelSettings_dbghu"]
 font_size = 20
 
-[node name="main_menu" type="Node2D"]
+[node name="main_menu" type="Node2D" node_paths=PackedStringArray("main_music_bar", "sfx_music_bar")]
 script = ExtResource("1_lgni4")
+main_music_bar = NodePath("Settings/Panel/VBoxContainer/SliderManager/MainMusic/MainMusicSlider")
+sfx_music_bar = NodePath("Settings/Panel/VBoxContainer/SliderManager/Secondary/SfxSlider")
 
 [node name="Backgroud" type="TileMapLayer" parent="."]
 scale = Vector2(2, 2)
