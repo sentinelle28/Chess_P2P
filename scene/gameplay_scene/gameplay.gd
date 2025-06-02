@@ -181,6 +181,7 @@ func _start_turn()->void:
 	emit_signal("NewTurn")
 
 func _do_consequence()->void:
+	piece_manager._remove_shader()
 	if EventListenner.did_action():
 		m_player.can_play = true
 		EventListenner._reset_action()

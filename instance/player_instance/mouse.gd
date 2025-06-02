@@ -27,6 +27,7 @@ func _process(_delta: float) -> void:
 			_mouv_input()
 			
 	if is_queued_for_card and Input.is_action_just_pressed("select"):
+		get_parent().piece_manager._remove_shader()
 		emit_signal("GetPos",is_black)
 	
 func _select_input()->void:
@@ -63,7 +64,7 @@ func _on_area_entered(area: Area2D) -> void:
 			last_selected_piece.is_selected = true
 			last_selected_piece.z_index = 2
 			last_selected_piece.queue_redraw()
-			last_selected_piece._add_shader()
+			last_selected_piece._add_shader(MouvRef.pre_shader)
 
 func _on_area_exited(area: Area2D) -> void:
 	if area is Piece and (not is_lock_on_piece) and (not is_queued_for_card):

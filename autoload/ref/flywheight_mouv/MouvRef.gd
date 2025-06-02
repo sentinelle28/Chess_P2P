@@ -8,6 +8,8 @@ var array_of_mouv:Array[MouvementOption] = [
 ]
 
 var pre_shader:Shader = preload("res://asset/godot_assset/shader/SelectedShader.gdshader")
+var could_be_selected_shader:Shader = preload("res://asset/godot_assset/shader/CouldBeSelected.gdshader")
+
 
 func get_mouv(index:int)->MouvementOption:
 	return array_of_mouv[index]

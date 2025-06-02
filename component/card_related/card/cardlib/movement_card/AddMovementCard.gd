@@ -7,6 +7,7 @@ func _apply(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScene)->void:
 	var piece:Piece = piece_manager.get_child(index)
 	piece.mouvement_option.append(get_mouv_to_add())
 	
+	
 func get_mouv_to_add()->int:
 	return 0
 
