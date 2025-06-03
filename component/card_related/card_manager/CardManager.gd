@@ -74,6 +74,11 @@ func _use_card(index:int)->void:
 
 func _send_card(pos:Vector2i,is_black:bool)->void:
 	_spend_energy(current_queued_card.get_cost())
+	var gameplay:GameplayScene = get_tree().current_scene
+	var true_pos:Vector2 = gameplay.piece_manager.get_map_pos(pos)
+	var size_of_card:Vector2 = get_child(0).size
+	gameplay.card_anim._do_animation(true_pos,current_queued_card,size_of_card)
+	
 	EventListenner.emit_signal("UseCard",current_queued_card.index,pos,is_black)
 	current_card.erase(current_queued_card)
 	current_queued_card = null

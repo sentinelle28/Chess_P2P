@@ -1,0 +1,148 @@
+[gd_scene load_steps=11 format=3 uid="uid://bqgl1b3cjfk8o"]
+
+[ext_resource type="Theme" uid="uid://b2q3onm83mnx3" path="res://asset/godot_assset/theme/PanelTheme.tres" id="1_itpgr"]
+[ext_resource type="Theme" uid="uid://bwa84tjmfm4v8" path="res://asset/godot_assset/theme/ResetButtonTheme.tres" id="2_6vvyk"]
+[ext_resource type="Script" uid="uid://bufjnt0j4oscu" path="res://instance/card_anim/card_anim.gd" id="2_txod4"]
+[ext_resource type="Theme" uid="uid://4sllni2xg00e" path="res://asset/godot_assset/theme/ValidateButtonTheme.tres" id="3_txod4"]
+[ext_resource type="Shader" uid="uid://dvbmt34mg7pcn" path="res://asset/godot_assset/shader/UseCardShader.gdshader" id="5_txod4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6vvyk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qse8f"]
+font_size = 20
+
+[sub_resource type="Animation" id="Animation_6vvyk"]
+resource_name = "UseCard"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [null, ExtResource("5_txod4"), null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.4, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_txod4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_txod4"]
+_data = {
+&"RESET": SubResource("Animation_txod4"),
+&"UseCard": SubResource("Animation_6vvyk")
+}
+
+[node name="Panel" type="Panel"]
+visible = false
+material = SubResource("ShaderMaterial_6vvyk")
+offset_right = 256.0
+offset_bottom = 196.0
+scale = Vector2(1.16467, 1.16467)
+theme = ExtResource("1_itpgr")
+script = ExtResource("2_txod4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Name_Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "name"
+label_settings = SubResource("LabelSettings_qse8f")
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrapButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_6vvyk")
+text = "Scrap"
+
+[node name="UseButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_txod4")
+text = "Use (2)"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_txod4")
+}

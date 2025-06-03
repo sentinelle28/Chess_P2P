@@ -5,7 +5,10 @@ var peer = ENetMultiplayerPeer.new()
 @export var playerscene:PackedScene
 @export_subgroup("Usefull tool")
 @export var internet_related:Control
-#@export var inputext:TextEdit
+@export var card_manager:CardManager
+@export var piece_manager:PieceManager
+@export var card_anim:CardAnim
+
 const PORT:int = 135
 const MAX_PLAYER:int = 2
 var m_player:Player
@@ -13,8 +16,6 @@ var is_two:bool = false
 var is_replaying:bool = false
 
 @onready var action_bar:VBoxContainer = $UI_related/UI/bottom_box/action/InMatch
-@export var card_manager:CardManager
-@export var piece_manager:PieceManager
 
 signal NewTurn
 signal EndTurn

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://gskdca2b7bu0" path="res://asset/visual/pixel chess_v1.2/boards/board_plain_05.png" id="3_7ggfb"]
 [ext_resource type="Theme" uid="uid://c1nw8lnmxxeh4" path="res://asset/godot_assset/theme/ButtonTheme.tres" id="3_jt474"]
 [ext_resource type="Script" uid="uid://eu4sjlhoqwpp" path="res://component/related_to_piece/piece_manager/PieceManager.gd" id="4_h3lfs"]
+[ext_resource type="Theme" uid="uid://b2q3onm83mnx3" path="res://asset/godot_assset/theme/PanelTheme.tres" id="4_r7gry"]
 [ext_resource type="PackedScene" uid="uid://4m31j6a34hu4" path="res://instance/piece_instance/Piece_lib/king.tscn" id="5_2l5nx"]
 [ext_resource type="Script" uid="uid://2ar7rvy5cxeg" path="res://component/card_related/card_manager/CardHolder.gd" id="5_dr73f"]
 [ext_resource type="Script" uid="uid://df1g4lj0cq1bv" path="res://component/card_related/card_manager/CardManager.gd" id="5_slw4p"]
@@ -17,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dxgqf6ymiu05x" path="res://instance/piece_instance/Piece_lib/knight.tscn" id="9_slw4p"]
 [ext_resource type="PackedScene" uid="uid://yrvgyml4s8un" path="res://instance/piece_instance/Piece_lib/rook.tscn" id="10_jt474"]
 [ext_resource type="PackedScene" uid="uid://cfjmlv0qpd7l3" path="res://instance/piece_instance/Piece_lib/pawn.tscn" id="11_qx00v"]
+[ext_resource type="PackedScene" uid="uid://bqgl1b3cjfk8o" path="res://instance/card_anim/card_anim.tscn" id="12_0yuk4"]
 [ext_resource type="Texture2D" uid="uid://geqi0bsnmyo3" path="res://asset/visual/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="12_aje2a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aje2a"]
@@ -34,26 +36,6 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qx00v"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
-bg_color = Color(0.615494, 0.609068, 0.477542, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.894963, 0.767454, 0.740326, 1)
-border_blend = true
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-
-[sub_resource type="Theme" id="Theme_aje2a"]
-Panel/styles/panel = SubResource("StyleBoxFlat_qx00v")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slw4p"]
 bg_color = Color(0, 0, 0, 1)
@@ -85,12 +67,13 @@ margins = Vector2i(7, 7)
 [sub_resource type="TileSet" id="TileSet_jhoar"]
 sources/0 = SubResource("TileSetAtlasSource_h3lfs")
 
-[node name="gameplay" type="Node2D" node_paths=PackedStringArray("internet_related", "card_manager", "piece_manager")]
+[node name="gameplay" type="Node2D" node_paths=PackedStringArray("internet_related", "card_manager", "piece_manager", "card_anim")]
 script = ExtResource("1_tfltx")
 playerscene = ExtResource("2_agxrv")
 internet_related = NodePath("UI_related/ui")
 card_manager = NodePath("UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager")
 piece_manager = NodePath("PieceManager")
+card_anim = NodePath("UI_related/Panel")
 
 [node name="UI_related" type="CanvasLayer" parent="."]
 
@@ -146,7 +129,7 @@ anchor_bottom = 1.0
 offset_top = -136.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = SubResource("Theme_aje2a")
+theme = ExtResource("4_r7gry")
 
 [node name="bottom_box" type="HBoxContainer" parent="UI_related/UI"]
 layout_mode = 1
@@ -479,6 +462,8 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Victory"
 label_settings = SubResource("LabelSettings_2kjuw")
+
+[node name="Panel" parent="UI_related" instance=ExtResource("12_0yuk4")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(576, 320)
