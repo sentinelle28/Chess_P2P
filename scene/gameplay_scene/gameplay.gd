@@ -24,6 +24,7 @@ func _ready() -> void:
 	connect("EndTurn",card_manager.hide)
 
 func _on_host_pressed()->void:
+	SoundManager._play_sfx("Click")
 	peer.create_server(PORT,MAX_PLAYER)
 	multiplayer.multiplayer_peer = peer
 	multiplayer.connect("peer_disconnected",_disconnect)
@@ -41,10 +42,10 @@ func _hide_UI()->void:
 	internet_related.hide()
 	
 func _on_join_pressed()->void:
+	SoundManager._play_sfx("Click")
 	var to_connect:String = get_ip()
 	if is_valid_ip(to_connect):
 		_connect_procedure()
-		
 		
 func _connect_procedure()->void:
 	multiplayer.multiplayer_peer = peer
@@ -85,7 +86,6 @@ func _add_player(id:int)->void:
 	
 	#show card ui
 	$UI_related/UI/bottom_box.show()
-	
 	
 func _reset_global()->void:
 	# hide player color
@@ -181,6 +181,7 @@ func _start_turn()->void:
 	emit_signal("NewTurn")
 
 func _do_consequence()->void:
+	SoundManager._play_sfx("Reset")
 	piece_manager._remove_shader()
 	if EventListenner.did_action():
 		m_player.can_play = true
@@ -200,6 +201,7 @@ func _do_consequence()->void:
 		EventListenner._reset_consequence()
 	
 func _send_action()->void:
+	SoundManager._play_sfx("Click")
 	if EventListenner.did_action():
 		var action_to_send:Action = EventListenner.get_action()
 		var to_add:String = "_host"
@@ -281,8 +283,8 @@ func _execute_card(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->voi
 	card_to_use._apply(pos_x,pos_y,is_black,self)
 	_start_turn()
 
-
 func _disconnect(id:int)->void:
+	SoundManager._play_sfx("Error")
 	print(id," is disconnected")
 	_reset_global()
 	remove_child(m_player)
@@ -291,7 +293,6 @@ func _disconnect(id:int)->void:
 	$UI_related/UI/bottom_box/Play/BlackKing.hide()
 	$UI_related/UI/bottom_box/Play/WhiteKing.hide()
 	
-
 func _reset_board()->void:
 	var tilemap:TileMapLayer = piece_manager.tilemap
 	for y:int in range(-10,6):

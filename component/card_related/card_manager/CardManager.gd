@@ -57,12 +57,14 @@ func _update_display(index:int)->void:
 	
 	
 func _discard_card(index:int)->void:
+	SoundManager._play_sfx("Click")
 	current_card.remove_at(index)
 	current_energy += 1
 	_update_card()
 	
 	
 func _use_card(index:int)->void:
+	SoundManager._play_sfx("Click")
 	current_queued_card = current_card[index]
 	if current_queued_card is AddMovementCard:
 		get_tree().current_scene.piece_manager._add_shader_to_piece(MouvRef.could_be_selected_shader)

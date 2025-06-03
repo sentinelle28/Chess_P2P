@@ -31,7 +31,9 @@ func _reset()->void:
 	to_delete.clear()
 	
 func _update_pos(index:int,value:Vector2i,do_emit_signal:bool)->void:
+	SoundManager._play_sfx("MovePiece")
 	if do_emit_signal:
+		SoundManager._play_sfx("TookPiece")
 		EventListenner.emit_signal("PieceMov",array_pos[index],value,index)
 	#check if there has been a kill
 	if value in array_pos and value != array_pos[index]:
