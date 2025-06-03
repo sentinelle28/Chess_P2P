@@ -1,11 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://ghna3yk7xeel"]
+[gd_scene load_steps=8 format=3 uid="uid://ghna3yk7xeel"]
 
 [ext_resource type="AudioStream" uid="uid://dx05vkf8lpg0p" path="res://asset/audio/music/loopmusic.ogg" id="1_jsm5y"]
 [ext_resource type="Script" uid="uid://cnnhkc4p2wfsg" path="res://autoload/stocker/sound_manager.gd" id="2_65cx2"]
+[ext_resource type="AudioStream" uid="uid://urayahmo860w" path="res://asset/audio/sfx/Click.tres" id="3_sf84v"]
+[ext_resource type="AudioStream" uid="uid://jrn3i5ivrb0n" path="res://asset/audio/sfx/Error.tres" id="4_44k83"]
+[ext_resource type="AudioStream" uid="uid://bglh32mj135t6" path="res://asset/audio/sfx/TookPiece.tres" id="5_nnaee"]
+[ext_resource type="AudioStream" uid="uid://cjl13dea54jfb" path="res://asset/audio/sfx/UseCard.tres" id="6_vfqqt"]
+[ext_resource type="AudioStream" uid="uid://beqmnwpmalvad" path="res://asset/audio/sfx/Reset.tres" id="7_f76ye"]
 
 [node name="SoundManager" type="AudioStreamPlayer"]
 stream = ExtResource("1_jsm5y")
 autoplay = true
 script = ExtResource("2_65cx2")
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_sf84v")
+volume_db = -20.0
+bus = &"Sfx"
+
+[node name="Error" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_44k83")
+bus = &"Sfx"
+
+[node name="TookPiece" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_nnaee")
+bus = &"Sfx"
+
+[node name="UseCard" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_vfqqt")
+bus = &"Sfx"
+
+[node name="Reset" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_f76ye")
+bus = &"Sfx"
 
 [connection signal="finished" from="." to="." method="_on_finished"]

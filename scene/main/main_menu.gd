@@ -16,14 +16,17 @@ func _on_play_lan_pressed() -> void:
 	_change_scene()
 
 func _change_scene()->void:
+	SoundManager._play_sfx("Click")
 	get_tree().change_scene_to_file("res://scene/gameplay_scene/gameplay.tscn")
 
 
 func _on_setting_button_pressed() -> void:
+	SoundManager._play_sfx("Click")
 	main_menu.hide()
 	setting_menu.show()
 
 func _on_quit_setting_pressed() -> void:
+	SoundManager._play_sfx("Click")
 	main_menu.show()
 	setting_menu.hide()
 
@@ -34,8 +37,12 @@ func _on_main_music_slider_drag_ended(value_changed: bool) -> void:
 		var rap:float = new_value/100.0
 		GameSettings.volume = (GameSettings.MIN_DB) * (1.-rap)
 		SoundManager._set_main_sound_level()
-
+		SoundManager._play_sfx("UseCard")
 
 func _on_sfx_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:
-		pass
+		var new_value:float = sfx_music_bar.value
+		var rap:float = new_value/100.0
+		GameSettings.sfx_volume = (GameSettings.SFX_MIN_DB) * (1.- rap)
+		SoundManager._set_sfx_sound_level()
+		SoundManager._play_sfx("UseCard")

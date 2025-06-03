@@ -15,6 +15,10 @@ run/main_scene="uid://crkrqkgyirce"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://asset/godot_assset/bus/default_bus_layout.tres"
+
 [autoload]
 
 MouvRef="*res://autoload/ref/flywheight_mouv/MouvRef.gd"
@@ -29,6 +33,10 @@ SoundManager="*res://autoload/stocker/SoundManager.tscn"
 
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_sfxr/plugin.cfg")
 
 [input]
 
