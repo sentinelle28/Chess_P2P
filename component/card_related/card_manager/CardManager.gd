@@ -31,25 +31,15 @@ func _update_card()->void:
 		else:
 			get_child(i).hide()
 	progress_bar.value = current_energy
-	if len(current_card) == 3 and not has_resized:
-		has_resized = true
-		for i:int in range(3):
-			var card:CardHolder = get_child(i)
-			card.use_button.add_theme_font_size_override("resized",16)
-			card.discard_button.add_theme_font_size_override("resized",16)
-	elif len(current_card) != 3 and has_resized:
-		has_resized = false
-		for i:int in range(3):
-			var card:CardHolder = get_child(i)
-			card.use_button.remove_theme_font_size_override("resized")
-			card.discard_button.remove_theme_font_size_override("resized")
 	
 func _show_use_button(index:int)->void:
+	
 	if current_card[index].get_cost() <= current_energy:
 		var child:CardHolder = get_child(index)
 		var button:Button = child.get_node("VBoxContainer/Action_Bar/Use")
 		button.show()
 		button.text = "Use (" + str(current_card[index].get_cost()) + ")"
+	
 		
 func _update_display(index:int)->void:
 	var card:CardHolder = get_child(index)

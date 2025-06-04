@@ -26,12 +26,14 @@ func _mouse_off()->void:
 	
 	
 func _discard()->void:
-	emit_signal("discard",self_index)
 	use_button.hide()
+	emit_signal("discard",self_index)
+	
 	
 func _use()->void:
-	emit_signal("use",self_index)
 	use_button.hide()
+	emit_signal("use",self_index)
+	
 	
 func _change_card(card:CardStrategyPattern)->void:
 	_change_descrition(card.get_description())
