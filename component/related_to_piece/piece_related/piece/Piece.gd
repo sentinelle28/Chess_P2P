@@ -3,14 +3,23 @@ class_name Piece
 @export var mouvement_option:Array[int]
 @export var rank_of_the_piece:int = 0
 @export var is_black:bool = true
-@export var image_to_load:Texture2D
+
+@onready var sprite:Sprite2D = get_node("Sprite2D")
+
 var is_selected:bool = false
 
 func _ready() -> void:
-	var sprite:Sprite2D = get_node("Sprite2D")
-	sprite.texture = image_to_load
 	sprite.hframes = 6
 	sprite.frame_coords.x = rank_of_the_piece
+	if is_black:
+		_change_texture(MouvRef.black_piece_ref)
+	else:
+		_change_texture(MouvRef.white_piece_ref)
+	
+	
+func _change_texture(textr:Texture2D)->void:
+	sprite.texture = textr
+	
 
 func get_possible_mouvement()->Array[Vector2i]:
 	var array:Array[Vector2i] = []
@@ -45,10 +54,8 @@ func _draw() -> void:
 			draw_circle(possible_pos*20,5,Color.GRAY,true)
 
 func _add_shader(shader:Shader)->void:
-	var sprite:Sprite2D = get_node("Sprite2D")
 	sprite.material = ShaderMaterial.new()
 	sprite.material.shader = shader
 	
 func _remove_shader()->void:
-	var sprite:Sprite2D = get_node("Sprite2D")
 	sprite.material = null

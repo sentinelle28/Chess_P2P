@@ -479,178 +479,146 @@ metadata/_custom_type_script = "uid://eu4sjlhoqwpp"
 [node name="BlackKing" parent="PieceManager" instance=ExtResource("5_2l5nx")]
 position = Vector2(560, 432)
 scale = Vector2(1.6, 1.6)
-image_to_load = ExtResource("6_bu0yp")
 
 [node name="BlackQueen" parent="PieceManager" instance=ExtResource("7_2kjuw")]
 position = Vector2(592, 432)
 scale = Vector2(1.6, 1.6)
-image_to_load = ExtResource("6_bu0yp")
 
 [node name="BlackBeashop" parent="PieceManager" instance=ExtResource("8_dr73f")]
 position = Vector2(528, 432)
 scale = Vector2(1.6, 1.6)
-image_to_load = ExtResource("6_bu0yp")
 
 [node name="BlackBeashop2" parent="PieceManager" instance=ExtResource("8_dr73f")]
 position = Vector2(624, 432)
 scale = Vector2(1.6, 1.6)
-image_to_load = ExtResource("6_bu0yp")
 
 [node name="BlackKnight" parent="PieceManager" instance=ExtResource("9_slw4p")]
 position = Vector2(496, 432)
 scale = Vector2(1.6, 1.6)
-image_to_load = ExtResource("6_bu0yp")
 
 [node name="BlackKnight2" parent="PieceManager" instance=ExtResource("9_slw4p")]
 position = Vector2(656, 432)
 scale = Vector2(1.6, 1.6)
-image_to_load = ExtResource("6_bu0yp")
 
 [node name="BlackRook" parent="PieceManager" instance=ExtResource("10_jt474")]
 position = Vector2(464, 432)
 scale = Vector2(1.6, 1.6)
-image_to_load = ExtResource("6_bu0yp")
 
 [node name="BlackRook2" parent="PieceManager" instance=ExtResource("10_jt474")]
 position = Vector2(688, 432)
 scale = Vector2(1.6, 1.6)
-image_to_load = ExtResource("6_bu0yp")
 
 [node name="BlackPawn" parent="PieceManager" instance=ExtResource("11_qx00v")]
 position = Vector2(464, 400)
 scale = Vector2(1.6, 1.6)
-image_to_load = ExtResource("6_bu0yp")
 
 [node name="BlackPawn2" parent="PieceManager" instance=ExtResource("11_qx00v")]
 position = Vector2(496, 400)
 scale = Vector2(1.6, 1.6)
-image_to_load = ExtResource("6_bu0yp")
 
 [node name="BlackPawn3" parent="PieceManager" instance=ExtResource("11_qx00v")]
 position = Vector2(528, 400)
 scale = Vector2(1.6, 1.6)
-image_to_load = ExtResource("6_bu0yp")
 
 [node name="BlackPawn4" parent="PieceManager" instance=ExtResource("11_qx00v")]
 position = Vector2(560, 400)
 scale = Vector2(1.6, 1.6)
-image_to_load = ExtResource("6_bu0yp")
 
 [node name="BlackPawn5" parent="PieceManager" instance=ExtResource("11_qx00v")]
 position = Vector2(592, 400)
 scale = Vector2(1.6, 1.6)
-image_to_load = ExtResource("6_bu0yp")
 
 [node name="BlackPawn6" parent="PieceManager" instance=ExtResource("11_qx00v")]
 position = Vector2(624, 400)
 scale = Vector2(1.6, 1.6)
-image_to_load = ExtResource("6_bu0yp")
 
 [node name="BlackPawn7" parent="PieceManager" instance=ExtResource("11_qx00v")]
 position = Vector2(656, 400)
 scale = Vector2(1.6, 1.6)
-image_to_load = ExtResource("6_bu0yp")
 
 [node name="BlackPawn8" parent="PieceManager" instance=ExtResource("11_qx00v")]
 position = Vector2(688, 400)
 scale = Vector2(1.6, 1.6)
-image_to_load = ExtResource("6_bu0yp")
 
 [node name="WhiteKing" parent="PieceManager" instance=ExtResource("5_2l5nx")]
 position = Vector2(592, 208)
 scale = Vector2(1.6, 1.6)
 is_black = false
-image_to_load = ExtResource("12_aje2a")
 
 [node name="WhiteQueen" parent="PieceManager" instance=ExtResource("7_2kjuw")]
 position = Vector2(560, 208)
 scale = Vector2(1.6, 1.6)
 is_black = false
-image_to_load = ExtResource("12_aje2a")
 
 [node name="WhiteBeashop" parent="PieceManager" instance=ExtResource("8_dr73f")]
 position = Vector2(528, 208)
 scale = Vector2(1.6, 1.6)
 is_black = false
-image_to_load = ExtResource("12_aje2a")
 
 [node name="WhiteBeashop2" parent="PieceManager" instance=ExtResource("8_dr73f")]
 position = Vector2(624, 208)
 scale = Vector2(1.6, 1.6)
 is_black = false
-image_to_load = ExtResource("12_aje2a")
 
 [node name="WhiteKnight" parent="PieceManager" instance=ExtResource("9_slw4p")]
 position = Vector2(496, 208)
 scale = Vector2(1.6, 1.6)
 is_black = false
-image_to_load = ExtResource("12_aje2a")
 
 [node name="WhiteKnight2" parent="PieceManager" instance=ExtResource("9_slw4p")]
 position = Vector2(656, 208)
 scale = Vector2(1.6, 1.6)
 is_black = false
-image_to_load = ExtResource("12_aje2a")
 
 [node name="WhiteRook" parent="PieceManager" instance=ExtResource("10_jt474")]
 position = Vector2(464, 208)
 scale = Vector2(1.6, 1.6)
 is_black = false
-image_to_load = ExtResource("12_aje2a")
 
 [node name="WhiteRook2" parent="PieceManager" instance=ExtResource("10_jt474")]
 position = Vector2(688, 208)
 scale = Vector2(1.6, 1.6)
 is_black = false
-image_to_load = ExtResource("12_aje2a")
 
 [node name="WhitePawn" parent="PieceManager" instance=ExtResource("11_qx00v")]
 position = Vector2(464, 240)
 scale = Vector2(1.6, 1.6)
 is_black = false
-image_to_load = ExtResource("12_aje2a")
 
 [node name="WhitePawn2" parent="PieceManager" instance=ExtResource("11_qx00v")]
 position = Vector2(496, 240)
 scale = Vector2(1.6, 1.6)
 is_black = false
-image_to_load = ExtResource("12_aje2a")
 
 [node name="WhitePawn3" parent="PieceManager" instance=ExtResource("11_qx00v")]
 position = Vector2(528, 240)
 scale = Vector2(1.6, 1.6)
 is_black = false
-image_to_load = ExtResource("12_aje2a")
 
 [node name="WhitePawn4" parent="PieceManager" instance=ExtResource("11_qx00v")]
 position = Vector2(560, 240)
 scale = Vector2(1.6, 1.6)
 is_black = false
-image_to_load = ExtResource("12_aje2a")
 
 [node name="WhitePawn5" parent="PieceManager" instance=ExtResource("11_qx00v")]
 position = Vector2(592, 240)
 scale = Vector2(1.6, 1.6)
 is_black = false
-image_to_load = ExtResource("12_aje2a")
 
 [node name="WhitePawn6" parent="PieceManager" instance=ExtResource("11_qx00v")]
 position = Vector2(624, 240)
 scale = Vector2(1.6, 1.6)
 is_black = false
-image_to_load = ExtResource("12_aje2a")
 
 [node name="WhitePawn7" parent="PieceManager" instance=ExtResource("11_qx00v")]
 position = Vector2(656, 240)
 scale = Vector2(1.6, 1.6)
 is_black = false
-image_to_load = ExtResource("12_aje2a")
 
 [node name="WhitePawn8" parent="PieceManager" instance=ExtResource("11_qx00v")]
 position = Vector2(688, 240)
 scale = Vector2(1.6, 1.6)
 is_black = false
-image_to_load = ExtResource("12_aje2a")
 
 [connection signal="pressed" from="UI_related/ui/VBoxContainer/Control/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="UI_related/ui/VBoxContainer/Control/Host" to="." method="_on_host_pressed"]
