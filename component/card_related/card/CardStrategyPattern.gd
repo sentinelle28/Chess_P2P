@@ -27,3 +27,8 @@ func _custom_reverse(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScen
 	pass
 	
 	
+func _do_reverse_not_activatable(gameplay:GameplayScene)->void:
+	gameplay.card_anim.hide()
+	gameplay._do_consequence()
+	SoundManager._play_sfx("Error")
+	print("couldn't use card: ",get_card_name())

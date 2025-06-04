@@ -42,6 +42,9 @@ func _apply(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScene)->void:
 				_destroy(pos + posi,tilemap)
 				if num_to_destroy <= 0:
 					break
+					
+	if num_to_destroy == get_num_to_destroy():
+		_do_reverse_not_activatable(gameplay_scene)
 	
 func _destroy(pos:Vector2i,tilemap:TileMapLayer)->void:
 	tilemap.set_cell(pos,0,Vector2i(-1,-1))

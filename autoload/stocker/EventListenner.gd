@@ -22,6 +22,12 @@ func _reset_consequence()->void:
 	consequences.clear()
 	
 func _add_card_consequence(CardIndex:int,pos:Vector2i,is_black:bool)->void:
+	var consequence:CardConsequence = CardConsequence.new()
+	consequence.card_index = CardIndex
+	consequence.pos = pos
+	consequence.is_black = is_black
+	_add_consequence(consequence)
+	
 	print("use ",CardLib.array_of_card[CardIndex].get_card_name()," on tile ",pos)
 	#_add_action
 	var c_action:CardAction = CardAction.new()
@@ -32,11 +38,7 @@ func _add_card_consequence(CardIndex:int,pos:Vector2i,is_black:bool)->void:
 	#execute action
 	action._do_action(get_tree().current_scene)
 	
-	var consequence:CardConsequence = CardConsequence.new()
-	consequence.card_index = CardIndex
-	consequence.pos = pos
-	consequence.is_black = is_black
-	_add_consequence(consequence)
+	
 	
 	
 func _add_consequence(consequence:Consequence)->void:
@@ -52,6 +54,12 @@ func _add_piece_taken_consequence(index_of_the_victime:int,pos_of_the_victime:Ve
 	print(index_of_the_victime," got taken at pos:",pos_of_the_victime)
 	
 func _add_movement_consequence(from:Vector2i,to:Vector2i,who:int)->void:
+	#mouv consequences
+	var new_consequence:MouvConsequence = MouvConsequence.new()
+	new_consequence.index = who
+	new_consequence.previous_pos = from
+	_add_consequence(new_consequence)
+	
 	#describe action
 	var new_action:MouvAction = MouvAction.new()
 	new_action.new_pos = to
@@ -60,11 +68,7 @@ func _add_movement_consequence(from:Vector2i,to:Vector2i,who:int)->void:
 	print(is_multiplayer_authority())
 	print(who," moves from: ",from," to: ",to)
 	
-	#mouv consequences
-	var new_consequence:MouvConsequence = MouvConsequence.new()
-	new_consequence.index = who
-	new_consequence.previous_pos = from
-	_add_consequence(new_consequence)
+	
 	
 func _reset_action()->void:
 	action = null

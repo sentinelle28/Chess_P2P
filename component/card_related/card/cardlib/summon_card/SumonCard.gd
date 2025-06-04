@@ -33,7 +33,10 @@ func _summon_range(pos:Vector2i,gameplay_scene:GameplayScene,is_black:bool)->voi
 						break
 			if left_to_summon <= 0:
 				break
-					
+				
+	if left_to_summon == get_num_to_summon():
+		_do_reverse_not_activatable(gameplay_scene)
+
 func _summon(pos:Vector2i,is_black:bool,gameplay:GameplayScene)->void:
 	var piece:Piece = SummonCardLib.get_piece(get_piece_to_summon(),is_black)
 	gameplay.piece_manager._add_piece(piece,pos)

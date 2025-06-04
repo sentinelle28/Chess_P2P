@@ -78,14 +78,17 @@ func _send_card(pos:Vector2i,is_black:bool)->void:
 	var true_pos:Vector2 = gameplay.piece_manager.get_map_pos(pos)
 	var size_of_card:Vector2 = get_child(0).size
 	gameplay.card_anim._do_animation(true_pos,current_queued_card,size_of_card)
-	
-	EventListenner.emit_signal("UseCard",current_queued_card.index,pos,is_black)
+	#temp destroy thingy
+	var temp:CardStrategyPattern = current_queued_card
 	current_card.erase(current_queued_card)
 	current_queued_card = null
+	EventListenner.emit_signal("UseCard",temp.index,pos,is_black)
+	
 
 
 func _spend_energy(energy_to_spend:int)->void:
 	current_energy -= energy_to_spend
+	print("spent ", energy_to_spend," to use card")
 
 func _reset()->void:
 	has_resized = false
