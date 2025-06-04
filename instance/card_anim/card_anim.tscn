@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bqgl1b3cjfk8o"]
+[gd_scene load_steps=10 format=3 uid="uid://bqgl1b3cjfk8o"]
 
 [ext_resource type="Theme" uid="uid://b2q3onm83mnx3" path="res://asset/godot_assset/theme/PanelTheme.tres" id="1_itpgr"]
 [ext_resource type="Theme" uid="uid://bwa84tjmfm4v8" path="res://asset/godot_assset/theme/ResetButtonTheme.tres" id="2_6vvyk"]
 [ext_resource type="Script" uid="uid://bufjnt0j4oscu" path="res://instance/card_anim/card_anim.gd" id="2_txod4"]
 [ext_resource type="Theme" uid="uid://4sllni2xg00e" path="res://asset/godot_assset/theme/ValidateButtonTheme.tres" id="3_txod4"]
-[ext_resource type="Shader" uid="uid://dvbmt34mg7pcn" path="res://asset/godot_assset/shader/UseCardShader.gdshader" id="5_txod4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6vvyk"]
 
@@ -16,31 +15,31 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
+tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:visible")
+tracks/2/path = NodePath("CPUParticles2D:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -52,42 +51,42 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_6vvyk"]
 resource_name = "UseCard"
-length = 2.0
+length = 1.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [null, ExtResource("5_txod4"), null]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.4, 2),
+"times": PackedFloat32Array(0, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(2),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.2),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_txod4"]
@@ -146,3 +145,27 @@ text = "Use (2)"
 libraries = {
 &"": SubResource("AnimationLibrary_txod4")
 }
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(130.509, 96.1646)
+emitting = false
+amount = 16
+one_shot = true
+speed_scale = 1.58
+emission_shape = 1
+emission_sphere_radius = 2.92
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 700.0
+angular_velocity_min = -86.49
+angular_velocity_max = 151.35
+orbit_velocity_min = -120.12
+orbit_velocity_max = 108.11
+linear_accel_max = 51.05
+radial_accel_max = 2.0
+tangential_accel_max = 6.01
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 10.0
+scale_amount_max = 20.0
+color = Color(0.894922, 0.894922, 0.894922, 1)
