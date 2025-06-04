@@ -14,6 +14,15 @@ signal use(index:int)
 func _ready() -> void:
 	discard_button.connect("pressed",_discard)
 	use_button.connect("pressed",_use)
+	connect("mouse_entered",_mouse_on)
+	connect("mouse_exited",_mouse_off)
+	material = ShaderMaterial.new()
+	
+func _mouse_on()->void:
+	material.shader = MouvRef.pre_shader
+	
+func _mouse_off()->void:
+	material.shader = null
 	
 	
 func _discard()->void:
