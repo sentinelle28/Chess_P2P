@@ -6,8 +6,8 @@ func _apply(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScene)->void:
 	var piece_manager:PieceManager = gameplay_scene.piece_manager
 	var piece:int = piece_manager.array_pos.find(pos)
 	if piece != -1:
-		if not "King" in piece_manager.get_child(piece):
-			var instance_piece:Piece = piece_manager.get_child(piece)
+		var instance_piece:Piece = piece_manager.get_child(piece)
+		if instance_piece.rank_of_the_piece != 5:
 			instance_piece.is_black = is_black
 			instance_piece._change_texture()
 		else:
