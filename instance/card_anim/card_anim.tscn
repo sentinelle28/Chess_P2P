@@ -1,11 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqgl1b3cjfk8o"]
+[gd_scene load_steps=13 format=3 uid="uid://bqgl1b3cjfk8o"]
 
 [ext_resource type="Theme" uid="uid://b2q3onm83mnx3" path="res://asset/godot_assset/theme/PanelTheme.tres" id="1_itpgr"]
+[ext_resource type="Shader" uid="uid://7hc0x6dfpbqb" path="res://asset/godot_assset/shader/DisolveShader.gdshader" id="1_txod4"]
 [ext_resource type="Theme" uid="uid://bwa84tjmfm4v8" path="res://asset/godot_assset/theme/ResetButtonTheme.tres" id="2_6vvyk"]
 [ext_resource type="Script" uid="uid://bufjnt0j4oscu" path="res://instance/card_anim/card_anim.gd" id="2_txod4"]
 [ext_resource type="Theme" uid="uid://4sllni2xg00e" path="res://asset/godot_assset/theme/ValidateButtonTheme.tres" id="3_txod4"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qse8f"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_142v7"]
+noise = SubResource("FastNoiseLite_qse8f")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6vvyk"]
+shader = ExtResource("1_txod4")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_142v7")
+shader_parameter/dissolve_value = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_qse8f"]
 font_size = 20
@@ -48,10 +57,22 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:material:shader_parameter/dissolve_value")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
 
 [sub_resource type="Animation" id="Animation_6vvyk"]
 resource_name = "UseCard"
-length = 1.2
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -59,7 +80,7 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.9, 1.2),
+"times": PackedFloat32Array(0, 1.4, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -71,7 +92,7 @@ tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1.2),
+"times": PackedFloat32Array(2),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -87,6 +108,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:material:shader_parameter/dissolve_value")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_txod4"]
