@@ -11,14 +11,14 @@ var is_selected:bool = false
 func _ready() -> void:
 	sprite.hframes = 6
 	sprite.frame_coords.x = rank_of_the_piece
+	_change_texture()
+	
+	
+func _change_texture()->void:
 	if is_black:
-		_change_texture(MouvRef.black_piece_ref)
+		sprite.texture = MouvRef.black_piece_ref
 	else:
-		_change_texture(MouvRef.white_piece_ref)
-	
-	
-func _change_texture(textr:Texture2D)->void:
-	sprite.texture = textr
+		sprite.texture = MouvRef.white_piece_ref
 	
 
 func get_possible_mouvement()->Array[Vector2i]:
