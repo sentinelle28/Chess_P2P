@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://chpp6u6l8c72o"]
+[gd_scene load_steps=30 format=4 uid="uid://chpp6u6l8c72o"]
 
 [ext_resource type="Script" uid="uid://cyyr26uacur4g" path="res://scene/gameplay_scene/gameplay.gd" id="1_tfltx"]
 [ext_resource type="PackedScene" uid="uid://djpfvvn6vm40b" path="res://instance/player_instance/mouse.tscn" id="2_agxrv"]
@@ -37,6 +37,8 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fixwg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slw4p"]
 bg_color = Color(0, 0, 0, 1)
@@ -187,6 +189,7 @@ metadata/_custom_type_script = "uid://df1g4lj0cq1bv"
 
 [node name="Card" type="Panel" parent="UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager"]
 visible = false
+material = SubResource("ShaderMaterial_fixwg")
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("8_lcphj")
