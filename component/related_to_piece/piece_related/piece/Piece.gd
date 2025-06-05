@@ -16,9 +16,9 @@ func _ready() -> void:
 	
 func _change_texture()->void:
 	if is_black:
-		sprite.texture = MouvRef.black_piece_ref
+		sprite.texture = ThemeRef.black_piece_ref
 	else:
-		sprite.texture = MouvRef.white_piece_ref
+		sprite.texture = ThemeRef.white_piece_ref
 	
 
 func get_possible_mouvement()->Array[Vector2i]:

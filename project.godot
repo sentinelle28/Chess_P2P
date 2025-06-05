@@ -28,6 +28,7 @@ CardLib="*res://autoload/ref/Card_lib/CardLib.gd"
 GameSettings="*res://autoload/Setting/Settings.gd"
 SummonCardLib="*res://autoload/ref/Card_lib/SummonCardLib.gd"
 SoundManager="*res://autoload/stocker/SoundManager.tscn"
+ThemeRef="*res://autoload/ref/ThemeRef.gd"
 
 [display]
 

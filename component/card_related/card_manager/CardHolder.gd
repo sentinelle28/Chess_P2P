@@ -19,7 +19,7 @@ func _ready() -> void:
 	material = ShaderMaterial.new()
 	
 func _mouse_on()->void:
-	material.shader = MouvRef.pre_shader
+	material.shader = ThemeRef.pre_shader
 	
 func _mouse_off()->void:
 	material.shader = null

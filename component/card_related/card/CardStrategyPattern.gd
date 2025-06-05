@@ -3,6 +3,10 @@ class_name CardStrategyPattern
 
 var index:int = 0
 
+func get_rarity()->int:
+	return 1 #1 to 5
+
+
 func get_card_name()->String:
 	return "Template"
 	

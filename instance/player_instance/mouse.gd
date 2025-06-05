@@ -64,7 +64,7 @@ func _on_area_entered(area: Area2D) -> void:
 			last_selected_piece.is_selected = true
 			last_selected_piece.z_index = 2
 			last_selected_piece.queue_redraw()
-			last_selected_piece._add_shader(MouvRef.pre_shader)
+			last_selected_piece._add_shader(ThemeRef.pre_shader)
 
 func _on_area_exited(area: Area2D) -> void:
 	if area is Piece and (not is_lock_on_piece) and (not is_queued_for_card):

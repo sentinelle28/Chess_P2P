@@ -25,15 +25,20 @@ func _update_card()->void:
 	progress_bar.show()
 	for i:int in range(3):
 		if len(current_card) >= i+1:
-			get_child(i).show()
+			_show_card_rarity(i)
 			_update_display(i)
 			_show_use_button(i)
 		else:
 			get_child(i).hide()
 	progress_bar.value = current_energy
 	
-func _show_use_button(index:int)->void:
+func _show_card_rarity(index:int)->void:
+	var card_holder:CardHolder = get_child(index)
+	card_holder.show()
 	
+	
+	
+func _show_use_button(index:int)->void:
 	if current_card[index].get_cost() <= current_energy:
 		var child:CardHolder = get_child(index)
 		var button:Button = child.get_node("VBoxContainer/Action_Bar/Use")
@@ -57,7 +62,7 @@ func _use_card(index:int)->void:
 	SoundManager._play_sfx("Click")
 	current_queued_card = current_card[index]
 	if current_queued_card is AddMovementCard:
-		get_tree().current_scene.piece_manager._add_shader_to_piece(MouvRef.could_be_selected_shader)
+		get_tree().current_scene.piece_manager._add_shader_to_piece(ThemeRef.could_be_selected_shader)
 	
 	emit_signal("CardQeued")
 	
