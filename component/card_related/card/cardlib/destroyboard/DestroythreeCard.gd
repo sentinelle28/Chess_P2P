@@ -10,3 +10,5 @@ func get_card_name()->String:
 func get_description()->String:
 	return "Destroy 3 board tile"
 	
+func get_rarity()->int:
+	return 3 #1 to 5

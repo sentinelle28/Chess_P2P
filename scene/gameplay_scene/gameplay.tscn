@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://chpp6u6l8c72o"]
+[gd_scene load_steps=29 format=4 uid="uid://chpp6u6l8c72o"]
 
 [ext_resource type="Script" uid="uid://cyyr26uacur4g" path="res://scene/gameplay_scene/gameplay.gd" id="1_tfltx"]
 [ext_resource type="PackedScene" uid="uid://djpfvvn6vm40b" path="res://instance/player_instance/mouse.tscn" id="2_agxrv"]
@@ -14,6 +14,7 @@
 [ext_resource type="LabelSettings" uid="uid://c2r1t5dko1l2p" path="res://asset/godot_assset/font/DescriptionFont.tres" id="8_225mg"]
 [ext_resource type="Theme" uid="uid://bwa84tjmfm4v8" path="res://asset/godot_assset/theme/ResetButtonTheme.tres" id="8_aje2a"]
 [ext_resource type="PackedScene" uid="uid://cprhdkq3mjwqu" path="res://instance/piece_instance/Piece_lib/beashop.tscn" id="8_dr73f"]
+[ext_resource type="Theme" uid="uid://drlqg2146f8o7" path="res://asset/godot_assset/theme/card_theme/GlobalCardTheme.tres" id="8_lcphj"]
 [ext_resource type="Theme" uid="uid://4sllni2xg00e" path="res://asset/godot_assset/theme/ValidateButtonTheme.tres" id="9_225mg"]
 [ext_resource type="PackedScene" uid="uid://dxgqf6ymiu05x" path="res://instance/piece_instance/Piece_lib/knight.tscn" id="9_slw4p"]
 [ext_resource type="PackedScene" uid="uid://yrvgyml4s8un" path="res://instance/piece_instance/Piece_lib/rook.tscn" id="10_jt474"]
@@ -188,6 +189,7 @@ metadata/_custom_type_script = "uid://df1g4lj0cq1bv"
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("8_lcphj")
 script = ExtResource("5_dr73f")
 metadata/_custom_type_script = "uid://2ar7rvy5cxeg"
 
@@ -246,6 +248,7 @@ text = "Use"
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("8_lcphj")
 script = ExtResource("5_dr73f")
 metadata/_custom_type_script = "uid://2ar7rvy5cxeg"
 
@@ -304,6 +307,7 @@ text = "Use"
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("8_lcphj")
 script = ExtResource("5_dr73f")
 metadata/_custom_type_script = "uid://2ar7rvy5cxeg"
 

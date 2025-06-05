@@ -11,3 +11,6 @@ func get_description()->String:
 
 func get_mouv_to_add()->int:
 	return 1
+
+func get_rarity()->int:
+	return 1 #1 to 5

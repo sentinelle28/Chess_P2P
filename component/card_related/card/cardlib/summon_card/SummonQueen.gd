@@ -13,3 +13,6 @@ func get_piece_to_summon()->int:
 	
 func get_num_to_summon()->int:
 	return 1
+
+func get_rarity()->int:
+	return 3 #1 to 5

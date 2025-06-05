@@ -30,3 +30,6 @@ func get_card_name()->String:
 	
 func get_description()->String:
 	return "Change a piece color if it's not a king"
+	
+func get_rarity()->int:
+	return 4 #1 to 5

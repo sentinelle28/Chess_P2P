@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://drlqg2146f8o7"]
+
+[ext_resource type="StyleBox" uid="uid://donh3lil66ss2" path="res://asset/godot_assset/theme/card_theme/Epic.tres" id="1_ji48n"]
+[ext_resource type="StyleBox" uid="uid://brsn48yka4s74" path="res://asset/godot_assset/theme/card_theme/Legendary.tres" id="2_ie7yg"]
+[ext_resource type="StyleBox" uid="uid://3i2vw2g2ngfl" path="res://asset/godot_assset/theme/card_theme/CommonCard.tres" id="3_432p2"]
+[ext_resource type="StyleBox" uid="uid://b03nal1e5r4jg" path="res://asset/godot_assset/theme/card_theme/Rare.tres" id="4_mx3wp"]
+[ext_resource type="StyleBox" uid="uid://dhw3mrev4h4ny" path="res://asset/godot_assset/theme/card_theme/Uncommon.tres" id="5_2pxn6"]
+
+[resource]
+Panel/styles/epic = ExtResource("1_ji48n")
+Panel/styles/legendary = ExtResource("2_ie7yg")
+Panel/styles/panel = ExtResource("3_432p2")
+Panel/styles/rare = ExtResource("4_mx3wp")
+Panel/styles/uncommon = ExtResource("5_2pxn6")

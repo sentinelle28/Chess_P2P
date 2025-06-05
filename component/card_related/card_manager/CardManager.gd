@@ -35,6 +35,14 @@ func _update_card()->void:
 func _show_card_rarity(index:int)->void:
 	var card_holder:CardHolder = get_child(index)
 	card_holder.show()
+	var rarity:int = current_card[index].get_rarity() - 1
+	var to_load:StyleBox
+	if rarity != 0:
+		to_load = card_holder.theme.get_stylebox(ThemeRef.array_of_theme[rarity],"Panel")
+	else:
+		to_load = load("res://asset/godot_assset/theme/card_theme/CommonCard.tres")
+	#which type variation to overwrite then which type of global then the stylebox -> shitty way of doing it
+	card_holder.theme.set_stylebox("panel","Panel",to_load)
 	
 	
 	

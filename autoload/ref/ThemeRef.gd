@@ -1,13 +1,7 @@
 extends Node
 
 
-var array_of_theme:Array[StyleBoxFlat] = [
-	preload("res://asset/godot_assset/theme/card_theme/CommonCard.tres"),
-	preload("res://asset/godot_assset/theme/card_theme/Uncommon.tres"),
-	preload("res://asset/godot_assset/theme/card_theme/Rare.tres"),
-	preload("res://asset/godot_assset/theme/card_theme/Epic.tres"),
-	preload("res://asset/godot_assset/theme/card_theme/Legendary.tres")
-]
+var array_of_theme:Array[String] = ["panel","Uncommon","rare","epic","legendary"]
 
 #shader reference
 var pre_shader:Shader = preload("res://asset/godot_assset/shader/SelectedShader.gdshader")
