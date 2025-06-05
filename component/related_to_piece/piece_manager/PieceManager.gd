@@ -21,14 +21,32 @@ func _reset()->void:
 			var child:Piece = get_child(i)
 			array_pos.append(PosReset.beginning_pos[i])
 			child.global_position = get_map_pos(PosReset.beginning_pos[i])
-			child.show()
-			child.monitorable = true
+			_reset_piece(child)
 		else:
 			# there is too many children
 			to_delete.append(get_child(i))
 	for piece:Piece in to_delete:
 		remove_child(piece)
 	to_delete.clear()
+	
+func _reset_piece(piece:Piece)->void:
+	piece.show()
+	piece.monitorable = true
+	var color:bool = "Black" in piece.name
+	piece.is_black = color
+	var array_of_piece_rank:Array[String] = ["Pawn","Knight","Rook","Beashop","Queen","King"]
+	var current_piece_name:String = piece.name
+	if color:
+		current_piece_name = current_piece_name.split("Black")[1]
+	else:
+		current_piece_name = current_piece_name.split("White")[1]
+		
+	for rank:String in array_of_piece_rank:
+		if rank in current_piece_name:
+			piece.rank_of_the_piece = array_of_piece_rank.find(rank)
+			break
+	
+	
 	
 func _update_pos(index:int,value:Vector2i,do_emit_signal:bool)->void:
 	SoundManager._play_sfx("MovePiece")
