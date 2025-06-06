@@ -10,9 +10,12 @@ var is_selected:bool = false
 
 func _ready() -> void:
 	sprite.hframes = 6
-	sprite.frame_coords.x = rank_of_the_piece
+	_update_frame_coords(rank_of_the_piece)
 	_change_texture()
 	
+	
+func _update_frame_coords(new_coords:int)->void:
+	sprite.frame_coords.x = new_coords
 	
 func _change_texture()->void:
 	if is_black:

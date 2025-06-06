@@ -41,10 +41,7 @@ func _reset_piece(piece:Piece)->void:
 	else:
 		current_piece_name = current_piece_name.split("White")[1]
 		
-	for rank:String in array_of_piece_rank:
-		if rank in current_piece_name:
-			piece.rank_of_the_piece = array_of_piece_rank.find(rank)
-			break
+	piece._update_frame_coords(piece.rank_of_the_piece)
 	
 	
 	
