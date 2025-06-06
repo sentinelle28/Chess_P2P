@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://chpp6u6l8c72o"]
+[gd_scene load_steps=37 format=4 uid="uid://chpp6u6l8c72o"]
 
 [ext_resource type="Script" uid="uid://cyyr26uacur4g" path="res://scene/gameplay_scene/gameplay.gd" id="1_tfltx"]
 [ext_resource type="PackedScene" uid="uid://djpfvvn6vm40b" path="res://instance/player_instance/mouse.tscn" id="2_agxrv"]
@@ -21,6 +21,11 @@
 [ext_resource type="PackedScene" uid="uid://cfjmlv0qpd7l3" path="res://instance/piece_instance/Piece_lib/pawn.tscn" id="11_qx00v"]
 [ext_resource type="PackedScene" uid="uid://bqgl1b3cjfk8o" path="res://instance/card_anim/card_anim.tscn" id="12_0yuk4"]
 [ext_resource type="Texture2D" uid="uid://geqi0bsnmyo3" path="res://asset/visual/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="12_aje2a"]
+[ext_resource type="StyleBox" uid="uid://donh3lil66ss2" path="res://asset/godot_assset/theme/card_theme/Epic.tres" id="13_hrub0"]
+[ext_resource type="StyleBox" uid="uid://brsn48yka4s74" path="res://asset/godot_assset/theme/card_theme/Legendary.tres" id="14_tqrbb"]
+[ext_resource type="StyleBox" uid="uid://3i2vw2g2ngfl" path="res://asset/godot_assset/theme/card_theme/CommonCard.tres" id="15_lwn6k"]
+[ext_resource type="StyleBox" uid="uid://b03nal1e5r4jg" path="res://asset/godot_assset/theme/card_theme/Rare.tres" id="16_6icrv"]
+[ext_resource type="StyleBox" uid="uid://dhw3mrev4h4ny" path="res://asset/godot_assset/theme/card_theme/Uncommon.tres" id="17_j7apr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aje2a"]
 content_margin_left = 2.0
@@ -39,6 +44,20 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fixwg"]
+
+[sub_resource type="Theme" id="Theme_7pstf"]
+Panel/styles/epic = ExtResource("13_hrub0")
+Panel/styles/legendary = ExtResource("14_tqrbb")
+Panel/styles/panel = ExtResource("15_lwn6k")
+Panel/styles/rare = ExtResource("16_6icrv")
+Panel/styles/uncommon = ExtResource("17_j7apr")
+
+[sub_resource type="Theme" id="Theme_m8ipa"]
+Panel/styles/epic = ExtResource("13_hrub0")
+Panel/styles/legendary = ExtResource("14_tqrbb")
+Panel/styles/panel = ExtResource("15_lwn6k")
+Panel/styles/rare = ExtResource("16_6icrv")
+Panel/styles/uncommon = ExtResource("17_j7apr")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slw4p"]
 bg_color = Color(0, 0, 0, 1)
@@ -251,7 +270,7 @@ text = "Use"
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("8_lcphj")
+theme = SubResource("Theme_7pstf")
 script = ExtResource("5_dr73f")
 metadata/_custom_type_script = "uid://2ar7rvy5cxeg"
 
@@ -310,7 +329,7 @@ text = "Use"
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("8_lcphj")
+theme = SubResource("Theme_m8ipa")
 script = ExtResource("5_dr73f")
 metadata/_custom_type_script = "uid://2ar7rvy5cxeg"
 
