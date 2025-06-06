@@ -15,6 +15,8 @@ var m_player:Player
 var is_two:bool = false
 var is_replaying:bool = false
 
+var turn:int = 0
+
 @onready var action_bar:VBoxContainer = $UI_related/UI/bottom_box/action/InMatch
 
 signal NewTurn
@@ -106,6 +108,7 @@ func _reset_global()->void:
 	piece_manager._reset()
 	card_manager._reset()
 	_reset_board()
+	turn = 0
 	
 @rpc("authority","call_remote")
 func _reset_client()->void:
@@ -122,6 +125,8 @@ func _on_start_pressed() -> void:
 		action_bar.visible = is_starting
 		m_player.is_black = is_black
 		m_player.can_play = is_starting
+		if is_starting == true:
+			turn = 1
 		_change_color(is_black)
 		rpc("_start_game", not is_starting, not is_black)
 
@@ -142,6 +147,8 @@ func _start_game(is_starting:bool,is_black:bool)->void:
 	m_player.can_play = is_starting
 	m_player.is_black = is_black
 	_change_color(is_black)
+	if is_starting == true:
+		turn = 1
 
 func _construct_mouv_action(who:int,to_x:int,to_y:int)->void:
 	var new_action:MouvAction = MouvAction.new()
@@ -179,6 +186,7 @@ func _start_turn()->void:
 	#remove possible action
 	EventListenner.action = null
 	print(is_multiplayer_authority()," can play")
+	turn += 1
 	emit_signal("NewTurn")
 
 func _do_consequence()->void:
@@ -313,3 +321,10 @@ func _reset_board()->void:
 						posi = Vector2i(1,0)
 			
 				tilemap.set_cell(new_pos,0,posi)
+
+func get_randint(lower_bound:int,upper_bound:int)->int:
+	var trans_turn:int = (turn%piece_manager.get_child_count())
+	var new_pos:Vector2i = piece_manager.array_pos[trans_turn]
+	var random:RandomNumberGenerator = RandomNumberGenerator.new()
+	random.seed = abs(new_pos.x * 2 - new_pos.y*9) * abs(new_pos.x * 4 - new_pos.y)
+	return random.randi_range(lower_bound,upper_bound)
