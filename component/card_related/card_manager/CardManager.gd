@@ -43,10 +43,6 @@ func _show_card_rarity(index:int)->void:
 		to_load = load("res://asset/godot_assset/theme/card_theme/CommonCard.tres")
 	#which type variation to overwrite then which type of global then the stylebox -> shitty way of doing it
 	card_holder.theme.set_stylebox("panel","Panel",to_load)
-	print(index," is loaded with: ", ThemeRef.array_of_theme[rarity])
-	print("and actually are loaded now with: ", to_load.resource_path)
-	
-	
 	
 func _show_use_button(index:int)->void:
 	if current_card[index].get_cost() <= current_energy:
