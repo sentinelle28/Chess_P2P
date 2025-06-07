@@ -14,7 +14,8 @@ var array_of_card:Array[CardStrategyPattern] = [
 	DestroyThreeCard.new(),
 	DestroynineCard.new(),
 	BetrayalCard.new(),
-	DiguiseCard.new()
+	DiguiseCard.new(),
+	DuplicateCard.new()
 ]
 
 var array_of_rarity:Array[int] = [
@@ -31,7 +32,8 @@ var array_of_rarity:Array[int] = [
 	3, #destroy 3 tile
 	1, #destroy 9 tile
 	3, #betrayal card
-	3 #diguise card
+	3, #diguise card
+	2# duplicate card
 ]
 
 var total:int = 0
