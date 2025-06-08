@@ -15,8 +15,8 @@ func _apply(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScene)->void:
 	var pos:Vector2i = Vector2i(to_x,to_y)
 	var piece_manager:PieceManager = gameplay_scene.piece_manager
 	if pos in piece_manager.array_pos:
-		var index:int = piece_manager.array_pos.find(pos)
-		var to_duplicate:Piece = piece_manager.get_child(index)
+		var c_index:int = piece_manager.array_pos.find(pos)
+		var to_duplicate:Piece = piece_manager.get_child(c_index)
 		if to_duplicate.rank_of_the_piece == 5:
 			_do_reverse_not_activatable(gameplay_scene)
 		else:
@@ -25,13 +25,13 @@ func _apply(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScene)->void:
 			for y:int in range(-1,2):
 				for x:int in range(-1,2):
 					var new_pos:Vector2i = pos + Vector2i(x,y)
-					if tilemap.get_cell_atlas_coords(pos) != Vector2i(-1,-1):
+					if tilemap.get_cell_atlas_coords(new_pos) != Vector2i(-1,-1):
 						possible_spawn_pos.append(Vector2i(x,y))
 			if len(possible_spawn_pos) == 0:
 				_do_reverse_not_activatable(gameplay_scene)
 			else:
-				var maxi:int = len(possible_spawn_pos) - 1
-				var rand:int = gameplay_scene.get_randint(0,maxi)
+				var c_maxi:int = len(possible_spawn_pos) - 1
+				var rand:int = gameplay_scene.get_randint(0,c_maxi)
 				var new_pos:Vector2i = possible_spawn_pos[rand]
 				
 				
@@ -60,7 +60,7 @@ func _custom_reverse(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScen
 			var x:int = i%3 - 1
 			var y:int = i/3 - 1
 			var pos:Vector2i = Vector2i(x+to_x,y+to_y)
-			var index:int = gameplay_scene.piece_manager.array_pos.find(pos)
-			gameplay_scene.piece_manager.remove_child(gameplay_scene.piece_manager.get_child(index))
+			var c_index:int = gameplay_scene.piece_manager.array_pos.find(pos)
+			gameplay_scene.piece_manager.remove_child(gameplay_scene.piece_manager.get_child(c_index))
 			break
 	
