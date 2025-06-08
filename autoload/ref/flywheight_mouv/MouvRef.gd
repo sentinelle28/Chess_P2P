@@ -4,7 +4,8 @@ var array_of_mouv:Array[MouvementOption] = [
 	load("res://instance/mouvement_lib/King.tres"),
 	load("res://instance/mouvement_lib/Knight.tres"),
 	load("res://instance/mouvement_lib/Pawn.tres"),
-	load("res://instance/mouvement_lib/Rook.tres")
+	load("res://instance/mouvement_lib/Rook.tres"),
+	load("res://instance/mouvement_lib/RandomMove.tres")
 ]
 
 

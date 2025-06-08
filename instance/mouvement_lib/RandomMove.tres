@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RandomMouvOption" load_steps=2 format=3 uid="uid://d06djjwxlgf5r"]
+
+[ext_resource type="Script" uid="uid://dgmxd0yhcjkuv" path="res://component/related_to_piece/piece_related/mouvement_component/RandomMoveOption.gd" id="1_b53sq"]
+
+[resource]
+script = ExtResource("1_b53sq")
+pos_array = Array[Vector2i]([])
+metadata/_custom_type_script = "uid://dgmxd0yhcjkuv"
