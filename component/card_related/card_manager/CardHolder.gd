@@ -26,12 +26,10 @@ func _mouse_off()->void:
 	
 	
 func _discard()->void:
-	use_button.hide()
 	emit_signal("discard",self_index)
 	
 	
 func _use()->void:
-	use_button.hide()
 	emit_signal("use",self_index)
 	
 	

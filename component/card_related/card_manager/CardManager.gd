@@ -45,11 +45,13 @@ func _show_card_rarity(index:int)->void:
 	card_holder.theme.set_stylebox("panel","Panel",to_load)
 	
 func _show_use_button(index:int)->void:
+	var child:CardHolder = get_child(index)
+	var button:Button = child.get_node("VBoxContainer/Action_Bar/Use")
 	if current_card[index].get_cost() <= current_energy:
-		var child:CardHolder = get_child(index)
-		var button:Button = child.get_node("VBoxContainer/Action_Bar/Use")
 		button.show()
 		button.text = "Use (" + str(current_card[index].get_cost()) + ")"
+	else:
+		button.hide()
 	
 		
 func _update_display(index:int)->void:
