@@ -2,7 +2,6 @@ extends MouvementOption
 class_name ComputeMouvOption
 
 
-
 func is_in_board(pos:Vector2i,tilemap:TileMapLayer)->bool:
 	return tilemap.get_cell_atlas_coords(pos) != Vector2i(-1,-1)
 	
