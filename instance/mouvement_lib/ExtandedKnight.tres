@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ExtandCompute" load_steps=2 format=3 uid="uid://bexewey5ed1q1"]
+
+[ext_resource type="Script" uid="uid://bn6s0pq28klgv" path="res://component/related_to_piece/piece_related/mouvement_component/ExtandCompute.gd" id="1_a4nlg"]
+
+[resource]
+script = ExtResource("1_a4nlg")
+pos_array = Array[Vector2i]([Vector2i(1, 2), Vector2i(-1, 2), Vector2i(2, 1), Vector2i(2, -1), Vector2i(1, -2), Vector2i(-1, -2), Vector2i(-2, 1), Vector2i(-2, -1)])
+metadata/_custom_type_script = "uid://b8t3sroj4iv3u"
