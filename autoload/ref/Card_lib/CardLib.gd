@@ -43,8 +43,8 @@ var total:int = 0
 func _ready() -> void:
 	for i:int in range(len(array_of_card)):
 		array_of_card[i].index = i
-		array_of_rarity[i] += total
 		total += array_of_rarity[i]
+		array_of_rarity[i] = total
 		
 func get_random_card()->CardStrategyPattern:
 	var random_card:CardStrategyPattern
