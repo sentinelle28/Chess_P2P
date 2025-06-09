@@ -48,12 +48,13 @@ func _reset_piece(piece:Piece)->void:
 func _update_pos(index:int,value:Vector2i,do_emit_signal:bool)->void:
 	SoundManager._play_sfx("MovePiece")
 	if do_emit_signal:
-		SoundManager._play_sfx("TookPiece")
 		EventListenner.emit_signal("PieceMov",array_pos[index],value,index)
 	#check if there has been a kill
 	if value in array_pos and value != array_pos[index]:
 		var index_of_the_victim:int = array_pos.find(value)
-		EventListenner.emit_signal("PieceTaken",index_of_the_victim,array_pos[index_of_the_victim])
+		if do_emit_signal:
+			SoundManager._play_sfx("TookPiece")
+			EventListenner.emit_signal("PieceTaken",index_of_the_victim,array_pos[index_of_the_victim])
 		_make_dead(index_of_the_victim)
 		var piece:Piece = get_child(index_of_the_victim)
 		if "King" in piece.name:
@@ -73,12 +74,14 @@ func get_map_pos(pos:Vector2i)->Vector2:
 func _make_dead(index:int)->void:
 	var child:Piece = get_child(index)
 	child.global_position = get_map_pos(Vector2i(-19,-11))
+	array_pos[index] = Vector2i(-19,-11)
 	child.hide()
 	child.monitorable = false
 	
 func _make_alive(index:int,pos:Vector2i)->void:
 	var child:Piece = get_child(index)
 	child.global_position = get_map_pos(pos)
+	array_pos[index] = pos
 	child.show()
 	child.monitorable = true
 
