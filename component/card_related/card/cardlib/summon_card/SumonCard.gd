@@ -25,8 +25,8 @@ func _summon_range(pos:Vector2i,gameplay_scene:GameplayScene,is_black:bool)->voi
 			for x:int in range(-1,2):
 				var new_pos:Vector2i = pos+Vector2i(x,y)
 				if can_summon(new_pos,tilemap,array_of_piece):
-					var index:int = (x + 1) + (y + 1) * 3 # find index base on pos
-					SummonCardLib.last_summon_array[index] = true
+					var c_index:int = (x + 1) + (y + 1) * 3 # find index base on pos
+					SummonCardLib.last_summon_array[c_index] = true
 					left_to_summon -= 1
 					_summon(new_pos,is_black,gameplay_scene)
 					if left_to_summon <= 0:

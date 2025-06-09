@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="ComputeMouvOption" load_steps=2 format=3 uid="uid://dxl0mcc4teqbw"]
+[gd_resource type="Resource" script_class="ExtandCompute" load_steps=2 format=3 uid="uid://dxl0mcc4teqbw"]
 
-[ext_resource type="Script" uid="uid://khk2br3shwca" path="res://component/related_to_piece/piece_related/mouvement_component/ComputeMouvOption.gd" id="1_jsvp8"]
-
+[ext_resource type="Script" uid="uid://bn6s0pq28klgv" path="res://component/related_to_piece/piece_related/mouvement_component/ExtandCompute.gd" id="1_jsvp8"]
 
 [resource]
 script = ExtResource("1_jsvp8")
