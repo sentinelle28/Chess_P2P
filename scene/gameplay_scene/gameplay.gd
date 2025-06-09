@@ -173,19 +173,19 @@ func _do_action(action:Action)->void:
 	_start_turn()
 
 func _start_turn()->void:
-	EventListenner.consequences.clear()
+	EventListenner._reset_consequence()
 	#allow player to do action
 	action_bar.show()
 	#can play
-	m_player.can_play = true
-	m_player.is_lock_on_piece = false
+	m_player._do_next_turn()
+	#remove possible action
+	EventListenner._reset_action()
 	#prevent action problem
 	is_replaying = false
-	#prevent precent turn to affect it
-	m_player.is_queued_for_card = false
-	#remove possible action
-	EventListenner.action = null
-	print(is_multiplayer_authority()," can play")
+	if is_multiplayer_authority():
+		print("Host can play")
+	else:
+		print("Client can play")
 	turn += 1
 	emit_signal("NewTurn")
 
@@ -328,7 +328,7 @@ func get_randint(lower_bound:int,upper_bound:int)->int:
 	var c_seed:int = abs(new_pos.x * 2 - new_pos.y*9) * abs(new_pos.x * 4 - new_pos.y) + turn
 	return get_randint_seed(c_seed,lower_bound,upper_bound)
 
-func get_randint_seed(seed:int,lower_bound:int,upper_bound:int)->int:
+func get_randint_seed(c_seed:int,lower_bound:int,upper_bound:int)->int:
 	var random:RandomNumberGenerator = RandomNumberGenerator.new()
-	random.seed = seed
+	random.seed = c_seed
 	return random.randi_range(lower_bound,upper_bound)

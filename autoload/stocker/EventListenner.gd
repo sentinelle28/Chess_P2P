@@ -6,6 +6,10 @@ signal DidAction # prevent mouse from doing two action
 
 var action:Action
 var consequences:Array[Consequence] = []
+var sub_turn_tick:int = 0
+
+func _reset_sub_tick()->void:
+	sub_turn_tick = 0
 
 func did_action()->bool:
 	return is_instance_valid(action)
@@ -20,6 +24,7 @@ func _ready() -> void:
 	
 func _reset_consequence()->void:
 	consequences.clear()
+	_reset_sub_tick()
 	
 func _add_card_consequence(CardIndex:int,pos:Vector2i,is_black:bool)->void:
 	var consequence:CardConsequence = CardConsequence.new()

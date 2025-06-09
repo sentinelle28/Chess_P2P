@@ -40,6 +40,7 @@ func get_possible_mouvement()->Array[Vector2i]:
 			for possible_mouv:Vector2i in MouvRef.get_mouv(option).get_possible_mouv():
 				if parent.is_in_map(possible_mouv,index):
 					array.append(possible_mouv)
+	EventListenner._reset_sub_tick()
 	return array
 
 func _draw() -> void:

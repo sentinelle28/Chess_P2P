@@ -77,6 +77,10 @@ func _reset()->void:
 	is_lock_on_piece = false
 	last_selected_piece = null
 	is_queued_for_card = false
+	
+func _do_next_turn()->void:
+	_reset()
+	can_play = true
 
 func _exit_piece(piece:Piece)->void:
 	if not is_instance_valid(last_selected_piece):
