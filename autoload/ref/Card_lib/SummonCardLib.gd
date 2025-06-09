@@ -28,9 +28,5 @@ func _reset_last_summon_array()->void:
 
 func get_piece(index:int,is_black:bool)->Piece:
 	var piece:Piece = array_of_piece[index].instantiate()
-	if is_black:
-		piece.image_to_load = black_piece_image
-	else:
-		piece.image_to_load = white_piece_image
 	piece.is_black = is_black
 	return piece

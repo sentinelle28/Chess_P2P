@@ -20,10 +20,10 @@ var array_of_card:Array[CardStrategyPattern] = [
 ]
 
 var array_of_rarity:Array[int] = [
-	6, #AddKnightMovement
+	5, #AddKnightMovement
 	5, #AddRookCard
 	5, #AddBeashopCard
-	6, #AddKingCard
+	5, #AddKingCard
 	5, #SummonPawn
 	4, #SummonKnight
 	3, #SummonBeashop
