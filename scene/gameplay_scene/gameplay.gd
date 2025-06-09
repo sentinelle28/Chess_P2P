@@ -325,7 +325,7 @@ func _reset_board()->void:
 func get_randint(lower_bound:int,upper_bound:int)->int:
 	var trans_turn:int = (turn%piece_manager.get_child_count())
 	var new_pos:Vector2i = piece_manager.array_pos[trans_turn]
-	var c_seed:int = abs(new_pos.x * 2 - new_pos.y*9) * abs(new_pos.x * 4 - new_pos.y) + turn
+	var c_seed:int = abs(new_pos.x * 2 - new_pos.y*9) * abs(new_pos.x * 4 - new_pos.y) + turn + EventListenner.sub_turn_tick
 	return get_randint_seed(c_seed,lower_bound,upper_bound)
 
 func get_randint_seed(c_seed:int,lower_bound:int,upper_bound:int)->int:
