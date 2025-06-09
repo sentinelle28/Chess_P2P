@@ -12,4 +12,3 @@ void fragment() {
 		COLOR.g = 1.;
 	}
 }
-
