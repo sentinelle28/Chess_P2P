@@ -18,7 +18,10 @@ func _update_frame_coords(new_coords:int)->void:
 	sprite.frame_coords.x = new_coords
 	
 func _change_texture()->void:
-	if is_black:
+	_change_texture_bis(is_black)
+
+func _change_texture_bis(value:bool)->void:
+	if value:
 		sprite.texture = ThemeRef.black_piece_ref
 	else:
 		sprite.texture = ThemeRef.white_piece_ref

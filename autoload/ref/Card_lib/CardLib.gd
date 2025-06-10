@@ -18,7 +18,8 @@ var array_of_card:Array[CardStrategyPattern] = [
 	DuplicateCard.new(),
 	AddRandomMove.new(),
 	AddKnightExtanded.new(),
-	HideCard.new()
+	HideCard.new(),
+	PaintCard.new()
 ]
 
 var array_of_rarity:Array[int] = [
@@ -39,7 +40,8 @@ var array_of_rarity:Array[int] = [
 	2,# duplicate card
 	3, #add random move
 	3, # add extanded knight
-	1 #hide card
+	1, #hide card
+	1 #paint card
 ]
 
 var total:int = 0
