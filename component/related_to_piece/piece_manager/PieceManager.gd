@@ -42,6 +42,7 @@ func _reset_piece(piece:Piece)->void:
 		current_piece_name = current_piece_name.split("White")[1]
 		
 	piece._update_frame_coords(piece.rank_of_the_piece)
+	piece.modulate.a = 1.0
 	
 	
 	
