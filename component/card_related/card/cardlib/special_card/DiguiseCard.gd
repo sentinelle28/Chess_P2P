@@ -25,5 +25,5 @@ func _custom_reverse(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScen
 	var piece_manager:PieceManager = gameplay_scene.piece_manager
 	if pos in piece_manager.array_pos:
 		var c_index:int = piece_manager.array_pos.find(pos)
-		piece_manager._reset_piece(piece_manager.get_child(c_index))
+		piece_manager._reset_piece_rank(piece_manager.get_child(c_index))
 	

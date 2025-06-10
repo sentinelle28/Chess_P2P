@@ -34,16 +34,12 @@ func _reset_piece(piece:Piece)->void:
 	piece.monitorable = true
 	var color:bool = "Black" in piece.name
 	piece.is_black = color
-	var array_of_piece_rank:Array[String] = ["Pawn","Knight","Rook","Beashop","Queen","King"]
-	var current_piece_name:String = piece.name
-	if color:
-		current_piece_name = current_piece_name.split("Black")[1]
-	else:
-		current_piece_name = current_piece_name.split("White")[1]
-		
-	piece._update_frame_coords(piece.rank_of_the_piece)
+	_reset_piece_rank(piece)
+	piece._change_texture()
 	piece.modulate.a = 1.0
 	
+func _reset_piece_rank(piece:Piece)->void:
+	piece._update_frame_coords(piece.rank_of_the_piece)
 	
 	
 func _update_pos(index:int,value:Vector2i,do_emit_signal:bool)->void:
