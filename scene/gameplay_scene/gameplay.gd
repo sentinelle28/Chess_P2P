@@ -18,6 +18,7 @@ var is_replaying:bool = false
 var turn:int = 0
 
 @onready var action_bar:VBoxContainer = $UI_related/UI/bottom_box/action/InMatch
+@onready var particle:CPUParticles2D = $UI_related/CardUseInstance
 
 signal NewTurn
 signal EndTurn
@@ -291,6 +292,7 @@ func _do_card_action_host(index_of_the_card:int,pos_x:int,pos_y:int,is_black:boo
 func _execute_card(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:
 	is_replaying = true
 	var card_to_use:CardStrategyPattern = CardLib.array_of_card[index_of_the_card]
+	_spawn_card_use_anim(Vector2i(pos_x,pos_y))
 	card_to_use._apply(pos_x,pos_y,is_black,self)
 	_start_turn()
 
@@ -335,3 +337,8 @@ func get_randint_seed(c_seed:int,lower_bound:int,upper_bound:int)->int:
 	var random:RandomNumberGenerator = RandomNumberGenerator.new()
 	random.seed = c_seed
 	return random.randi_range(lower_bound,upper_bound)
+
+func _spawn_card_use_anim(pos:Vector2i)->void:
+	particle.global_position = piece_manager.get_map_pos(pos)
+	particle.emitting = true
+	

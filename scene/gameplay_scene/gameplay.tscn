@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://chpp6u6l8c72o"]
+[gd_scene load_steps=38 format=4 uid="uid://chpp6u6l8c72o"]
 
 [ext_resource type="Script" uid="uid://cyyr26uacur4g" path="res://scene/gameplay_scene/gameplay.gd" id="1_tfltx"]
 [ext_resource type="PackedScene" uid="uid://djpfvvn6vm40b" path="res://instance/player_instance/mouse.tscn" id="2_agxrv"]
@@ -26,6 +26,7 @@
 [ext_resource type="StyleBox" uid="uid://3i2vw2g2ngfl" path="res://asset/godot_assset/theme/card_theme/CommonCard.tres" id="15_lwn6k"]
 [ext_resource type="StyleBox" uid="uid://b03nal1e5r4jg" path="res://asset/godot_assset/theme/card_theme/Rare.tres" id="16_6icrv"]
 [ext_resource type="StyleBox" uid="uid://dhw3mrev4h4ny" path="res://asset/godot_assset/theme/card_theme/Uncommon.tres" id="17_j7apr"]
+[ext_resource type="PackedScene" uid="uid://bd2xs816io5xc" path="res://instance/card_anim/card_use_instance.tscn" id="19_tqrbb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aje2a"]
 content_margin_left = 2.0
@@ -503,6 +504,8 @@ text = "Victory"
 label_settings = SubResource("LabelSettings_2kjuw")
 
 [node name="Panel" parent="UI_related" instance=ExtResource("12_0yuk4")]
+
+[node name="CardUseInstance" parent="UI_related" instance=ExtResource("19_tqrbb")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(576, 320)

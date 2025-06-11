@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd2xs816io5xc"]
+
+[sub_resource type="Gradient" id="Gradient_ihook"]
+offsets = PackedFloat32Array(0, 0.182493, 0.445104, 0.718101, 0.912463, 1)
+colors = PackedColorArray(0.831373, 0, 0.87451, 1, 1, 0.113982, 0.440087, 1, 0.548728, 0.71079, 1.92523e-06, 1, 1, 0.76888, 0.149456, 1, 0, 0.933333, 0.756863, 1, 1, 1, 1, 1)
+
+[node name="CardUseInstance" type="CPUParticles2D"]
+emitting = false
+one_shot = true
+emission_shape = 1
+emission_sphere_radius = 3.79
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 55.4
+initial_velocity_max = 99.72
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+orbit_velocity_min = 11.08
+orbit_velocity_max = 238.23
+linear_accel_max = 18.84
+radial_accel_max = 18.28
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 31.47
+scale_amount_max = 50.0
+color = Color(1, 0, 1, 1)
+color_ramp = SubResource("Gradient_ihook")
