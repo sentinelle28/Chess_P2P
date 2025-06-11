@@ -19,7 +19,8 @@ func _ready() -> void:
 	material = ShaderMaterial.new()
 	
 func _mouse_on()->void:
-	material.shader = ThemeRef.pre_shader
+	if not is_instance_valid(material.shader):
+		material.shader = ThemeRef.pre_shader
 	
 func _mouse_off()->void:
 	material.shader = null
