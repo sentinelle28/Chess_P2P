@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=4 uid="uid://crkrqkgyirce"]
+[gd_scene load_steps=12 format=4 uid="uid://crkrqkgyirce"]
 
 [ext_resource type="Script" uid="uid://dsvihcfx686cj" path="res://scene/main/main_menu.gd" id="1_lgni4"]
 [ext_resource type="Texture2D" uid="uid://gskdca2b7bu0" path="res://asset/visual/pixel chess_v1.2/boards/board_plain_05.png" id="2_rxfpd"]
 [ext_resource type="Theme" uid="uid://c1nw8lnmxxeh4" path="res://asset/godot_assset/theme/ButtonTheme.tres" id="3_j5kbh"]
 [ext_resource type="Theme" uid="uid://bwa84tjmfm4v8" path="res://asset/godot_assset/theme/ResetButtonTheme.tres" id="4_ruq5w"]
+[ext_resource type="Theme" uid="uid://b17gm1jyvc1wo" path="res://asset/godot_assset/theme/SliderTheme.tres" id="5_dbghu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j5kbh"]
 texture = ExtResource("2_rxfpd")
@@ -157,6 +158,7 @@ text = "Main music"
 
 [node name="MainMusicSlider" type="HSlider" parent="Settings/Panel/VBoxContainer/SliderManager/MainMusic"]
 layout_mode = 2
+theme = ExtResource("5_dbghu")
 value = 100.0
 rounded = true
 
@@ -170,6 +172,7 @@ text = "Sound Effects"
 
 [node name="SfxSlider" type="HSlider" parent="Settings/Panel/VBoxContainer/SliderManager/Secondary"]
 layout_mode = 2
+theme = ExtResource("5_dbghu")
 value = 100.0
 rounded = true
 

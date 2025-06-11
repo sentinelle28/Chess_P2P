@@ -1,0 +1,36 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://b17gm1jyvc1wo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ctnu"]
+bg_color = Color(0.460597, 0.634107, 0.674509, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_juchs"]
+bg_color = Color(0.532207, 0.59822, 0.761159, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[resource]
+HSlider/constants/center_grabber = 0
+HSlider/constants/grabber_offset = 0
+HSlider/icons/grabber = null
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = null
+HSlider/icons/tick = null
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_4ctnu")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_juchs")
+HSlider/styles/slider = null
