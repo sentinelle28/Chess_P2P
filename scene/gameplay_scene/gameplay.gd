@@ -128,6 +128,7 @@ func _on_start_pressed() -> void:
 		if is_starting == true:
 			turn = 1
 		_change_color(is_black)
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		rpc("_start_game", not is_starting, not is_black)
 
 func is_peer_connected()->bool:
@@ -147,6 +148,7 @@ func _start_game(is_starting:bool,is_black:bool)->void:
 	m_player.can_play = is_starting
 	m_player.is_black = is_black
 	_change_color(is_black)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	if is_starting == true:
 		turn = 1
 
