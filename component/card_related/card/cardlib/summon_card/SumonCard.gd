@@ -15,27 +15,43 @@ func _summon_range(pos:Vector2i,gameplay_scene:GameplayScene,is_black:bool)->voi
 	var left_to_summon:int = get_num_to_summon()
 	var tilemap:TileMapLayer = gameplay_scene.piece_manager.tilemap
 	var array_of_piece:Array[Vector2i] = gameplay_scene.piece_manager.array_pos
+	
+	var pos_to_check:Array[Vector2i] = [
+		Vector2i(1,1),
+		Vector2i(-1,-1),
+		Vector2i(-1,0),
+		Vector2i(1,-1),
+		Vector2i(-1,1),
+		Vector2i(1,0),
+		Vector2i(0,-1),
+		Vector2i(0,1)]
+	
 	if can_summon(pos,tilemap,array_of_piece):
 		SummonCardLib.last_summon_array[4] = true
 		left_to_summon -= 1
 		_summon(pos,is_black,gameplay_scene)
 	
 	if left_to_summon > 0:
-		for y:int in range(-1,2):
-			for x:int in range(-1,2):
-				var new_pos:Vector2i = pos+Vector2i(x,y)
-				if can_summon(new_pos,tilemap,array_of_piece):
-					var c_index:int = (x + 1) + (y + 1) * 3 # find index base on pos
-					SummonCardLib.last_summon_array[c_index] = true
-					left_to_summon -= 1
-					_summon(new_pos,is_black,gameplay_scene)
-					if left_to_summon <= 0:
-						break
-			if left_to_summon <= 0:
-				break
+		pos_to_check = get_shuffle_array(pos_to_check,gameplay_scene)
+		for posi:Vector2i in pos_to_check:
+			if can_summon(pos + posi,tilemap,gameplay_scene.piece_manager.array_pos):
+				left_to_summon -= 1
+				var c_index:int = (posi.x + 1) + (posi.y+1)*3
+				SummonCardLib.last_summon_array[c_index] = true
+				_summon(pos + posi,is_black,gameplay_scene)
+				if left_to_summon <= 0:
+					break
 				
 	if left_to_summon == get_num_to_summon():
 		_do_reverse_not_activatable(gameplay_scene)
+
+
+func get_shuffle_array(array:Array[Vector2i],gameplay:GameplayScene)->Array[Vector2i]:
+	var copy_array:Array[Vector2i] = array.duplicate(true)
+	seed(gameplay.get_randint(0,1000))
+	copy_array.shuffle()
+	return copy_array
+
 
 func _summon(pos:Vector2i,is_black:bool,gameplay:GameplayScene)->void:
 	var piece:Piece = SummonCardLib.get_piece(get_piece_to_summon(),is_black)

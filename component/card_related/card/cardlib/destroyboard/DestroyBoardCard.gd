@@ -10,6 +10,7 @@ func can_destroy(pos:Vector2i,array_of_piece:Array[Vector2i],tilemap:TileMapLaye
 	
 
 func _apply(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScene)->void:
+	EventListenner.sub_turn_tick = 0
 	SummonCardLib._reset_last_summon_array()
 	var pos_to_check:Array[Vector2i] = [
 		Vector2i(1,1),
@@ -17,7 +18,6 @@ func _apply(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScene)->void:
 		Vector2i(-1,0),
 		Vector2i(1,-1),
 		Vector2i(-1,1),
-		Vector2i(0,0),
 		Vector2i(1,0),
 		Vector2i(0,-1),
 		Vector2i(0,1)]
@@ -34,6 +34,7 @@ func _apply(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScene)->void:
 		num_to_destroy -= 1
 		
 	if num_to_destroy > 0:
+		pos_to_check = get_shuffle_array(pos_to_check,gameplay_scene)
 		for posi:Vector2i in pos_to_check:
 			if can_destroy(pos + posi,piece_manager.array_pos,tilemap):
 				num_to_destroy -= 1
@@ -45,6 +46,13 @@ func _apply(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScene)->void:
 					
 	if num_to_destroy == get_num_to_destroy():
 		_do_reverse_not_activatable(gameplay_scene)
+	
+func get_shuffle_array(array:Array[Vector2i],gameplay:GameplayScene)->Array[Vector2i]:
+	var copy_array:Array[Vector2i] = array.duplicate(true)
+	seed(gameplay.get_randint(0,1000))
+	copy_array.shuffle()
+	return copy_array
+	
 	
 func _destroy(pos:Vector2i,tilemap:TileMapLayer)->void:
 	tilemap.set_cell(pos,0,Vector2i(-1,-1))
