@@ -18,7 +18,7 @@ var is_replaying:bool = false
 var turn:int = 0
 
 @onready var action_bar:VBoxContainer = $UI_related/UI/bottom_box/action/InMatch
-@onready var particle:CPUParticles2D = $UI_related/CardUseInstance
+@onready var particle:CPUParticles2D = $Menu_UI/CardUseInstance
 
 signal NewTurn
 signal EndTurn
@@ -61,7 +61,7 @@ func get_ip()->String:
 	if GameSettings.is_lan_mode:
 		return IP.get_local_addresses()[1]
 	
-	return $UI_related/ui/VBoxContainer/TextEdit.text
+	return $Menu_UI/ui/VBoxContainer/TextEdit.text
 	
 func is_valid_ip(ip:String)->bool:
 	var result:Error = peer.create_client(ip,PORT)
@@ -79,6 +79,7 @@ func _add_player(id:int)->void:
 	
 	#check if mouse clicked somewhere good
 	m_player.connect("mouv_input",piece_manager._check_mouse_pos)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	
 	#switch mouse to card mode
@@ -129,7 +130,7 @@ func _on_start_pressed() -> void:
 		if is_starting == true:
 			turn = 1
 		_change_color(is_black)
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		
 		rpc("_start_game", not is_starting, not is_black)
 
 func is_peer_connected()->bool:
@@ -149,7 +150,7 @@ func _start_game(is_starting:bool,is_black:bool)->void:
 	m_player.can_play = is_starting
 	m_player.is_black = is_black
 	_change_color(is_black)
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
 	if is_starting == true:
 		turn = 1
 

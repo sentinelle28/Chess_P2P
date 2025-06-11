@@ -48,6 +48,7 @@ animations = [{
 [node name="mouse" type="Area2D"]
 top_level = true
 z_index = 100
+z_as_relative = false
 monitorable = false
 script = ExtResource("1_3m1e7")
 

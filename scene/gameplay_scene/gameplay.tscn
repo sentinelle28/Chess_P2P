@@ -106,14 +106,14 @@ sources/0 = SubResource("TileSetAtlasSource_h3lfs")
 [node name="gameplay" type="Node2D" node_paths=PackedStringArray("internet_related", "card_manager", "piece_manager", "card_anim")]
 script = ExtResource("1_tfltx")
 playerscene = ExtResource("2_agxrv")
-internet_related = NodePath("UI_related/ui")
+internet_related = NodePath("Menu_UI/ui")
 card_manager = NodePath("UI_related/UI/bottom_box/Card/PreventBarProblem/CardManager")
 piece_manager = NodePath("PieceManager")
-card_anim = NodePath("UI_related/Panel")
+card_anim = NodePath("Menu_UI/Card_anim")
 
-[node name="UI_related" type="CanvasLayer" parent="."]
+[node name="Menu_UI" type="CanvasLayer" parent="."]
 
-[node name="ui" type="Control" parent="UI_related"]
+[node name="ui" type="Control" parent="Menu_UI"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -127,7 +127,7 @@ offset_bottom = 76.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI_related/ui"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu_UI/ui"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -135,27 +135,34 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextEdit" type="TextEdit" parent="UI_related/ui/VBoxContainer"]
+[node name="TextEdit" type="TextEdit" parent="Menu_UI/ui/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_aje2a")
 placeholder_text = "Input Ip"
 
-[node name="Control" type="HBoxContainer" parent="UI_related/ui/VBoxContainer"]
+[node name="Control" type="HBoxContainer" parent="Menu_UI/ui/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Join" type="Button" parent="UI_related/ui/VBoxContainer/Control"]
+[node name="Join" type="Button" parent="Menu_UI/ui/VBoxContainer/Control"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_jt474")
 text = "Join"
 
-[node name="Host" type="Button" parent="UI_related/ui/VBoxContainer/Control"]
+[node name="Host" type="Button" parent="Menu_UI/ui/VBoxContainer/Control"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_jt474")
 text = "Host"
+
+[node name="CardUseInstance" parent="Menu_UI" instance=ExtResource("19_tqrbb")]
+
+[node name="Card_anim" parent="Menu_UI" instance=ExtResource("12_0yuk4")]
+
+[node name="UI_related" type="CanvasLayer" parent="."]
+layer = -1
 
 [node name="UI" type="Panel" parent="UI_related"]
 anchors_preset = 12
@@ -503,10 +510,6 @@ grow_vertical = 2
 text = "Victory"
 label_settings = SubResource("LabelSettings_2kjuw")
 
-[node name="Panel" parent="UI_related" instance=ExtResource("12_0yuk4")]
-
-[node name="CardUseInstance" parent="UI_related" instance=ExtResource("19_tqrbb")]
-
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(576, 320)
 scale = Vector2(2, 2)
@@ -662,8 +665,8 @@ position = Vector2(688, 240)
 scale = Vector2(1.6, 1.6)
 is_black = false
 
-[connection signal="pressed" from="UI_related/ui/VBoxContainer/Control/Join" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="UI_related/ui/VBoxContainer/Control/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Menu_UI/ui/VBoxContainer/Control/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Menu_UI/ui/VBoxContainer/Control/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="UI_related/UI/bottom_box/action/InMatch/Reset" to="." method="_do_consequence"]
 [connection signal="pressed" from="UI_related/UI/bottom_box/action/InMatch/Validate" to="." method="_send_action"]
 [connection signal="pressed" from="UI_related/UI/bottom_box/action/Start" to="." method="_on_start_pressed"]
