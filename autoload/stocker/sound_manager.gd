@@ -9,7 +9,10 @@ func _set_main_sound_level()->void:
 
 func _set_sfx_sound_level()->void:
 	for child:AudioStreamPlayer in get_children():
-		child.volume_db = GameSettings.sfx_volume - 2.
+		if child.name == "Click":
+			child.volume_db = GameSettings.sfx_volume - 8.
+		else:
+			child.volume_db = GameSettings.sfx_volume - 2.
 
 
 func _on_finished() -> void:
