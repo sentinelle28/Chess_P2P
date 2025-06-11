@@ -35,10 +35,6 @@ ThemeRef="*res://autoload/ref/ThemeRef.gd"
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/godot_sfxr/plugin.cfg")
-
 [input]
 
 select={
