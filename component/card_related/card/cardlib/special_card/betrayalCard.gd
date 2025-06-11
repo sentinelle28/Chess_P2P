@@ -29,7 +29,7 @@ func get_card_name()->String:
 	return "Betrayal"
 	
 func get_description()->String:
-	return "Change a piece color if it's not a king"
+	return "Make the piece yours"
 	
 func get_rarity()->int:
 	return 4 #1 to 5
