@@ -23,9 +23,12 @@ func _mouse_on()->void:
 		material.shader = ThemeRef.pre_shader
 	
 func _mouse_off()->void:
-	material.shader = null
+	if can_change_shader():
+		material.shader = null
 	
-	
+func can_change_shader()->bool:
+	return is_instance_valid(material.shader) and material.shader.resource_path != "res://asset/godot_assset/shader/CardRarityVisualEffect.gdshader"
+
 func _discard()->void:
 	emit_signal("discard",self_index)
 	
