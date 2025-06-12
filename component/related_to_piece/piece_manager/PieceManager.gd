@@ -50,11 +50,10 @@ func _update_pos(index:int,value:Vector2i,do_emit_signal:bool)->void:
 	if value in array_pos and value != array_pos[index]:
 		var index_of_the_victim:int = array_pos.find(value)
 		if do_emit_signal:
-			SoundManager._play_sfx("TookPiece")
 			EventListenner.emit_signal("PieceTaken",index_of_the_victim,array_pos[index_of_the_victim])
 		_make_dead(index_of_the_victim)
 		var piece:Piece = get_child(index_of_the_victim)
-		if "King" in piece.name:
+		if piece.rank_of_the_piece == 5:
 			emit_signal("Victory",not piece.is_black)
 	
 	

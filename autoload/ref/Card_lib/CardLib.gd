@@ -22,7 +22,8 @@ var array_of_card:Array[CardStrategyPattern] = [
 	PaintCard.new(),
 	LostControlCard.new(),
 	WoodCard.new(),
-	ConfusionCard.new()
+	ConfusionCard.new(),
+	HazardousBulletCard.new()
 ]
 
 var array_of_rarity:Array[int] = [
@@ -47,7 +48,8 @@ var array_of_rarity:Array[int] = [
 	1, #paint card
 	1, #lost control card
 	5, #wood card
-	4000 #confusion
+	4, #confusion
+	3 #hazardous bullet
 ]
 
 var total:int = 0
