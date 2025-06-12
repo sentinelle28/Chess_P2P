@@ -13,7 +13,6 @@ var array_of_card:Array[CardStrategyPattern] = [
 	DestroyOneCard.new(),
 	DestroyThreeCard.new(),
 	DestroynineCard.new(),
-	BetrayalCard.new(),
 	DiguiseCard.new(),
 	DuplicateCard.new(),
 	AddRandomMove.new(),
@@ -30,7 +29,10 @@ var array_of_card:Array[CardStrategyPattern] = [
 	WindRightCard.new(),
 	CursedCard.new(),
 	LightningCard.new(),
-	CharmedCard.new()
+	CharmedCard.new(),
+	BanCard.new(),
+	BetrayalCard.new(),
+	BridgeCard.new()
 ]
 
 var array_of_rarity:Array[int] = []
@@ -42,7 +44,7 @@ func _ready() -> void:
 		array_of_card[i].index = i
 		array_of_rarity.append(6 - array_of_card[i].get_rarity())
 		#if i == len(array_of_card) - 1:
-		#	array_of_rarity[i] = 1000
+		#	array_of_rarity[i] = 10000
 		total += array_of_rarity[i]
 		array_of_rarity[i] = total
 	
