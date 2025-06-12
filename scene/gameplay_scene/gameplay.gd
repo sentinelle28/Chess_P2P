@@ -18,6 +18,7 @@ var is_replaying:bool = false
 var turn:int = 0
 
 @onready var action_bar:VBoxContainer = $UI_related/UI/bottom_box/action/InMatch
+@onready var bottom_ui:HBoxContainer = $UI_related/UI/bottom_box
 @onready var particle:CPUParticles2D = $Menu_UI/CardUseInstance
 
 signal NewTurn
@@ -273,11 +274,14 @@ func _do_victory(is_black:bool)->void:
 @rpc("any_peer","call_local")
 func _stop_action_host()->void:
 	if is_multiplayer_authority():
-		action_bar.hide()
-		m_player.can_play = false
+		_stop_action()
 
 @rpc("authority","call_remote")
 func _stop_action_client()->void:
+	_stop_action()
+	
+func _stop_action()->void:
+	card_manager.progress_bar.hide()
 	action_bar.hide()
 	m_player.can_play = false
 
