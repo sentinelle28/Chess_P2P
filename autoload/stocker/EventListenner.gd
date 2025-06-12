@@ -67,12 +67,13 @@ func _add_movement_consequence(from:Vector2i,to:Vector2i,who:int)->void:
 	_add_consequence(new_consequence)
 	
 	#describe action
-	var new_action:MouvAction = MouvAction.new()
-	new_action.new_pos = to
-	new_action.index = who
-	_add_action(new_action)
-	print(is_multiplayer_authority())
-	print(who," moves from: ",from," to: ",to)
+	if not is_instance_valid(action):
+		var new_action:MouvAction = MouvAction.new()
+		new_action.new_pos = to
+		new_action.index = who
+		_add_action(new_action)
+		print(is_multiplayer_authority())
+		print(who," moves from: ",from," to: ",to)
 	
 	
 	

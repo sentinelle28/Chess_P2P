@@ -44,9 +44,14 @@ func _reset_piece_rank(piece:Piece)->void:
 	
 func _update_pos(index:int,value:Vector2i,do_emit_signal:bool)->void:
 	SoundManager._play_sfx("MovePiece")
-	if do_emit_signal:
-		EventListenner.emit_signal("PieceMov",array_pos[index],value,index)
-	#check if there has been a kill
+	
+		
+	#check if there has been a kill to where the guy will land
+	_check_for_kill(index,value,do_emit_signal)
+	#make the guy move
+	_anim_pos(index,value,do_emit_signal)
+	
+func _check_for_kill(index:int,value:Vector2i,do_emit_signal:bool)->void:
 	if value in array_pos and value != array_pos[index]:
 		var index_of_the_victim:int = array_pos.find(value)
 		if do_emit_signal:
@@ -56,7 +61,9 @@ func _update_pos(index:int,value:Vector2i,do_emit_signal:bool)->void:
 		if piece.rank_of_the_piece == 5:
 			emit_signal("Victory",not piece.is_black)
 	
-	
+func _anim_pos(index:int,value:Vector2i,do_emit_signal:bool)->void:
+	if do_emit_signal:
+		EventListenner.emit_signal("PieceMov",array_pos[index],value,index)
 	array_pos[index] = value
 	var child:Piece = get_child(index)
 	var temp:Tween = get_tree().create_tween()
@@ -84,8 +91,10 @@ func _make_alive(index:int,pos:Vector2i)->void:
 func is_in_map(pos:Vector2i,index:int)->bool:
 	var posi:Vector2i = array_pos[index]
 	var true_pos:Vector2i = pos+posi
-	return tilemap.get_cell_atlas_coords(true_pos) != Vector2i(-1,-1)
+	return is_valid_tile(true_pos)
 	
+func is_valid_tile(pos:Vector2i)->bool:
+	return tilemap.get_cell_atlas_coords(pos) != Vector2i(-1,-1)
 
 func _check_mouse_pos(who:int)->void:
 	var tile_pos:Vector2i = get_mouse_pos()
