@@ -101,8 +101,8 @@ func _reset_global()->void:
 	#hide turn option
 	$UI_related/UI/bottom_box/action/Start.hide()
 	#hide defeat or victory
-	$UI_related/Defeat.hide()
-	$UI_related/Victory.hide()
+	$Menu_UI/Defeat.hide()
+	$Menu_UI/Victory.hide()
 	#reset
 	m_player._reset()
 	EventListenner._reset_action()
@@ -267,8 +267,8 @@ func _do_victory(is_black:bool)->void:
 		rpc("_stop_action"+to_add)
 		
 	var result:bool = is_black == m_player.is_black
-	$UI_related/Defeat.visible = not result
-	$UI_related/Victory.visible = result
+	$Menu_UI/Defeat.visible = not result
+	$Menu_UI/Victory.visible = result
 
 @rpc("any_peer","call_local")
 func _stop_action_host()->void:
