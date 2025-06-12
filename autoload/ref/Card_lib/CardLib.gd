@@ -23,42 +23,26 @@ var array_of_card:Array[CardStrategyPattern] = [
 	LostControlCard.new(),
 	WoodCard.new(),
 	ConfusionCard.new(),
-	HazardousBulletCard.new()
+	HazardousBulletCard.new(),
+	WindDownCard.new(),
+	WindUpCard.new(),
+	WindLeftCard.new(),
+	WindRightCard.new()
 ]
 
-var array_of_rarity:Array[int] = [
-	5, #AddKnightMovement
-	5, #AddRookCard
-	5, #AddBeashopCard
-	5, #AddKingCard
-	5, #SummonPawn
-	4, #SummonKnight
-	3, #SummonBeashop
-	3, #SummonRook
-	2, #SummonQueen
-	4, #destroy 1 tile
-	4, #destroy 3 tile
-	2, #destroy 9 tile
-	3, #betrayal card
-	3, #diguise card
-	2,# duplicate card
-	3, #add random move
-	3, # add extanded knight
-	1, #hide card
-	1, #paint card
-	1, #lost control card
-	5, #wood card
-	4, #confusion
-	3 #hazardous bullet
-]
+var array_of_rarity:Array[int] = []
 
 var total:int = 0
 
 func _ready() -> void:
 	for i:int in range(len(array_of_card)):
 		array_of_card[i].index = i
+		array_of_rarity.append(6 - array_of_card[i].get_rarity())
+		#if i == len(array_of_card) - 1:
+		#	array_of_rarity[i] = 1000
 		total += array_of_rarity[i]
 		array_of_rarity[i] = total
+	
 		
 func get_random_card()->CardStrategyPattern:
 	var random_card:CardStrategyPattern
