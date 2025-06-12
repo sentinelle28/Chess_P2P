@@ -27,7 +27,10 @@ var array_of_card:Array[CardStrategyPattern] = [
 	WindDownCard.new(),
 	WindUpCard.new(),
 	WindLeftCard.new(),
-	WindRightCard.new()
+	WindRightCard.new(),
+	CursedCard.new(),
+	LightningCard.new(),
+	CharmedCard.new()
 ]
 
 var array_of_rarity:Array[int] = []

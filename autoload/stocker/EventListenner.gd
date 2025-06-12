@@ -4,6 +4,7 @@ signal PieceMov(from:Vector2i,to:Vector2i,who:int) #emited from piece manager to
 signal UseCard(CardIndex:int,pos:Vector2i,is_black:bool) # emited from card manager to self
 signal DidAction # prevent mouse from doing two action
 
+
 var action:Action
 var consequences:Array[Consequence] = []
 var sub_turn_tick:int = 0
@@ -22,9 +23,13 @@ func _ready() -> void:
 	connect("PieceMov",_add_movement_consequence)
 	connect("UseCard",_add_card_consequence)
 	
+	
 func _reset_consequence()->void:
 	consequences.clear()
 	_reset_sub_tick()
+	
+
+	
 	
 func _add_card_consequence(CardIndex:int,pos:Vector2i,is_black:bool)->void:
 	var consequence:CardConsequence = CardConsequence.new()
