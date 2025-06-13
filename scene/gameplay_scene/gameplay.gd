@@ -127,10 +127,7 @@ func _on_start_pressed() -> void:
 		action_bar.visible = is_starting
 		m_player.is_black = is_black
 		m_player.can_play = is_starting
-		if is_starting == true:
-			turn = 1
 		_change_color(is_black)
-		
 		rpc("_start_game", not is_starting, not is_black)
 
 func is_peer_connected()->bool:
@@ -150,9 +147,8 @@ func _start_game(is_starting:bool,is_black:bool)->void:
 	m_player.can_play = is_starting
 	m_player.is_black = is_black
 	_change_color(is_black)
-	
-	if is_starting == true:
-		turn = 1
+
+
 
 func _construct_mouv_action(who:int,to_x:int,to_y:int)->void:
 	var new_action:MouvAction = MouvAction.new()
@@ -170,11 +166,16 @@ func _do_mouv_action_host(who:int,to_x:int,to_y:int)->void:
 		_construct_mouv_action(who,to_x,to_y)
 		
 func _do_action(action:Action)->void:
+	
 	is_replaying = true
 	if action is MouvAction:
 		action._do_action(piece_manager)
 	#prevent weird reset that doesn't make sens
 	_start_turn()
+
+func _augment_turn()->void:
+	turn += 1
+	
 
 func _start_turn()->void:
 	EventListenner._reset_consequence()
@@ -186,7 +187,7 @@ func _start_turn()->void:
 	EventListenner._reset_action()
 	#prevent action problem
 	is_replaying = false
-	turn += 1
+	_augment_turn()
 	emit_signal("NewTurn")
 
 func _do_consequence()->void:
@@ -217,6 +218,8 @@ func _send_action()->void:
 		#make sure we ask to update the right pc
 		if is_multiplayer_authority():
 			to_add = "_client"
+		
+		rpc("_syncro_turn"+to_add,turn)
 		
 		#send info as requiered
 		if action_to_send is MouvAction:
@@ -341,3 +344,13 @@ func _spawn_card_use_anim(pos:Vector2i)->void:
 	particle.global_position = piece_manager.get_map_pos(pos)
 	particle.emitting = true
 	
+@rpc("call_remote","authority")
+func _syncro_turn_client(n_turn:int)->void:
+	turn = n_turn
+	EventListenner.sub_turn_tick = 0
+
+@rpc("call_local","any_peer")
+func _syncro_turn_host(n_turn:int)->void:
+	if is_multiplayer_authority():
+		turn = n_turn
+		EventListenner.sub_turn_tick = 0

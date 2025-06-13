@@ -14,5 +14,6 @@ func _piece_activate(piece:int,pos:Vector2i,_is_black:bool,gameplay_scene:Gamepl
 	var piece_manager:PieceManager = gameplay_scene.piece_manager
 	var previous_pos:Vector2i = pos
 	var new_pos:Vector2i = previous_pos + Vector2i(gameplay_scene.get_randint(-1,1),gameplay_scene.get_randint(-1,1))
+	
 	piece_manager._update_pos(piece,new_pos,true)
 	

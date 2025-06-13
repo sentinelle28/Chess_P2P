@@ -21,7 +21,6 @@ var array_of_card:Array[CardStrategyPattern] = [
 	PaintCard.new(),
 	LostControlCard.new(),
 	WoodCard.new(),
-	ConfusionCard.new(),
 	HazardousBulletCard.new(),
 	WindDownCard.new(),
 	WindUpCard.new(),
@@ -32,7 +31,8 @@ var array_of_card:Array[CardStrategyPattern] = [
 	CharmedCard.new(),
 	BanCard.new(),
 	BetrayalCard.new(),
-	BridgeCard.new()
+	BridgeCard.new(),
+	ConfusionCard.new()
 ]
 
 var array_of_rarity:Array[int] = []
