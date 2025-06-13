@@ -95,7 +95,6 @@ func _send_card(pos:Vector2i,is_black:bool)->void:
 
 func _spend_energy(energy_to_spend:int)->void:
 	current_energy -= energy_to_spend
-	print("spent ", energy_to_spend," to use card")
 
 func _reset()->void:
 	has_resized = false

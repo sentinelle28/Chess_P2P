@@ -76,7 +76,7 @@ func _on_area_exited(area: Area2D) -> void:
 func _reset()->void:
 	is_lock_on_piece = false
 	last_selected_piece = null
-	is_queued_for_card = false
+	_reset_card_mode()
 	
 func _do_next_turn()->void:
 	_reset()
@@ -97,9 +97,9 @@ func _switch_to_card_mode()->void:
 	is_queued_for_card = true
 	last_selected_piece = null
 	is_lock_on_piece = false
-	print("switch to card mode")
+	$AnimationPlayer.play("WaitingForCard")
 	
 
 func _reset_card_mode()->void:
 	is_queued_for_card = false
-	print("reset card mode")
+	$AnimationPlayer.play("RESET")

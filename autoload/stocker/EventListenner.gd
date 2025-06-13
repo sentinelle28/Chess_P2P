@@ -38,7 +38,7 @@ func _add_card_consequence(CardIndex:int,pos:Vector2i,is_black:bool)->void:
 	consequence.is_black = is_black
 	_add_consequence(consequence)
 	
-	print("use ",CardLib.array_of_card[CardIndex].get_card_name()," on tile ",pos)
+	
 	#_add_action
 	var c_action:CardAction = CardAction.new()
 	c_action.card_index = CardIndex
@@ -61,8 +61,7 @@ func _add_piece_taken_consequence(index_of_the_victime:int,pos_of_the_victime:Ve
 	new_consequence.pos_of_the_victim = pos_of_the_victime
 	_add_consequence(new_consequence)
 	
-	print(is_multiplayer_authority())
-	print(index_of_the_victime," got taken at pos:",pos_of_the_victime)
+	
 	
 func _add_movement_consequence(from:Vector2i,to:Vector2i,who:int)->void:
 	#mouv consequences
@@ -77,8 +76,7 @@ func _add_movement_consequence(from:Vector2i,to:Vector2i,who:int)->void:
 		new_action.new_pos = to
 		new_action.index = who
 		_add_action(new_action)
-		print(is_multiplayer_authority())
-		print(who," moves from: ",from," to: ",to)
+		
 	
 	
 	

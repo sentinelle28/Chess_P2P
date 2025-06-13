@@ -16,8 +16,8 @@ func _custom_reverse(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScen
 	if piece != -1:
 		_piece_reverse(piece,pos,is_black,gameplay_scene)
 		
-func _piece_reverse(piece:int,pos:Vector2i,is_black:bool,gameplay_scene:GameplayScene)->void:
+func _piece_reverse(_piece:int,_pos:Vector2i,_is_black:bool,_gameplay_scene:GameplayScene)->void:
 	pass
 	
-func _piece_activate(piece:int,pos:Vector2i,is_black:bool,gameplay_scene:GameplayScene)->void:
+func _piece_activate(_piece:int,_pos:Vector2i,_is_black:bool,_gameplay_scene:GameplayScene)->void:
 	pass

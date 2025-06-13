@@ -15,19 +15,19 @@ func _apply(_to_x:int,_to_y:int,is_black:bool,gameplay_scene:GameplayScene)->voi
 		count += 1
 	
 	#move child without checking for kill yet
-	for index:int in piece_to_move:
-		var where_to:Vector2i = piece_manager.array_pos[index]+get_direction()
+	for c_index:int in piece_to_move:
+		var where_to:Vector2i = piece_manager.array_pos[c_index]+get_direction()
 		if piece_manager.is_valid_tile(where_to):
-			piece_manager._anim_pos(index,where_to,true)
+			piece_manager._anim_pos(c_index,where_to,true)
 	
 	#check for kill
-	for index:int in piece_to_move:
-		var previous_pos:Vector2i = piece_manager.array_pos[index]
+	for c_index:int in piece_to_move:
+		var previous_pos:Vector2i = piece_manager.array_pos[c_index]
 		#prevent not working kill
-		piece_manager.array_pos[index] = Vector2i(-100,100)
+		piece_manager.array_pos[c_index] = Vector2i(-100,100)
 		
-		piece_manager._check_for_kill(index,previous_pos,true)
-		piece_manager.array_pos[index] = previous_pos
+		piece_manager._check_for_kill(c_index,previous_pos,true)
+		piece_manager.array_pos[c_index] = previous_pos
 	
 	
 	

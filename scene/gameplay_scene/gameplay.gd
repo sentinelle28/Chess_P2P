@@ -68,7 +68,6 @@ func is_valid_ip(ip:String)->bool:
 	var result:Error = peer.create_client(ip,PORT)
 	if result != OK:
 		return false 
-	print("connected to: ", ip)
 	return true
 	
 func _add_player(id:int)->void:
@@ -187,10 +186,6 @@ func _start_turn()->void:
 	EventListenner._reset_action()
 	#prevent action problem
 	is_replaying = false
-	if is_multiplayer_authority():
-		print("Host can play")
-	else:
-		print("Client can play")
 	turn += 1
 	emit_signal("NewTurn")
 
@@ -203,13 +198,13 @@ func _do_consequence()->void:
 		card_manager._update_card()
 		for consequence:Consequence in EventListenner.consequences:
 			if consequence is MouvConsequence:
-				print("trying to reverse mouvement consequence")
+				
 				consequence._reverse(piece_manager)
 			if consequence is PieceTakenConsequence:
-				print("trying to reverse piece taken")
+				
 				consequence._reverse(piece_manager)
 			if consequence is CardConsequence:
-				print("trying to reverse card consequence")
+				
 				consequence._reverse(self)
 				
 		EventListenner._reset_consequence()
@@ -241,7 +236,7 @@ func _send_action()->void:
 		
 func _send_movement_action(to_add:String,action_to_send:MouvAction)->void:
 	var to_call:String = "_do_mouv_action"+to_add
-	print("action was sent from :",is_multiplayer_authority()," to: ",not is_multiplayer_authority())
+	
 	rpc(
 		to_call, #mouv function
 		action_to_send.index, #who to move
@@ -301,9 +296,8 @@ func _execute_card(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->voi
 	card_to_use._apply(pos_x,pos_y,is_black,self)
 	_start_turn()
 
-func _disconnect(id:int)->void:
+func _disconnect(_id:int)->void:
 	SoundManager._play_sfx("Error")
-	print(id," is disconnected")
 	_reset_global()
 	remove_child(m_player)
 	action_bar.hide()

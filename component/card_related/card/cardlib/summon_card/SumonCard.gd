@@ -62,7 +62,7 @@ func can_summon(pos:Vector2i,tilemap:TileMapLayer,array_of_piece:Array[Vector2i]
 	# in board and not on another piece
 	return (tilemap.get_cell_atlas_coords(pos) != Vector2i(-1,-1)) and (not pos in array_of_piece)
 
-func _custom_reverse(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScene)->void:
+func _custom_reverse(to_x:int,to_y:int,_is_black:bool,gameplay_scene:GameplayScene)->void:
 	var pos:Vector2i = Vector2i(to_x,to_y)
 	var piece_mana:PieceManager = gameplay_scene.piece_manager
 	for i:int in range(9):

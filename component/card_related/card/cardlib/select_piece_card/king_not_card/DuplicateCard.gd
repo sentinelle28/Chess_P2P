@@ -43,7 +43,7 @@ func _not_king_piece_activate(piece:int,pos:Vector2i,_is_black:bool,gameplay_sce
 	
 	
 	
-func _custom_reverse(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScene)->void:
+func _custom_reverse(to_x:int,to_y:int,_is_black:bool,gameplay_scene:GameplayScene)->void:
 	for i:int in range(9):
 		if SummonCardLib.last_summon_array[i]:
 			var x:int = i%3 - 1

@@ -11,10 +11,10 @@ func can_do_action(pos:Vector2i,array_of_piece:Array[Vector2i],tilemap:TileMapLa
 func is_tile(tilemap:TileMapLayer,pos:Vector2i)->bool:
 	return tilemap.get_cell_atlas_coords(pos) != Vector2i(-1,-1)
 
-func _set_tile(pos:Vector2i,tilemap:TileMapLayer)->void:
+func _set_tile(_pos:Vector2i,_tilemap:TileMapLayer)->void:
 	pass
 
-func _apply(to_x:int,to_y:int,is_black:bool,gameplay_scene:GameplayScene)->void:
+func _apply(to_x:int,to_y:int,_is_black:bool,gameplay_scene:GameplayScene)->void:
 	EventListenner.sub_turn_tick = 0
 	SummonCardLib._reset_last_summon_array()
 	var pos_to_check:Array[Vector2i] = [

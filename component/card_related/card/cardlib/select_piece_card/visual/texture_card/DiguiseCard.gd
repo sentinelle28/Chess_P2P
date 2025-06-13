@@ -9,7 +9,7 @@ func get_card_name()->String:
 func get_description()->String:
 	return "Change the apparence of a piece"
 	
-func _piece_reverse(piece:int,pos:Vector2i,is_black:bool,gameplay_scene:GameplayScene)->void:
+func _piece_reverse(piece:int,_pos:Vector2i,_is_black:bool,gameplay_scene:GameplayScene)->void:
 	var piece_manager:PieceManager = gameplay_scene.piece_manager
 	piece_manager._reset_piece_rank(piece_manager.get_child(piece))
 	

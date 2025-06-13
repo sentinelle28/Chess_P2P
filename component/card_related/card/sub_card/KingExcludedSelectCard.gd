@@ -9,5 +9,5 @@ func _piece_activate(piece:int,pos:Vector2i,is_black:bool,gameplay_scene:Gamepla
 	else:
 		_do_reverse_not_activatable(gameplay_scene)
 		
-func _not_king_piece_activate(piece:int,pos:Vector2i,is_black:bool,gameplay_scene:GameplayScene)->void:
+func _not_king_piece_activate(_piece:int,_pos:Vector2i,_is_black:bool,_gameplay_scene:GameplayScene)->void:
 	pass

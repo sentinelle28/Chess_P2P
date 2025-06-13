@@ -1,7 +1,7 @@
 extends KingExcludedSelectCard
 class_name BetrayalCard
 
-func _not_king_piece_activate(piece:int,pos:Vector2i,is_black:bool,gameplay_scene:GameplayScene)->void:
+func _not_king_piece_activate(piece:int,_pos:Vector2i,is_black:bool,gameplay_scene:GameplayScene)->void:
 	var piece_manager:PieceManager = gameplay_scene.piece_manager
 	var instance_piece:Piece = piece_manager.get_child(piece)
 	instance_piece.is_black = is_black
@@ -9,7 +9,7 @@ func _not_king_piece_activate(piece:int,pos:Vector2i,is_black:bool,gameplay_scen
 
 	
 
-func _piece_reverse(piece:int,pos:Vector2i,is_black:bool,gameplay_scene:GameplayScene)->void:
+func _piece_reverse(piece:int,_pos:Vector2i,is_black:bool,gameplay_scene:GameplayScene)->void:
 	var piece_manager:PieceManager = gameplay_scene.piece_manager
 	var instance_piece:Piece = piece_manager.get_child(piece)
 	instance_piece.is_black = (not is_black)
