@@ -53,7 +53,7 @@ func _show_use_button(index:int)->void:
 	var button:Button = child.get_node("VBoxContainer/Action_Bar/Use")
 	if current_card[index].get_cost() <= current_energy:
 		button.show()
-		button.text = "Use (" + str(current_card[index].get_cost()) + ")"
+		#button.text = "Use (" + str(current_card[index].get_cost()) + ")"
 	else:
 		button.hide()
 	
