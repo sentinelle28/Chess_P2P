@@ -9,18 +9,18 @@
 [ext_resource type="PackedScene" uid="uid://4m31j6a34hu4" path="res://instance/piece_instance/Piece_lib/king.tscn" id="5_2l5nx"]
 [ext_resource type="Script" uid="uid://2ar7rvy5cxeg" path="res://component/card_related/card_manager/CardHolder.gd" id="5_dr73f"]
 [ext_resource type="Script" uid="uid://df1g4lj0cq1bv" path="res://component/card_related/card_manager/CardManager.gd" id="5_slw4p"]
-[ext_resource type="Texture2D" uid="uid://bscdnhk241vqs" path="res://asset/visual/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="6_bu0yp"]
 [ext_resource type="PackedScene" uid="uid://p0dm03gw6762" path="res://instance/piece_instance/Piece_lib/queen.tscn" id="7_2kjuw"]
+[ext_resource type="Texture2D" uid="uid://burixuttdhhmw" path="res://asset/visual/icon/BlackKingImage.png" id="7_tqrbb"]
 [ext_resource type="LabelSettings" uid="uid://c2r1t5dko1l2p" path="res://asset/godot_assset/font/DescriptionFont.tres" id="8_225mg"]
 [ext_resource type="Theme" uid="uid://bwa84tjmfm4v8" path="res://asset/godot_assset/theme/ResetButtonTheme.tres" id="8_aje2a"]
 [ext_resource type="PackedScene" uid="uid://cprhdkq3mjwqu" path="res://instance/piece_instance/Piece_lib/beashop.tscn" id="8_dr73f"]
 [ext_resource type="Theme" uid="uid://drlqg2146f8o7" path="res://asset/godot_assset/theme/card_theme/GlobalCardTheme.tres" id="8_lcphj"]
+[ext_resource type="Texture2D" uid="uid://x04b11hlo6wm" path="res://asset/visual/icon/WhiteKingImage.png" id="8_lwn6k"]
 [ext_resource type="Theme" uid="uid://4sllni2xg00e" path="res://asset/godot_assset/theme/ValidateButtonTheme.tres" id="9_225mg"]
 [ext_resource type="PackedScene" uid="uid://dxgqf6ymiu05x" path="res://instance/piece_instance/Piece_lib/knight.tscn" id="9_slw4p"]
 [ext_resource type="PackedScene" uid="uid://yrvgyml4s8un" path="res://instance/piece_instance/Piece_lib/rook.tscn" id="10_jt474"]
 [ext_resource type="PackedScene" uid="uid://cfjmlv0qpd7l3" path="res://instance/piece_instance/Piece_lib/pawn.tscn" id="11_qx00v"]
 [ext_resource type="PackedScene" uid="uid://bqgl1b3cjfk8o" path="res://instance/card_anim/card_anim.tscn" id="12_0yuk4"]
-[ext_resource type="Texture2D" uid="uid://geqi0bsnmyo3" path="res://asset/visual/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="12_aje2a"]
 [ext_resource type="StyleBox" uid="uid://donh3lil66ss2" path="res://asset/godot_assset/theme/card_theme/Epic.tres" id="13_hrub0"]
 [ext_resource type="StyleBox" uid="uid://brsn48yka4s74" path="res://asset/godot_assset/theme/card_theme/Legendary.tres" id="14_tqrbb"]
 [ext_resource type="StyleBox" uid="uid://3i2vw2g2ngfl" path="res://asset/godot_assset/theme/card_theme/CommonCard.tres" id="15_lwn6k"]
@@ -219,21 +219,39 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 
-[node name="BlackKing" type="Sprite2D" parent="UI_related/UI/bottom_box/Play"]
+[node name="BlackKing" type="TextureRect" parent="UI_related/UI/bottom_box/Play"]
 visible = false
-position = Vector2(68, 68)
-scale = Vector2(3.5, 3.5)
-texture = ExtResource("6_bu0yp")
-hframes = 6
-frame = 5
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.448
+anchor_top = 0.471
+anchor_right = 0.448
+anchor_bottom = 0.471
+offset_left = -24.064
+offset_top = -24.056
+offset_right = -8.064
+offset_bottom = -8.056
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+texture = ExtResource("7_tqrbb")
 
-[node name="WhiteKing" type="Sprite2D" parent="UI_related/UI/bottom_box/Play"]
+[node name="WhiteKing" type="TextureRect" parent="UI_related/UI/bottom_box/Play"]
 visible = false
-position = Vector2(68, 68)
-scale = Vector2(3.25, 3.25)
-texture = ExtResource("12_aje2a")
-hframes = 6
-frame = 5
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.448
+anchor_top = 0.471
+anchor_right = 0.448
+anchor_bottom = 0.471
+offset_left = -24.064
+offset_top = -24.056
+offset_right = -8.064
+offset_bottom = -8.056
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+texture = ExtResource("8_lwn6k")
 
 [node name="Card" type="HBoxContainer" parent="UI_related/UI/bottom_box"]
 layout_mode = 2
