@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://dx05vkf8lpg0p" path="res://asset/audio/music/loopmusic.ogg" id="1_jsm5y"]
 [ext_resource type="Script" uid="uid://cnnhkc4p2wfsg" path="res://autoload/stocker/sound_manager.gd" id="2_65cx2"]
-[ext_resource type="AudioStream" uid="uid://urayahmo860w" path="res://asset/audio/sfx/Click.tres" id="3_sf84v"]
+[ext_resource type="AudioStream" uid="uid://bducbvh6ohj4d" path="res://asset/audio/sfx/click.wav" id="3_44k83"]
 [ext_resource type="AudioStream" uid="uid://jrn3i5ivrb0n" path="res://asset/audio/sfx/Error.tres" id="4_44k83"]
 [ext_resource type="AudioStream" uid="uid://bglh32mj135t6" path="res://asset/audio/sfx/TookPiece.tres" id="5_nnaee"]
 [ext_resource type="AudioStream" uid="uid://cjl13dea54jfb" path="res://asset/audio/sfx/UseCard.tres" id="6_vfqqt"]
@@ -15,7 +15,7 @@ autoplay = true
 script = ExtResource("2_65cx2")
 
 [node name="Click" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_sf84v")
+stream = ExtResource("3_44k83")
 volume_db = -8.134
 pitch_scale = 1.1
 bus = &"Sfx"
