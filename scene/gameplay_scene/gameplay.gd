@@ -16,6 +16,8 @@ var is_two:bool = false
 var is_replaying:bool = false
 
 var turn:int = 0
+var can_send_turn:bool = true
+
 
 @onready var action_bar:VBoxContainer = $UI_related/UI/bottom_box/action/InMatch
 @onready var bottom_ui:HBoxContainer = $UI_related/UI/bottom_box
@@ -188,7 +190,9 @@ func _start_turn()->void:
 	#prevent action problem
 	is_replaying = false
 	_augment_turn()
-	emit_signal("NewTurn")
+	if can_send_turn:
+		emit_signal("NewTurn")
+	can_send_turn = true
 
 func _do_consequence()->void:
 	SoundManager._play_sfx("Reset")
@@ -254,34 +258,23 @@ func _send_card_action(to_add:String,action_to_send:CardAction)->void:
 	action_to_send.is_black)
 	
 func _do_victory(is_black:bool)->void:
+	action_bar.hide()
 	if is_multiplayer_authority():
 		$UI_related/UI/bottom_box/action/Start.show()
 	
 	if not is_replaying:
 		_send_action()
-		var to_add:String = "_host"
-		#make sure we ask to update the right pc
-		if is_multiplayer_authority():
-			to_add = "_client"
-		rpc("_stop_action"+to_add)
-		
+	_stop_action()
 	var result:bool = is_black == m_player.is_black
 	$Menu_UI/Defeat.visible = not result
 	$Menu_UI/Victory.visible = result
 
-@rpc("any_peer","call_local")
-func _stop_action_host()->void:
-	if is_multiplayer_authority():
-		_stop_action()
-
-@rpc("authority","call_remote")
-func _stop_action_client()->void:
-	_stop_action()
-	
 func _stop_action()->void:
 	card_manager.progress_bar.hide()
+	card_manager.hide()
 	action_bar.hide()
 	m_player.can_play = false
+	can_send_turn = false
 
 @rpc("authority","call_remote")
 func _do_card_action_client(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:

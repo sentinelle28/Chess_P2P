@@ -9,6 +9,7 @@ signal StopQueuing # emited to prevent mouse seeking the same thing over and ove
 var array_pos:Array[Vector2i] = []
 var possible_pos:Array[Vector2i] = []
 
+var has_already_move:bool = false
 
 func _ready() -> void:
 	connect("Victory",get_parent()._do_victory)
@@ -44,12 +45,13 @@ func _reset_piece_rank(piece:Piece)->void:
 	
 func _update_pos(index:int,value:Vector2i,do_emit_signal:bool)->void:
 	SoundManager._play_sfx("MovePiece")
-	
+	has_already_move = false
 		
 	#check if there has been a kill to where the guy will land
 	_check_for_kill(index,value,do_emit_signal)
 	#make the guy move
-	_anim_pos(index,value,do_emit_signal)
+	if not has_already_move:
+		_anim_pos(index,value,do_emit_signal)
 	
 func _check_for_kill(index:int,value:Vector2i,do_emit_signal:bool)->void:
 	if value in array_pos and value != array_pos[index]:
@@ -59,6 +61,8 @@ func _check_for_kill(index:int,value:Vector2i,do_emit_signal:bool)->void:
 		_make_dead(index_of_the_victim)
 		var piece:Piece = get_child(index_of_the_victim)
 		if piece.rank_of_the_piece == 5:
+			_anim_pos(index,value,do_emit_signal)
+			has_already_move = true
 			emit_signal("Victory",not piece.is_black)
 	
 func _anim_pos(index:int,value:Vector2i,do_emit_signal:bool)->void:
