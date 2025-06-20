@@ -401,11 +401,11 @@ func _reset_client(bit:bool)->void:
 	if can_catch_message(bit):
 		_reset_global()
 	
-@rpc("call_local","any_peer")
+@rpc("call_local","any_peer","unreliable",1)
 func _stop_sending_host(bit:bool)->void:
 	if is_multiplayer_authority():
 		_stop_sending(bit)
 
-@rpc("call_remote","authority")
+@rpc("call_remote","authority","unreliable",1)
 func _stop_sending_client(bit:bool)->void:
 	_stop_sending(bit)
