@@ -26,6 +26,11 @@ var can_send_turn:bool = true
 signal NewTurn
 signal EndTurn
 
+var current_bit:bool = false
+var continue_running:bool = false
+const TIME_BETWEEN_MESSAGE:float = 0.1
+const NUM_OF_STOPPING_PACKAGE:int = 10
+
 func _ready() -> void:
 	connect("NewTurn",card_manager._update_energy)
 	connect("EndTurn",card_manager.hide)
@@ -114,15 +119,17 @@ func _reset_global()->void:
 	_reset_board()
 	turn = 0
 	
-@rpc("authority","call_remote")
-func _reset_client()->void:
-	_reset_global()
+
 
 func _on_start_pressed() -> void:
 	if is_two:
 		#hide unuseful
 		_reset_global()
-		rpc("_reset_client")
+		
+		continue_running = true
+		while continue_running:
+			rpc("_reset_client",current_bit)
+			await get_tree().create_timer(TIME_BETWEEN_MESSAGE).timeout
 		#who is gonna start
 		var is_black:bool = randi_range(0,1) == 1
 		var is_starting:bool = randi_range(0,1) == 1
@@ -130,7 +137,13 @@ func _on_start_pressed() -> void:
 		m_player.is_black = is_black
 		m_player.can_play = is_starting
 		_change_color(is_black)
-		rpc("_start_game", not is_starting, not is_black)
+		continue_running = true
+		var op_starting:bool = not is_starting
+		var op_black:bool = not is_black
+		while continue_running:
+			rpc("_start_game",current_bit ,op_starting, op_black)
+			await get_tree().create_timer(TIME_BETWEEN_MESSAGE).timeout
+		
 
 func is_peer_connected()->bool:
 	return get_multiplayer().peer.is_active()
@@ -143,32 +156,8 @@ func _change_color(is_black:bool)->void:
 		$UI_related/UI/bottom_box/Play/BlackKing.hide()
 		$UI_related/UI/bottom_box/Play/WhiteKing.show()
 
-@rpc("call_remote","authority")
-func _start_game(is_starting:bool,is_black:bool)->void:
-	action_bar.visible = is_starting
-	m_player.can_play = is_starting
-	m_player.is_black = is_black
-	_change_color(is_black)
-
-
-
-func _construct_mouv_action(who:int,to_x:int,to_y:int)->void:
-	var new_action:MouvAction = MouvAction.new()
-	new_action.index = who
-	new_action.new_pos = Vector2i(to_x,to_y)
-	_do_action(new_action)
-
-@rpc("authority","call_remote")
-func _do_mouv_action_client(who:int,to_x:int,to_y:int)->void:
-	_construct_mouv_action(who,to_x,to_y)
-	
-@rpc("any_peer","call_local")
-func _do_mouv_action_host(who:int,to_x:int,to_y:int)->void:
-	if is_multiplayer_authority():
-		_construct_mouv_action(who,to_x,to_y)
 		
 func _do_action(action:Action)->void:
-	
 	is_replaying = true
 	if action is MouvAction:
 		action._do_action(piece_manager)
@@ -178,7 +167,6 @@ func _do_action(action:Action)->void:
 func _augment_turn()->void:
 	turn += 1
 	
-
 func _start_turn()->void:
 	EventListenner._reset_consequence()
 	#allow player to do action
@@ -223,7 +211,11 @@ func _send_action()->void:
 		if is_multiplayer_authority():
 			to_add = "_client"
 		
-		rpc("_syncro_turn"+to_add,turn)
+		continue_running = true
+		var to_call:String = "_syncro_turn"+to_add
+		while continue_running:
+			rpc(to_call,current_bit,turn)
+			await get_tree().create_timer(TIME_BETWEEN_MESSAGE).timeout
 		
 		#send info as requiered
 		if action_to_send is MouvAction:
@@ -243,19 +235,29 @@ func _send_action()->void:
 		
 func _send_movement_action(to_add:String,action_to_send:MouvAction)->void:
 	var to_call:String = "_do_mouv_action"+to_add
+	var action_index:int = action_to_send.index
+	var action_x:int = action_to_send.new_pos.x
+	var action_y:int = action_to_send.new_pos.y
 	
-	rpc(
-		to_call, #mouv function
-		action_to_send.index, #who to move
-		action_to_send.new_pos.x, #where on x
-		action_to_send.new_pos.y) #where on y
+	continue_running = true
+	while continue_running:
+		rpc(to_call, #mouv function
+			current_bit, #current bit -> alternating bit method
+			action_index, #who to move
+			action_x, #where on x
+			action_y) #where on y
+		await get_tree().create_timer(TIME_BETWEEN_MESSAGE).timeout
 
 func _send_card_action(to_add:String,action_to_send:CardAction)->void:
 	var to_call:String = "_do_card_action"+to_add
-	rpc(to_call,action_to_send.card_index,
-	action_to_send.pos.x,
-	action_to_send.pos.y,
-	action_to_send.is_black)
+	var card_index:int = action_to_send.card_index
+	var card_x:int = action_to_send.pos.x
+	var card_y:int = action_to_send.pos.y
+	var is_black:bool =action_to_send.is_black
+	continue_running = true
+	while continue_running:
+		rpc(to_call,current_bit,card_index,card_x,card_y,is_black)
+		await get_tree().create_timer(TIME_BETWEEN_MESSAGE).timeout
 	
 func _do_victory(is_black:bool)->void:
 	action_bar.hide()
@@ -275,15 +277,6 @@ func _stop_action()->void:
 	action_bar.hide()
 	m_player.can_play = false
 	can_send_turn = false
-
-@rpc("authority","call_remote")
-func _do_card_action_client(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:
-	_execute_card(index_of_the_card,pos_x,pos_y,is_black)
-	
-@rpc("any_peer","call_local")
-func _do_card_action_host(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:
-	if is_multiplayer_authority():
-		_execute_card(index_of_the_card,pos_x,pos_y,is_black)
 
 func _execute_card(index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:
 	is_replaying = true
@@ -337,13 +330,82 @@ func _spawn_card_use_anim(pos:Vector2i)->void:
 	particle.global_position = piece_manager.get_map_pos(pos)
 	particle.emitting = true
 	
-@rpc("call_remote","authority")
-func _syncro_turn_client(n_turn:int)->void:
-	turn = n_turn
-	EventListenner.sub_turn_tick = 0
+func _construct_mouv_action(who:int,to_x:int,to_y:int)->void:
+	var new_action:MouvAction = MouvAction.new()
+	new_action.index = who
+	new_action.new_pos = Vector2i(to_x,to_y)
+	_do_action(new_action)
+	
+	
+func _stop_sending(bit:bool)->void:
+	if bit != current_bit:
+		continue_running = false
+		current_bit = bit
+		
 
-@rpc("call_local","any_peer")
-func _syncro_turn_host(n_turn:int)->void:
-	if is_multiplayer_authority():
+func can_catch_message(bit:bool)->bool:
+	if bit == current_bit:
+		current_bit = not bit
+		var to_add:String = "_host"
+		if is_multiplayer_authority():
+			to_add = "_client"
+		var to_call:String = "_stop_sending" + to_add
+		for i:int in range(NUM_OF_STOPPING_PACKAGE):
+			rpc(to_call,current_bit)
+		
+		return true
+	return false
+
+@rpc("call_remote","authority")
+func _syncro_turn_client(bit:bool,n_turn:int)->void:
+	if can_catch_message(bit):
 		turn = n_turn
 		EventListenner.sub_turn_tick = 0
+
+@rpc("call_local","any_peer")
+func _syncro_turn_host(bit:bool,n_turn:int)->void:
+	if is_multiplayer_authority() and can_catch_message(bit):
+		turn = n_turn
+		EventListenner.sub_turn_tick = 0
+
+@rpc("call_remote","authority")
+func _start_game(bit:bool,is_starting:bool,is_black:bool)->void:
+	if can_catch_message(bit):
+		action_bar.visible = is_starting
+		m_player.can_play = is_starting
+		m_player.is_black = is_black
+		_change_color(is_black)
+
+@rpc("authority","call_remote")
+func _do_mouv_action_client(bit:bool,who:int,to_x:int,to_y:int)->void:
+	if can_catch_message(bit):
+		_construct_mouv_action(who,to_x,to_y)
+	
+@rpc("any_peer","call_local")
+func _do_mouv_action_host(bit:bool,who:int,to_x:int,to_y:int)->void:
+	if is_multiplayer_authority()  and can_catch_message(bit):
+		_construct_mouv_action(who,to_x,to_y)
+		
+@rpc("authority","call_remote")
+func _do_card_action_client(bit:bool,index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:
+	if can_catch_message(bit):
+		_execute_card(index_of_the_card,pos_x,pos_y,is_black)
+	
+@rpc("any_peer","call_local")
+func _do_card_action_host(bit:bool,index_of_the_card:int,pos_x:int,pos_y:int,is_black:bool)->void:
+	if is_multiplayer_authority() and can_catch_message(bit):
+		_execute_card(index_of_the_card,pos_x,pos_y,is_black)
+		
+@rpc("authority","call_remote")
+func _reset_client(bit:bool)->void:
+	if can_catch_message(bit):
+		_reset_global()
+	
+@rpc("call_local","any_peer")
+func _stop_sending_host(bit:bool)->void:
+	if is_multiplayer_authority():
+		_stop_sending(bit)
+
+@rpc("call_remote","authority")
+func _stop_sending_client(bit:bool)->void:
+	_stop_sending(bit)
